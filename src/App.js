@@ -13,9 +13,11 @@ function App() {
         console.log(user);
         setAuthenticated(true);
         setLoading(false);
+        localStorage.setItem('isAuthnticated',true)
       } else {
         setAuthenticated(false);
         setLoading(false);
+        localStorage.setItem('isAuthnticated',false)
       }
     });
   }, []);

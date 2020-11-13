@@ -8,9 +8,12 @@ const Routes = (
   <Suspense fallback={"Loading"}>
     <Router history={history}>
       <Switch>
+        {/* lazy route means that user either authnticated or not */}
         <LazyComponent.Home path="/" exact />
-        <LazyComponent.Login path="/Login" exact />
-        <LazyComponent.Signup path="/Signup" exact />
+        {/* public route means that user is not authnticated */}
+        <PublicRoute component={LazyComponent.Login} path="/Login" exact />
+        <PublicRoute component={LazyComponent.Signup} path="/Signup" exact />
+        {/* private route means that user is authnticated */}
       </Switch>
     </Router>
   </Suspense>
