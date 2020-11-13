@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { Router } from "react-router-dom";
+import history from "./routes/History";
 import { auth } from "./firebase";
-import Home from "./Home/Home";
+import Routes from "./routes/Routes";
 import "./App.scss";
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -17,7 +19,6 @@ function App() {
       }
     });
   }, []);
-  return <Home />;
+  return <Router history={history}>{Routes}</Router>;
 }
-
 export default App;
