@@ -7,4 +7,9 @@ function signin(email, password) {
   return auth().signInWithEmailAndPassword(email, password);
 }
 
-export { signup, signin };
+function signInWithGoogle() {
+    const provider = new auth.GoogleAuthProvider();
+    return auth().signInWithPopup(provider);
+  }
+
+export { signup, signin, signInWithGoogle };
