@@ -1,11 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import React, { useState } from "react";
+import {signin} from './../../firebase/authMethods';
+import History from './../../routes/History';
 function Login() {
+  const [email, setEamil] = useState("");
+  const [password, setPassword] = useState("");
+  const handleChange = (e) => {
+    switch (e.target.name) {
+      case "email":
+        setEamil(e.target.value);
+        break;
+      case "password":
+        setPassword(e.target.value);
+        break;
+      default:
+        setEamil("");
+        setPassword("");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        await signin(email, password);
+        localStorage.setItem('isAuthnticated',true);
+        History.push('/Chat')
+      } catch (error) {
+       console.log(error.message)
+      }
+  };
   return (
-    <span>
-      <Link to="/Signup">signup</Link>
-    </span>
+    <>
+      <span>login page</span>
+      <input type="email" name="email" value={email} onChange={handleChange} />
+      <input
+        type="password"
+        name="password"
+        value={password}
+        onChange={handleChange}
+      />
+      <button type="submit" onClick={handleSubmit}>
+        login
+      </button>
+    </>
   );
 }
 

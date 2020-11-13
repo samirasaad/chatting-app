@@ -14,6 +14,7 @@ const Routes = (
         <PublicRoute component={LazyComponent.Login} path="/Login" exact />
         <PublicRoute component={LazyComponent.Signup} path="/Signup" exact />
         {/* private route means that user is authnticated */}
+        <PrivateRoute component={LazyComponent.Chat} path="/Chat" exact />
       </Switch>
     </Router>
   </Suspense>
