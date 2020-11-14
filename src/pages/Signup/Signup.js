@@ -39,39 +39,44 @@ function Signup() {
     localStorage.setItem("userEmail", auth().currentUser.email);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, signInType) => {
     e.preventDefault();
     try {
       let usersList = [];
       await signup(email, password);
-      addUserInfoToStorage();
-      let user = auth().currentUser;
-      await db
-        .collection("users")
-        .where("id", "==", user.uid)
-        .get()
-        .then((querySnapshot) => {
-          usersList = querySnapshot.docs.map((doc) => {
-            return doc.data();
-          });
-        });
-      if (usersList.length === 0) {
-        //new user set it to users collection
-        db.collection("users").doc(user.uid).set({
-          id: user.uid,
-          userName: user.displayName,
-          photoUrl: user.photoURL,
-          userEmail: user.email,
-        });
-      } else {
-        //already existing user
-        addUserInfoToStorage();
-      }
-      History.push("/Chat");
+      auth().onAuthStateChanged(async function (user) {
+        if (user) {
+          addUserInfoToStorage();
+          let user = auth().currentUser;
+          await db
+            .collection("users")
+            .where("id", "==", user.uid)
+            .get()
+            .then((querySnapshot) => {
+              usersList = querySnapshot.docs.map((doc) => {
+                return doc.data();
+              });
+            });
+          if (usersList.length === 0) {
+            //new user set it to users collection
+            db.collection("users").doc(user.uid).set({
+              id: user.uid,
+              userName: user.displayName,
+              photoUrl: user.photoURL,
+              userEmail: user.email,
+            });
+          } else {
+            //already existing user
+            addUserInfoToStorage();
+          }
+          History.push("/Chat");
+        }
+      });
     } catch (error) {
       console.log(error.message);
     }
   };
+
   return (
     <>
       <span>signup page</span>

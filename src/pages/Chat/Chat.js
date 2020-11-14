@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { db } from "./../../firebase";
+import { db,auth } from "./../../firebase";
 function Chat() {
   const [usersList, setUsersList] = useState([]);
 
   useEffect(() => {
     getUsersList();
-  });
+    console.log(auth().currentUser)
+  },[]);
 
   const getUsersList = async () => {
     await db
@@ -20,7 +21,7 @@ function Chat() {
   };
 
   return (
-    <section className="chatboard-wrapper row">
+    <section className="chat-wrapper row">
       <div className="col-md-4">
         {usersList &&
           usersList.length > 0 &&
