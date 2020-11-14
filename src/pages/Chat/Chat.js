@@ -1,14 +1,33 @@
-import React, { useEffect } from "react";
-import {db} from './../../firebase'
+import React, { useEffect, useState } from "react";
+import { db } from "./../../firebase";
 function Chat() {
-  useEffect(()=>{
-    console.log()
-    
-  })
+  const [usersList, setUsersList] = useState([]);
 
+  useEffect(() => {
+    getUsersList();
+  });
 
+  const getUsersList = async () => {
+    await db
+      .collection("users")
+      .get()
+      .then((querySnapshot) => {
+        let usersList = querySnapshot.docs.map((doc) => {
+          return doc.data();
+        });
+        setUsersList(usersList);
+      });
+  };
 
-  return <span>chat</span>;
+  return (
+    <section className="chatboard-wrapper row">
+      <div className="col-md-4">
+        {usersList &&
+          usersList.length > 0 &&
+          usersList.map((user) => <p key={user.id}>{user.userName}</p>)}
+      </div>
+    </section>
+  );
 }
 
 export default Chat;

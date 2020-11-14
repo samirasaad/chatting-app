@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { signin, signInWithGoogle } from "./../../firebase/authMethods";
 import { db, auth } from "./../../firebase";
+import { signin, signInWithGoogle } from "./../../firebase/authMethods";
 import History from "./../../routes/History";
 function Login() {
   const [email, setEamil] = useState("");
