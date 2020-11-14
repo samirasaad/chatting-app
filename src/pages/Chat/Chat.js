@@ -6,13 +6,7 @@ function Chat() {
     
   })
 
- const getListUser = async () => {
-    // const result = await db.collection(AppString.NODE_USERS).get()
-    // if (result.docs.length > 0) {
-    //     this.listUser = [...result.docs]
-    //     this.setState({isLoading: false})
-    // }
-}
+
 
   return <span>chat</span>;
 }
