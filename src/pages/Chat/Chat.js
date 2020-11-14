@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { db,auth } from "./../../firebase";
+import { Link, useParams } from "react-router-dom";
+import { db } from "./../../firebase";
 function Chat() {
   const [usersList, setUsersList] = useState([]);
-
+  const [message, setMessage] = useState("");
+  const userId = useParams().id;
   useEffect(() => {
     getUsersList();
-    console.log(auth().currentUser)
-  },[]);
+  }, []);
+
+  useEffect(() => {
+    console.log("get messages but firstly check if id !== index ");
+  }, [userId]);
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
 
   const getUsersList = async () => {
     await db
@@ -25,8 +33,21 @@ function Chat() {
       <div className="col-md-4">
         {usersList &&
           usersList.length > 0 &&
-          usersList.map((user) => <p key={user.id}>{user.userName}</p>)}
+          usersList.map((user) => (
+            <Link to={`/chat/${user.id}`} key={user.id}>
+              <p>{user.userName}</p>
+            </Link>
+          ))}
       </div>
+      {/* index for welcome page otherwise user choose a chat room */}
+      {userId !== "index" ? (
+        <div className="col-md-7">
+          chat room
+          <input type="text" value={message} onChange={handleChange} />
+        </div>
+      ) : (
+        <p>welcome page</p>
+      )}
     </section>
   );
 }

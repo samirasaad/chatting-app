@@ -67,7 +67,7 @@ function Login() {
             //already existing user
             addUserInfoToStorage();
           }
-          History.push("/Chat");
+          History.push("/Chat/index");
         }
       });
     } catch (error) {
