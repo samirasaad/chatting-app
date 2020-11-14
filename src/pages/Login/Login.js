@@ -62,6 +62,7 @@ function Login() {
               userName: user.displayName,
               photoUrl: user.photoURL,
               userEmail: user.email,
+              availibility:'online'
             });
           } else {
             //already existing user

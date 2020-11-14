@@ -19,6 +19,7 @@ function Chat() {
   const getUsersList = async () => {
     await db
       .collection("users")
+      .where("id", "!=", userId)
       .get()
       .then((querySnapshot) => {
         let usersList = querySnapshot.docs.map((doc) => {
@@ -35,7 +36,10 @@ function Chat() {
           usersList.length > 0 &&
           usersList.map((user) => (
             <Link to={`/chat/${user.id}`} key={user.id}>
-              <p>{user.userName}</p>
+              <p>
+                {user.userName}
+                {user.availibility}
+              </p>
             </Link>
           ))}
       </div>
