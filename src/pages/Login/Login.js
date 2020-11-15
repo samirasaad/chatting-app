@@ -8,10 +8,10 @@ function Login() {
 
   const addUserInfoToStorage = () => {
     localStorage.setItem("isAuthnticated", true);
-    localStorage.setItem("userID", auth().currentUser.uid);
-    localStorage.setItem("userPic", auth().currentUser.photoURL);
-    localStorage.setItem("userFullName", auth().currentUser.displayName);
-    localStorage.setItem("userEmail", auth().currentUser.email);
+    // localStorage.setItem("userID", auth().currentUser.uid);
+    // localStorage.setItem("userPic", auth().currentUser.photoURL);
+    // localStorage.setItem("userFullName", auth().currentUser.displayName);
+    // localStorage.setItem("userEmail", auth().currentUser.email);
   };
 
   const handleChange = (e) => {
@@ -62,11 +62,14 @@ function Login() {
               userName: user.displayName,
               photoUrl: user.photoURL,
               userEmail: user.email,
-              availibility:'online'
+              availibility: "online",
             });
           } else {
             //already existing user
             addUserInfoToStorage();
+            db.collection("users").doc(user.uid).update({
+              availibility: "online",
+            });
           }
           History.push("/Chat/index");
         }

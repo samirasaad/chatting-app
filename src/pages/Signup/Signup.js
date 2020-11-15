@@ -5,8 +5,13 @@ import History from "./../../routes/History";
 function Signup() {
   const [email, setEamil] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+
   const handleChange = (e) => {
     switch (e.target.name) {
+      case "userName":
+        setUserName(e.target.value);
+        break;
       case "email":
         setEamil(e.target.value);
         break;
@@ -19,35 +24,23 @@ function Signup() {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //       await signup(email, password);
-  //       localStorage.setItem('isAuthnticated',true);
-  //       History.push('/Chat')
-  //     } catch (error) {
-  //      console.log(error.message)
-  //     }
-
-  // };
-
   const addUserInfoToStorage = () => {
+    console.log(auth().currentUser);
     localStorage.setItem("isAuthnticated", true);
-    localStorage.setItem("userID", auth().currentUser.uid);
-    localStorage.setItem("userPic", auth().currentUser.photoURL);
-    localStorage.setItem("userFullName", auth().currentUser.displayName);
-    localStorage.setItem("userEmail", auth().currentUser.email);
+    // localStorage.setItem("userID", auth().currentUser.uid);
+    // localStorage.setItem("userPic", auth().currentUser.photoURL);
+    // localStorage.setItem("userFullName", auth().currentUser.displayName);
+    // localStorage.setItem("userEmail", auth().currentUser.email);
   };
 
-  const handleSubmit = async (e, signInType) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let usersList = [];
       await signup(email, password);
+      //we can check if there`s a currentuser rather than using onAuthStateChanged
       auth().onAuthStateChanged(async function (user) {
         if (user) {
-          addUserInfoToStorage();
-          let user = auth().currentUser;
           await db
             .collection("users")
             .where("id", "==", user.uid)
@@ -58,17 +51,23 @@ function Signup() {
               });
             });
           if (usersList.length === 0) {
-            //new user set it to users collection
-            db.collection("users").doc(user.uid).set({
-              id: user.uid,
-              userName: user.displayName,
-              photoUrl: user.photoURL,
-              userEmail: user.email,
-              availibility:'online'
-            });
+            //if new user set it to users collection
+            db.collection("users")
+              .doc(user.uid)
+              .set({
+                id: user.uid,
+                userName: user.displayName || userName,
+                photoUrl: user.photoURL,
+                userEmail: user.email,
+                availibility: "online",
+              });
+            addUserInfoToStorage();
           } else {
             //already existing user
             addUserInfoToStorage();
+            db.collection("users").doc(user.uid).update({
+              availibility: "online",
+            });
           }
           History.push("/Chat/index");
         }
@@ -81,6 +80,12 @@ function Signup() {
   return (
     <>
       <span>signup page</span>
+      <input
+        type="text"
+        name="userName"
+        value={userName}
+        onChange={handleChange}
+      />
       <input type="email" name="email" value={email} onChange={handleChange} />
       <input
         type="password"
