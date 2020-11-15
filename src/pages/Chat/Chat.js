@@ -4,14 +4,17 @@ import { db } from "./../../firebase";
 function Chat() {
   const [usersList, setUsersList] = useState([]);
   const [message, setMessage] = useState("");
-  const userId = useParams().id;
+  const currentUserId = localStorage.getItem('userID')
+  const peerUserId = useParams().id;
+  
   useEffect(() => {
     getUsersList();
-  }, []);
+  } );
 
   useEffect(() => {
     console.log("get messages but firstly check if id !== index ");
-  }, [userId]);
+  }, [peerUserId]);
+
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
@@ -19,7 +22,7 @@ function Chat() {
   const getUsersList = async () => {
     await db
       .collection("users")
-      .where("id", "!=", userId)
+      .where("id", "!=", currentUserId)
       .get()
       .then((querySnapshot) => {
         let usersList = querySnapshot.docs.map((doc) => {
@@ -44,7 +47,7 @@ function Chat() {
           ))}
       </div>
       {/* index for welcome page otherwise user choose a chat room */}
-      {userId !== "index" ? (
+      {peerUserId !== "index" ? (
         <div className="col-md-7">
           chat room
           <input type="text" value={message} onChange={handleChange} />

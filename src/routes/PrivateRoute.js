@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 function PrivateRoute({ component: Component, ...rest }) {
-  const isAuthnticated = localStorage.getItem("isAuthnticated");
+  const isAuthnticated = localStorage.getItem("isAuthnticated") && localStorage.getItem('userID');
   return (
     <Route
       {...rest}

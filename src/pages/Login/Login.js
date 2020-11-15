@@ -8,7 +8,7 @@ function Login() {
 
   const addUserInfoToStorage = () => {
     localStorage.setItem("isAuthnticated", true);
-    // localStorage.setItem("userID", auth().currentUser.uid);
+    localStorage.setItem("userID", auth().currentUser.uid);
     // localStorage.setItem("userPic", auth().currentUser.photoURL);
     // localStorage.setItem("userFullName", auth().currentUser.displayName);
     // localStorage.setItem("userEmail", auth().currentUser.email);
