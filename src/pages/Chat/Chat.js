@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import WelcomeBoard from "../WelcomeBoard/WelcomeBoard";
+import ChatBoard from "../ChatBoard/ChatBoard";
 import { db } from "./../../firebase";
-function Chat() {
+function Chat(props) {
   const [usersList, setUsersList] = useState([]);
-  const [message, setMessage] = useState("");
-  const currentUserId = localStorage.getItem('userID')
-  const peerUserId = useParams().id;
-  
+  const [peerUserInfo, setPeerUserInfo] = useState({});
+  const currentUserId = localStorage.getItem("userID");
+  const [peerUserId, setPeerUserId] = useState(props.match.params.id);
+
   useEffect(() => {
     getUsersList();
-  } );
+  }, []);
 
   useEffect(() => {
-    console.log("get messages but firstly check if id !== index ");
-  }, [peerUserId]);
+    setPeerUserId(props.match.params.id);
+    peerUserId && getCurrentPeerUser(props.match.params.id);
+  }, [props.match.params.id]);
 
-  const handleChange = (e) => {
-    setMessage(e.target.value);
+  const getCurrentPeerUser = async (id) => {
+    await db
+      .collection("users")
+      .where("id", "==", id)
+      .get()
+      .then((querySnapshot) => {
+        let peerUser = querySnapshot.docs.map((doc) => {
+          return doc.data();
+        });
+        setPeerUserInfo(peerUser[0]);
+      });
   };
 
   const getUsersList = async () => {
@@ -46,15 +58,13 @@ function Chat() {
             </Link>
           ))}
       </div>
-      {/* index for welcome page otherwise user choose a chat room */}
-      {peerUserId !== "index" ? (
-        <div className="col-md-7">
-          chat room
-          <input type="text" value={message} onChange={handleChange} />
-        </div>
+      <div className="col-md-7">
+      {peerUserInfo ? (
+        <ChatBoard peerUserId={peerUserId}/>
       ) : (
-        <p>welcome page</p>
+       <WelcomeBoard />
       )}
+        </div>
     </section>
   );
 }
