@@ -66,7 +66,7 @@ function ChatBoard({ peerUserId }) {
     //   });
   };
 
-  const handleSubmitMessage = async (e, content, type) => {
+  const handleSubmitMessage = async (e) => {
     e.preventDefault();
 
     //for img

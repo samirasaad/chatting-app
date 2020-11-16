@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import WelcomeBoard from "../WelcomeBoard/WelcomeBoard";
 import ChatBoard from "../ChatBoard/ChatBoard";
 import { db } from "./../../firebase";
-import './Chat.scss';
+import SettingsBrightnessIcon from "@material-ui/icons/SettingsBrightness";
+import SettingsBrightnessTwoToneIcon from '@material-ui/icons/SettingsBrightnessTwoTone';
+import "./Chat.scss";
 function Chat(props) {
   const [usersList, setUsersList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -64,30 +66,40 @@ function Chat(props) {
     }
   };
 
+  const changeMode = () => {
+    document.querySelector(".chat-wrapper").classList.toggle("dark-mode");
+    document.querySelector(".chat-wrapper").classList.toggle("light-mode");
+    document.querySelector(".mode-icon").classList.toggle("mode-icon-active");
+  };
   return (
-    <section className="chat-wrapper row mx-0 container-fluid">
-     
-      <div className="col-md-4">
-      <form onSubmit={handleFilter}>
-        <input type='text' onChange={handleChange} value={searchValue} />
-      </form>
-        {filteredList &&
-          filteredList.length > 0 &&
-          filteredList.map((user) => (
-            <Link to={`/chat/${user.id}`} key={user.id}>
-              <p>
-                {user.userName}
-                {user.availibility}
-              </p>
-            </Link>
-          ))}
+    <section className="light-mode chat-wrapper container-fluid">
+      <div className="d-flex flex-column">
+        <span>mode</span>
+        <SettingsBrightnessTwoToneIcon className="mode-icon" onClick={changeMode} />
       </div>
-      <div className="col-md-7">
-        {peerUserInfo ? (
-          <ChatBoard peerUserId={peerUserId} />
-        ) : (
-          <WelcomeBoard />
-        )}
+      <div className="row mx-0">
+        <div className="col-md-4">
+          <form onSubmit={handleFilter}>
+            <input type="text" onChange={handleChange} value={searchValue} />
+          </form>
+          {filteredList &&
+            filteredList.length > 0 &&
+            filteredList.map((user) => (
+              <Link to={`/chat/${user.id}`} key={user.id}>
+                <p>
+                  {user.userName}
+                  {user.availibility}
+                </p>
+              </Link>
+            ))}
+        </div>
+        <div className="col-md-8">
+          {peerUserInfo ? (
+            <ChatBoard peerUserId={peerUserId} />
+          ) : (
+            <WelcomeBoard />
+          )}
+        </div>
       </div>
     </section>
   );

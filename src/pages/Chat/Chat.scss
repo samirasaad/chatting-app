@@ -1,2 +1,29 @@
+@import "./../../scss/variables";
+@mixin mode($modeBg, $primaryText, $secondaryText) {
+  background-color: $modeBg;
+  color: $primaryText;
+}
+
+.dark-mode {
+  @include mode($primaryColorDark, $secondaryColorDark, green);
+}
+
+.light-mode {
+  @include mode($primaryColorLight, $secondaryColorLight, red);
+}
+
 .chat-wrapper {
+  min-height: 100vh;
+  .mode-icon {
+    color: #c1c1c1;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .mode-icon-active {
+    color: #50d350;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
