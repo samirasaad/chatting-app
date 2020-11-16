@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import WelcomeBoard from "../WelcomeBoard/WelcomeBoard";
+import FilterBar from "../../components/FilterBar/FilterBar";
 import ChatBoard from "../ChatBoard/ChatBoard";
+import SettingsBrightnessTwoToneIcon from "@material-ui/icons/SettingsBrightnessTwoTone";
 import { db } from "./../../firebase";
-import SettingsBrightnessIcon from "@material-ui/icons/SettingsBrightness";
-import SettingsBrightnessTwoToneIcon from '@material-ui/icons/SettingsBrightnessTwoTone';
 import "./Chat.scss";
 function Chat(props) {
   const [usersList, setUsersList] = useState([]);
@@ -75,13 +75,18 @@ function Chat(props) {
     <section className="light-mode chat-wrapper container-fluid">
       <div className="d-flex flex-column">
         <span>mode</span>
-        <SettingsBrightnessTwoToneIcon className="mode-icon" onClick={changeMode} />
+        <SettingsBrightnessTwoToneIcon
+          className="mode-icon"
+          onClick={changeMode}
+        />
       </div>
       <div className="row mx-0">
         <div className="col-md-4 section-bg">
-          <form onSubmit={handleFilter} >
-            <input type="text" className='w-100' onChange={handleChange} value={searchValue} />
-          </form>
+          <FilterBar
+            handleFilter={handleFilter}
+            handleChange={handleChange}
+            searchValue={searchValue}
+          />
           {filteredList &&
             filteredList.length > 0 &&
             filteredList.map((user) => (
@@ -95,7 +100,7 @@ function Chat(props) {
         </div>
         <div className="col-md-8 section-bg messages-wrapper">
           {peerUserInfo ? (
-            <ChatBoard peerUserId={peerUserId} />
+            <ChatBoard peerUserInfo={peerUserInfo} peerUserId={peerUserId} />
           ) : (
             <WelcomeBoard />
           )}

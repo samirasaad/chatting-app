@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { db } from "./../../firebase";
-import Emojis from "../../components/Emojis/Emojis";
-import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
+import { db, auth } from "./../../firebase";
 import moment from "moment";
+import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
+import UserAvatar from "../../components/UserAvatar/UserAvatar";
+import PanToolIcon from "@material-ui/icons/PanTool";
+import "./ChatBoard.scss";
 
-function ChatBoard({ peerUserId }) {
+function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
+  const peerUserId = id;
+  const peerUserPicurl = photoUrl;
+  const peerUserName = userName;
+  const currentUserPic = auth().currentUser && auth().currentUser.photoURL;
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
-  const [chosenEmoji, setChosenEmoji] = useState(null);
   const currentUserId = localStorage.getItem("userID");
   //   let [newMessagesCounter, setNewMessagesCounter] = useState(0);
   const chatId =
@@ -124,14 +129,24 @@ function ChatBoard({ peerUserId }) {
   const renderMessages = ({ idFrom, content }, index) => {
     if (idFrom === localStorage.getItem("userID")) {
       return (
-        <div key={index} className="d-flex justify-content-end">
-          <p>{content}</p>
+        <div key={index} className="d-flex my-4 justify-content-end">
+          <p className="position-relative msg-bg-current-user mx-3 p-2">{content}</p>
+          <UserAvatar
+            img={currentUserPic}
+            size="small"
+            statusClass="status-circle-small"
+          />
         </div>
       );
     } else {
       return (
-        <div key={index} className="d-flex justify-content-start">
-          <p>{content}</p>
+        <div key={index} className="d-flex my-4 justify-content-start">
+          <UserAvatar
+            img={peerUserPicurl}
+            size="small"
+            statusClass="status-circle-small"
+          />
+          <p className="position-relative msg-bg-peer-user mx-3 p-2">{content}</p>
         </div>
       );
     }
@@ -139,13 +154,27 @@ function ChatBoard({ peerUserId }) {
 
   return (
     <>
-      <div className="flex">
+      <section className="chat-board">
         {messagesList && messagesList.length > 0 ? (
           messagesList.map((message, index) => renderMessages(message, index))
         ) : (
-          <p>start chating</p>
+          <div className="d-flex flex-column align-items-center mt-5">
+            <UserAvatar
+              img={peerUserPicurl}
+              size="large"
+              statusClass="status-circle-large"
+            />
+            <p className="user-name d-flex flex-column align-items-center bold-font">
+              {peerUserName}
+            </p>
+            <span>
+              There is no chat between you and{" "}
+              <span className="medium-font">{peerUserName}</span>, Say hi
+            </span>
+            <PanToolIcon className="say-hi-icon mt-4" />
+          </div>
         )}
-      </div>
+      </section>
       <SendMsgBar
         handleSubmitMessage={handleSubmitMessage}
         handleChange={handleChange}
