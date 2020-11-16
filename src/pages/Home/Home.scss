@@ -1,0 +1,26 @@
+@import "./../../scss/variables";
+.splash-screen {
+  background-image: url("../../assets/images/Skyline_.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  .row {
+    min-height: 100vh;
+  }
+  .main-text {
+    font-size: 3em;
+    color: #2d5872;
+  }
+  .lottie {
+    svg {
+      // width: 58% !important;
+      // height: 65% !important;
+    }
+  }
+}
+@media screen and (max-width: 300px) {
+  .splash-screen {
+    .main-text {
+      font-size: 2em;
+    }
+  }
+}
