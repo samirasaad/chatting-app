@@ -6,21 +6,39 @@ function ChatBoard({ peerUserId }) {
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
   const currentUserId = localStorage.getItem("userID");
-  const chatId = `${currentUserId}-${peerUserId}` || `${peerUserId}-${currentUserId}`;
+  //   let [newMessagesCounter, setNewMessagesCounter] = useState(0);
+  const chatId =
+    `${currentUserId}-${peerUserId}` || `${peerUserId}-${currentUserId}`;
 
   useEffect(() => {
     getChatMessages();
   }, [peerUserId]);
 
+  //   useEffect(() => {
+  //     getNewMsgsCounter();
+  //   }, []);
+
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
 
+  //   const getNewMsgsCounter = async () => {
+  //     await db
+  //       .collection("messages")
+  //       .doc(`${currentUserId}-${peerUserId}`)
+  //       .collection("chat")
+  //       .onSnapshot((querySnapshot) => {
+  //         setNewMessagesCounter(
+  //           querySnapshot.docs[querySnapshot.docs.length - 1].data()
+  //             .newMessagesCounter
+  //         );
+  //       });
+  //   };
   const getChatMessages = async () => {
     await db
       .collection("messages")
       .doc(`${currentUserId}-${peerUserId}`)
-      .collection('chat')
+      .collection("chat")
       .onSnapshot((querySnapshot) => {
         let messages = querySnapshot.docs.map((doc) => {
           return doc.data();
@@ -28,16 +46,16 @@ function ChatBoard({ peerUserId }) {
         setMessagesList(messages);
       });
 
-      await db
-      .collection("messages")
-      .doc(`${peerUserId}-${currentUserId}`)
-      .collection('chat')
-      .onSnapshot((querySnapshot) => {
-        let messages = querySnapshot.docs.map((doc) => {
-          return doc.data();
-        });
-        setMessagesList(messages);
-      });
+    //   await db
+    //   .collection("messages")
+    //   .doc(`${peerUserId}-${currentUserId}`)
+    //   .collection('chat')
+    //   .onSnapshot((querySnapshot) => {
+    //     let messages = querySnapshot.docs.map((doc) => {
+    //       return doc.data();
+    //     });
+    //     setMessagesList(messages);
+    //   });
   };
 
   const handleSubmitMessage = async (e, content, type) => {
@@ -48,9 +66,11 @@ function ChatBoard({ peerUserId }) {
     //     this.setState({isShowSticker: false})
     // }
 
-    //empty message dont send
     if (message.trim() === "") {
+      //empty message dont send
       return;
+    } else {
+      //   setNewMessagesCounter(newMessagesCounter + 1);
     }
 
     const timestamp = moment().valueOf().toString();
@@ -58,36 +78,36 @@ function ChatBoard({ peerUserId }) {
     const itemMessage = {
       idFrom: currentUserId,
       idTo: peerUserId,
-      timestamp: timestamp,
+      timestamp,
       content: message.trim(),
-      // type: type,
+      //   newMessagesCounter,
     };
 
     await db
       .collection("messages")
       .doc(`${currentUserId}-${peerUserId}`)
-      .collection('chat')
+      .collection("chat")
       .doc(timestamp)
       .set(itemMessage)
       .then(() => {
         setMessage("");
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         // this.props.showToast(0, err.toString());
       });
 
-      await db
+    await db
       .collection("messages")
       .doc(`${peerUserId}-${currentUserId}`)
-      .collection('chat')
+      .collection("chat")
       .doc(timestamp)
       .set(itemMessage)
       .then(() => {
         setMessage("");
       })
       .catch((err) => {
-          console.log(err)
+        console.log(err);
         // this.props.showToast(0, err.toString());
       });
   };
