@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import WelcomeBoard from "../WelcomeBoard/WelcomeBoard";
 import ChatBoard from "../ChatBoard/ChatBoard";
 import { db } from "./../../firebase";
+import './Chat.scss';
 function Chat(props) {
   const [usersList, setUsersList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -64,11 +65,12 @@ function Chat(props) {
   };
 
   return (
-    <section className="chat-wrapper row">
+    <section className="chat-wrapper row mx-0 container-fluid">
+     
+      <div className="col-md-4">
       <form onSubmit={handleFilter}>
         <input type='text' onChange={handleChange} value={searchValue} />
       </form>
-      <div className="col-md-4">
         {filteredList &&
           filteredList.length > 0 &&
           filteredList.map((user) => (

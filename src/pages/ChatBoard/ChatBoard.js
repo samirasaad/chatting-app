@@ -120,15 +120,31 @@ function ChatBoard({ peerUserId }) {
       });
   };
 
+  const renderMessages = ({ idFrom, content }, index) => {
+    if (idFrom === localStorage.getItem("userID")) {
+      return (
+        <div className="d-flex justify-content-end">
+          <p key={index}>{content}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="d-flex justify-content-start">
+          <p key={index}>{content}</p>
+        </div>
+      );
+    }
+  };
+
   return (
     <>
-      {messagesList && messagesList.length > 0 ? (
-        messagesList.map((message, index) => (
-          <p key={index}>{message.content}</p>
-        ))
-      ) : (
-        <p>start chating</p>
-      )}
+      <div className="flex">
+        {messagesList && messagesList.length > 0 ? (
+          messagesList.map((message, index) => renderMessages(message, index))
+        ) : (
+          <p>start chating</p>
+        )}
+      </div>
       <form onSubmit={handleSubmitMessage}>
         <input type="text" onChange={handleChange} value={message} />
       </form>

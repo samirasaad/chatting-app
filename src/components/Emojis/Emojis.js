@@ -1,24 +1,3 @@
-// import React from "react";
-// import { Popover } from '@material-ui/core';
-// import Picker from "emoji-picker-react";
-
-// const Emojis = ({ handleEmojiClick }) => {
-//   return <Popover
-//   anchorOrigin={{
-//     vertical: 'top',
-//     horizontal: 'left',
-//   }}
-//   transformOrigin={{
-//     vertical: 'top',
-//     horizontal: 'left',
-//   }}
-// >
-// <Picker onEmojiClick={handleEmojiClick} disableSearchBar={true} />
-// </Popover>
-// };
-
-// export default Emojis;
-
 import React from "react";
 import Popover from "@material-ui/core/Popover";
 import Picker from "emoji-picker-react";
