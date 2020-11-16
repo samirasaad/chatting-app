@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { db } from "./../../firebase";
+import Emojis from "../../components/Emojis/Emojis";
 import moment from "moment";
 
 function ChatBoard({ peerUserId }) {
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
+  const [chosenEmoji, setChosenEmoji] = useState(null);
   const currentUserId = localStorage.getItem("userID");
   //   let [newMessagesCounter, setNewMessagesCounter] = useState(0);
   const chatId =
@@ -18,8 +20,14 @@ function ChatBoard({ peerUserId }) {
   //     getNewMsgsCounter();
   //   }, []);
 
-  const handleChange = (e) => {
-    setMessage(e.target.value);
+  const handleChange = (event, emojiObject) => {
+    console.log(event.target.value);
+    setMessage(event.target.value);
+  };
+
+  const handleChooseEmoji = (event, emojiObject) => {
+    console.log(emojiObject);
+    setMessage(message + emojiObject.emoji);
   };
 
   //   const getNewMsgsCounter = async () => {
@@ -115,13 +123,16 @@ function ChatBoard({ peerUserId }) {
   return (
     <>
       {messagesList && messagesList.length > 0 ? (
-        messagesList.map((message) => <p>{message.content}</p>)
+        messagesList.map((message, index) => (
+          <p key={index}>{message.content}</p>
+        ))
       ) : (
         <p>start chating</p>
       )}
       <form onSubmit={handleSubmitMessage}>
         <input type="text" onChange={handleChange} value={message} />
       </form>
+      <Emojis handleEmojiClick={handleChooseEmoji} />
     </>
   );
 }

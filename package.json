@@ -6,7 +6,9 @@
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
+    "@tinymce/tinymce-react": "^3.8.1",
     "bootstrap": "^4.5.3",
+    "emoji-picker-react": "^3.2.4",
     "firebase": "^8.0.0",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
@@ -15,6 +17,7 @@
     "react-lazyload": "^3.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "tinymce-emoji": "^0.1.4",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
