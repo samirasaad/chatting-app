@@ -5,9 +5,11 @@ import ChatBoard from "../ChatBoard/ChatBoard";
 import { db } from "./../../firebase";
 function Chat(props) {
   const [usersList, setUsersList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
   const [peerUserInfo, setPeerUserInfo] = useState({});
   const currentUserId = localStorage.getItem("userID");
   const [peerUserId, setPeerUserId] = useState(props.match.params.id);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     getUsersList();
@@ -41,15 +43,35 @@ function Chat(props) {
           return doc.data();
         });
         setUsersList(usersList);
+        setFilteredList(usersList);
       });
+  };
+
+  const handleChange = (e) => {
+    setSearchValue(e.target.value.toLowerCase());
+  };
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+    if (searchValue) {
+      let filteredUsers = usersList.filter((user) => {
+        return user.userName.toLowerCase().indexOf(searchValue) >= 0;
+      });
+      setFilteredList(filteredUsers);
+    } else {
+      setFilteredList(usersList);
+    }
   };
 
   return (
     <section className="chat-wrapper row">
+      <form onSubmit={handleFilter}>
+        <input type='text' onChange={handleChange} value={searchValue} />
+      </form>
       <div className="col-md-4">
-        {usersList &&
-          usersList.length > 0 &&
-          usersList.map((user) => (
+        {filteredList &&
+          filteredList.length > 0 &&
+          filteredList.map((user) => (
             <Link to={`/chat/${user.id}`} key={user.id}>
               <p>
                 {user.userName}
@@ -59,12 +81,12 @@ function Chat(props) {
           ))}
       </div>
       <div className="col-md-7">
-      {peerUserInfo ? (
-        <ChatBoard peerUserId={peerUserId}/>
-      ) : (
-       <WelcomeBoard />
-      )}
-        </div>
+        {peerUserInfo ? (
+          <ChatBoard peerUserId={peerUserId} />
+        ) : (
+          <WelcomeBoard />
+        )}
+      </div>
     </section>
   );
 }
