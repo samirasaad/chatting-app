@@ -78,9 +78,9 @@ function Chat(props) {
         <SettingsBrightnessTwoToneIcon className="mode-icon" onClick={changeMode} />
       </div>
       <div className="row mx-0">
-        <div className="col-md-4">
-          <form onSubmit={handleFilter}>
-            <input type="text" onChange={handleChange} value={searchValue} />
+        <div className="col-md-4 section-bg">
+          <form onSubmit={handleFilter} >
+            <input type="text" className='w-100' onChange={handleChange} value={searchValue} />
           </form>
           {filteredList &&
             filteredList.length > 0 &&
@@ -93,7 +93,7 @@ function Chat(props) {
               </Link>
             ))}
         </div>
-        <div className="col-md-8">
+        <div className="col-md-8 section-bg messages-wrapper">
           {peerUserInfo ? (
             <ChatBoard peerUserId={peerUserId} />
           ) : (

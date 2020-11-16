@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "./../../firebase";
 import Emojis from "../../components/Emojis/Emojis";
+import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
 import moment from "moment";
 
 function ChatBoard({ peerUserId }) {
@@ -123,14 +124,14 @@ function ChatBoard({ peerUserId }) {
   const renderMessages = ({ idFrom, content }, index) => {
     if (idFrom === localStorage.getItem("userID")) {
       return (
-        <div className="d-flex justify-content-end">
-          <p key={index}>{content}</p>
+        <div key={index} className="d-flex justify-content-end">
+          <p>{content}</p>
         </div>
       );
     } else {
       return (
-        <div className="d-flex justify-content-start">
-          <p key={index}>{content}</p>
+        <div key={index} className="d-flex justify-content-start">
+          <p>{content}</p>
         </div>
       );
     }
@@ -145,10 +146,12 @@ function ChatBoard({ peerUserId }) {
           <p>start chating</p>
         )}
       </div>
-      <form onSubmit={handleSubmitMessage}>
-        <input type="text" onChange={handleChange} value={message} />
-      </form>
-      <Emojis handleEmojiClick={handleChooseEmoji} />
+      <SendMsgBar
+        handleSubmitMessage={handleSubmitMessage}
+        handleChange={handleChange}
+        handleChooseEmoji={handleChooseEmoji}
+        message={message}
+      />
     </>
   );
 }

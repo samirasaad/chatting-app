@@ -1,19 +1,24 @@
 @import "./../../scss/variables";
-@mixin mode($modeBg, $primaryText, $secondaryText) {
-  background-color: $modeBg;
-  color: $primaryText;
-}
+// @mixin mode($modeBg, $primaryText, $secondaryText) {
+//   background-color: $modeBg;
+//   color: $primaryText;
+// }
 
-.dark-mode {
-  @include mode($primaryColorDark, $secondaryColorDark, green);
-}
+// .dark-mode {
+//   @include mode($primaryColorDark, $secondaryColorDark, green);
+// }
 
-.light-mode {
-  @include mode($primaryColorLight, $secondaryColorLight, red);
-}
+// .light-mode {
+//   @include mode($primaryColorLight, $secondaryColorLight, red);
+// }
 
 .chat-wrapper {
   min-height: 100vh;
+  .section-bg {
+    border-radius: 2em;
+    border: 15px solid white;
+    min-height: 80vh;
+  }
   .mode-icon {
     color: #c1c1c1;
     &:hover {
@@ -25,5 +30,24 @@
     &:hover {
       cursor: pointer;
     }
+  }
+  .messages-wrapper {
+    position: relative;
+  }
+}
+
+//DARK-MODE
+.chat-wrapper.dark-mode {
+  .section-bg {
+    background-color: $primaryColorDark;
+    color: $secondaryColorDark;
+  }
+}
+
+//LIGHT-MODE
+.chat-wrapper.light-mode {
+  .section-bg {
+    background-color: $primaryColorLight;
+    color: $secondaryColorLight;
   }
 }

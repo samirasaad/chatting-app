@@ -1,6 +1,8 @@
 import React from "react";
 import Popover from "@material-ui/core/Popover";
 import Picker from "emoji-picker-react";
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import './Emojis.scss';
 
  const Emojis =({ handleEmojiClick }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,8 +25,9 @@ import Picker from "emoji-picker-react";
         variant="contained"
         color="primary"
         onClick={handleClick}
+        className='position-absolute emoji-parent'
       >
-        emojis
+       <InsertEmoticonIcon />
       </span>
       <Popover
         id={id}
