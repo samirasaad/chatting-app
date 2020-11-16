@@ -17,7 +17,7 @@
     left: 98%;
     border-left: 0 solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid white;
+    // border-bottom: 8px solid white;
   }
   .msg-bg-peer-user:before {
     content: "";
@@ -27,12 +27,12 @@
     height: 0;
     right: 98%;
     border-left: 8px solid transparent;
-    border-bottom: 8px solid white;
+    // border-bottom: 8px solid white;
   }
   .msg-bg-current-user,
   .msg-bg-peer-user {
     border-radius: 3px;
-    background-color: white;
+    // background-color: white;
   }
   .status-circle-large {
     bottom: 10px;
@@ -54,14 +54,22 @@
 
 //LIGHT-MODE
 .chat-wrapper.light-mode {
-  .msg-bg {
+  .msg-bg-current-user,
+  .msg-bg-peer-user {
     background-color: white;
+    &:before {
+      border-bottom: 8px solid white;
+    }
   }
 }
 
 //DARK-MODE
 .chat-wrapper.dark-mode {
-  .msg-bg {
+  .msg-bg-current-user,
+  .msg-bg-peer-user {
     background-color: #424242;
+    &:before {
+      border-bottom: 8px solid #424242;
+    }
   }
 }
