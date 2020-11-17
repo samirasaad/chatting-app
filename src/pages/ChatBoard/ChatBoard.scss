@@ -1,3 +1,7 @@
+@import "./../../scss/variables";
+.chat-min-height {
+  min-height: 59vh;
+}
 .chat-board {
   margin-bottom: 2em;
   .user-name {
@@ -42,10 +46,10 @@
 //LIGHT-MODE
 .chat-wrapper.light-mode {
   .msg-bg-current-user {
-    background-color: #2d5872;
+    background-color: $currentUserBg;
     color: white;
     &:before {
-      border-bottom: 8px solid #2d5872;
+      border-bottom: 8px solid $currentUserBg;
     }
   }
 
@@ -59,9 +63,9 @@
 //DARK-MODE
 .chat-wrapper.dark-mode {
   .msg-bg-current-user {
-    background-color: #2d5872;
+    background-color: $currentUserBg;
     &:before {
-      border-bottom: 8px solid #2d5872;
+      border-bottom: 8px solid $currentUserBg;
     }
   }
   .msg-bg-peer-user {

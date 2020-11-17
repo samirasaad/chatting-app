@@ -16,7 +16,6 @@
   min-height: 70vh;
   .section-bg {
     border-radius: 1.6em;
-    border: 5px solid white;
     min-height: 79.9vh;
   }
   .messages-wrapper {
@@ -27,21 +26,25 @@
 }
 //DARK-MODE
 .chat-wrapper.dark-mode {
+  background-color: black;
   .send-msg-bar {
-    background-color: $primaryColorDark;
+    background-color: $darkBg;
   }
   .section-bg {
-    background-color: $primaryColorDark;
+    border: 5px solid black;
+    background-color: $darkBg;
     color: $secondaryColorDark;
   }
 }
 //LIGHT-MODE
 .chat-wrapper.light-mode {
+  border: 5px solid white;
   .send-msg-bar {
     background-color: $secondaryColorLight;
     color: $primaryColorDark;
   }
   .section-bg {
+    border: 5px solid white;
     background-color: $secondaryColorLight;
     color: $primaryColorLight;
   }

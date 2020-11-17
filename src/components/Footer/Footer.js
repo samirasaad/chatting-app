@@ -4,7 +4,7 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import "./Footer.scss";
 const Footer = () => {
   return (
-    <footer className="d-flex justify-content-center footer-wrapper align-items-center">
+    <footer className="d-flex light-mode justify-content-center footer-wrapper align-items-center">
       <a href="https://github.com/samirasaad">
         <GitHubIcon className="mx-2" />
       </a>

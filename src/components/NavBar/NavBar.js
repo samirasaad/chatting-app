@@ -11,9 +11,17 @@ const NavBar = () => {
   const userID = localStorage.getItem("userID");
 
   const changeMode = () => {
+    //chat-wrapper
     document.querySelector(".chat-wrapper").classList.toggle("dark-mode");
     document.querySelector(".chat-wrapper").classList.toggle("light-mode");
+    //mode icone
     document.querySelector(".mode-icon").classList.toggle("mode-icon-active");
+    //navbar
+    document.querySelector(".navbar-wrapper").classList.toggle("dark-mode");
+    document.querySelector(".navbar-wrapper").classList.toggle("light-mode");
+    //footer
+    document.querySelector(".footer-wrapper").classList.toggle("dark-mode");
+    document.querySelector(".footer-wrapper").classList.toggle("light-mode");
   };
 
   const handleLogout = async () => {
@@ -30,7 +38,7 @@ const NavBar = () => {
       });
   };
   return (
-    <section className="navbar-wrapper  container-fluid medium-font d-flex justify-content-between align-items-center">
+    <section className="navbar-wrapper light-mode container-fluid medium-font d-flex justify-content-between align-items-center">
       <p className="mb-0 py-2">
         <img src={logo} alt="chatBoard-logo" className="logo" />
         <h3 className="brand-name mx-3 mb-0 medium-font">ChatBoard</h3>

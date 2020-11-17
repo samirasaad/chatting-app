@@ -68,7 +68,7 @@ function Chat(props) {
   return (
     <>
      <NavBar />
-    <section className="light-mode chat-wrapper my-1 container-fluid">
+    <section className="light-mode chat-wrapper py-1 container-fluid">
       <div className="row mx-0">
         <div className="col-md-3 section-bg">
           <UsersList
@@ -80,12 +80,14 @@ function Chat(props) {
           />
         </div>
         <div className="col-md-9 section-bg messages-wrapper">
+          {/* <div className='position-relative'> */}
           {peerUserInfo ? (
             <ChatBoard peerUserInfo={peerUserInfo} peerUserId={peerUserId} />
-          ) : (
-            <WelcomeBoard />
-          )}
-        </div>
+            ) : (
+              <WelcomeBoard />
+              )}
+              </div>
+        {/* </div> */}
       </div>
     </section>
     </>

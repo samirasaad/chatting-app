@@ -167,7 +167,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   return (
     <>
-      <section className="chat-board">
+      <section className={`${messagesList.length === 0 && 'chat-min-height'} chat-board`}>
         {messagesList && messagesList.length > 0 ? (
           messagesList.map((message, index) => renderMessages(message, index))
         ) : (
@@ -184,7 +184,10 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
             </p>
             <span>
               There is no chat between you and
-              <span className="medium-font mx-1 peer-user-name">{peerUserName}</span>, Say hi
+              <span className="medium-font mx-1 peer-user-name">
+                {peerUserName}
+              </span>
+              , Say hi
             </span>
             <PanToolIcon className="say-hi-icon mt-4" />
           </div>

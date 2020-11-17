@@ -1,6 +1,7 @@
 @import "./../../scss/variables";
 .send-msg-bar {
   bottom: 0;
+  // top: 100%;
   .send-btn {
     color: #999797;
     svg:hover {
@@ -18,6 +19,7 @@
     background-color: #090909;
     box-shadow: 0px 0px 8px -3px #494949;
     border: none;
+    color: white;
   }
 }
 .chat-wrapper.light-mode {
