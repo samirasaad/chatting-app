@@ -16,16 +16,15 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const [messagesList, setMessagesList] = useState([]);
   const currentUserId = localStorage.getItem("userID");
   //   let [newMessagesCounter, setNewMessagesCounter] = useState(0);
-  const chatId =
-    `${currentUserId}-${peerUserId}` || `${peerUserId}-${currentUserId}`;
 
   useEffect(() => {
+    updateScroll();
     getChatMessages();
   }, [peerUserId]);
 
-  //   useEffect(() => {
-  //     getNewMsgsCounter();
-  //   }, []);
+  useEffect(() => {
+    // getNewMsgsCounter();
+  }, []);
 
   const handleChange = (event, emojiObject) => {
     setMessage(event.target.value);
@@ -73,21 +72,17 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   const handleSubmitMessage = async (e) => {
     e.preventDefault();
-
     //for img
     // if (this.state.isShowSticker && type === 2) {
     //     this.setState({isShowSticker: false})
     // }
-
     if (message.trim() === "") {
       //empty message dont send
       return;
     } else {
       //   setNewMessagesCounter(newMessagesCounter + 1);
     }
-
     const timestamp = (new Date().getTime() / 1000).toString();
-
     const itemMessage = {
       idFrom: currentUserId,
       idTo: peerUserId,
@@ -95,7 +90,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       content: message.trim(),
       //   newMessagesCounter,
     };
-
     await db
       .collection("messages")
       .doc(`${currentUserId}-${peerUserId}`)
@@ -104,6 +98,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       .set(itemMessage)
       .then(() => {
         setMessage("");
+        updateScroll();
       })
       .catch((err) => {
         console.log(err);
@@ -163,6 +158,11 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
         </div>
       );
     }
+  };
+
+  const updateScroll = () => {
+    var chatContainer = document.querySelector(".messages-wrapper");
+    chatContainer.scrollTop = chatContainer.scrollHeight;
   };
 
   return (
