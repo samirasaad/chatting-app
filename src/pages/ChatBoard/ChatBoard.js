@@ -129,7 +129,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
     if (idFrom === localStorage.getItem("userID")) {
       return (
         <div key={index} className="d-flex my-4 justify-content-end">
-          <div className="flex">
+          <div className="d-flex flex-column align-items-end">
             <p className="position-relative msg-bg-current-user mx-3 p-2 mb-0">
               {content}
             </p>
@@ -152,7 +152,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
             size="small"
             statusClass="status-circle-small"
           />
-          <div className="flex">
+          <div className="d-flex flex-column align-items-start">
             <p className="position-relative msg-bg-peer-user mx-3 p-2 mb-0">
               {content}
             </p>

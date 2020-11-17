@@ -11,7 +11,7 @@ const SendMsgBar = ({
   return (
     <>
       <form
-        className="send-msg-bar d-flex align-items-baseline position-absolute"
+        className="send-msg-bar d-flex align-items-baseline position-sticky pt-2"
         onSubmit={handleSubmitMessage}
       >
         <input
@@ -19,11 +19,14 @@ const SendMsgBar = ({
           type="text"
           onChange={handleChange}
           value={message}
-          placeholder='Enter your message'
+          placeholder="Enter your message"
         />
         <Emojis handleEmojiClick={handleChooseEmoji} />
         <p className="send-btn mx-3 py-2">
-          <SendOutlinedIcon onClick={handleSubmitMessage} className={`${!message && 'disable-send-msg'}`}/>
+          <SendOutlinedIcon
+            onClick={handleSubmitMessage}
+            className={`${!message && "disable-send-msg"}`}
+          />
         </p>
       </form>
     </>

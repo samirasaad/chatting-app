@@ -13,39 +13,33 @@
 // }
 
 .chat-wrapper {
-  min-height: 100vh;
+  min-height: 70vh;
   .section-bg {
     border-radius: 2em;
     border: 15px solid white;
-    min-height: 80vh;
+    min-height: 79.9vh;
   }
-  // .mode-icon {
-  //   color: #c1c1c1;
-  //   &:hover {
-  //     cursor: pointer;
-  //   }
-  // }
-  // .mode-icon-active {
-  //   color: #50d350;
-  //   &:hover {
-  //     cursor: pointer;
-  //   }
-  // }
   .messages-wrapper {
     position: relative;
+    max-height: 79vh;
+    overflow-y: auto;
   }
 }
-
 //DARK-MODE
 .chat-wrapper.dark-mode {
+  .send-msg-bar {
+    background-color: $primaryColorDark;
+  }
   .section-bg {
     background-color: $primaryColorDark;
     color: $secondaryColorDark;
   }
 }
-
 //LIGHT-MODE
 .chat-wrapper.light-mode {
+  .send-msg-bar {
+    background-color: $secondaryColorLight;
+  }
   .section-bg {
     background-color: $secondaryColorLight;
     color: $primaryColorLight;

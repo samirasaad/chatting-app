@@ -1,6 +1,6 @@
+@import "./../../scss/variables";
 .send-msg-bar {
-  bottom: 10px;
-  width: 97%;
+  bottom: 0;
   input.send-msg {
     border-radius: 1.4em;
     border: 1px solid #dbdbdb;
@@ -16,21 +16,5 @@
   }
   .disable-send-msg:hover {
     cursor: not-allowed !important;
-  }
-}
-//LIGHT-MODE
-.section-bg.light-mode {
-  .send-msg-bar {
-    .send-btn {
-      color: black;
-    }
-  }
-}
-//DARK-MODE
-.section-bg.dark-mode {
-  .send-msg-bar {
-    .send-btn {
-      color: white;
-    }
   }
 }

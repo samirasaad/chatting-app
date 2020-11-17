@@ -30,6 +30,7 @@
   .msg-bg-current-user,
   .msg-bg-peer-user {
     border-radius: 3px;
+    font-size: 1.2em;
   }
   .status-circle-large {
     bottom: 10px;
@@ -53,7 +54,14 @@
 }
 //LIGHT-MODE
 .chat-wrapper.light-mode {
-  .msg-bg-current-user,
+  .msg-bg-current-user {
+    background-color: #2d5872;
+    color: white;
+    &:before {
+      border-bottom: 8px solid #2d5872;
+    }
+  }
+
   .msg-bg-peer-user {
     background-color: white;
     &:before {
@@ -63,7 +71,12 @@
 }
 //DARK-MODE
 .chat-wrapper.dark-mode {
-  .msg-bg-current-user,
+  .msg-bg-current-user {
+    background-color: #2d5872;
+    &:before {
+      border-bottom: 8px solid #2d5872;
+    }
+  }
   .msg-bg-peer-user {
     background-color: #424242;
     &:before {
