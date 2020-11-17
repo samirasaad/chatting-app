@@ -73,13 +73,13 @@ function Chat(props) {
   };
   return (
     <section className="light-mode chat-wrapper container-fluid">
-      <div className="d-flex flex-column">
+      {/* <div className="d-flex flex-column">
         <span>mode</span>
         <SettingsBrightnessTwoToneIcon
           className="mode-icon"
           onClick={changeMode}
         />
-      </div>
+      </div> */}
       <div className="row mx-0">
         <div className="col-md-4 section-bg">
           <FilterBar

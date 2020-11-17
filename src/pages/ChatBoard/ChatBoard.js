@@ -6,10 +6,11 @@ import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import PanToolIcon from "@material-ui/icons/PanTool";
 import "./ChatBoard.scss";
 
-function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
+function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const peerUserId = id;
   const peerUserPicurl = photoUrl;
   const peerUserName = userName;
+  const peerUserAvailibility = availibility;
   const currentUserPic = auth().currentUser && auth().currentUser.photoURL;
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
@@ -19,10 +20,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
     `${currentUserId}-${peerUserId}` || `${peerUserId}-${currentUserId}`;
 
   useEffect(() => {
-    console.log((new Date().getTime() / 1000).toString());
-    console.log(new Date().getTime() / 1000);
-    let d = (new Date().getTime() / 1000).toString()
-    console.log(moment(d*1000).format("DD/MM/YYYY , h:mm:ss A"))
     getChatMessages();
   }, [peerUserId]);
 
@@ -31,12 +28,10 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
   //   }, []);
 
   const handleChange = (event, emojiObject) => {
-    console.log(event.target.value);
     setMessage(event.target.value);
   };
 
   const handleChooseEmoji = (event, emojiObject) => {
-    console.log(emojiObject);
     setMessage(message + emojiObject.emoji);
   };
 
@@ -139,7 +134,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
               {content}
             </p>
             <small className="mx-3 time">
-              {moment(timestamp*1000).format("DD/MM/YYYY , h:mm A")}
+              {moment(timestamp * 1000).format("DD/MM/YYYY , h:mm A")}
             </small>
           </div>
           <UserAvatar
@@ -162,7 +157,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
               {content}
             </p>
             <small className="mx-3 time">
-              {moment(timestamp*1000).format("DD/MM/YYYY , h:mm A")}
+              {moment(timestamp * 1000).format("DD/MM/YYYY , h:mm A")}
             </small>
           </div>
         </div>
@@ -180,7 +175,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
             <UserAvatar
               img={peerUserPicurl}
               size="large"
-              statusClass="status-circle-large"
+              statusClass={`${
+                peerUserAvailibility === "online" && "status-circle-large"
+              } `}
             />
             <p className="user-name d-flex flex-column align-items-center bold-font">
               {peerUserName}

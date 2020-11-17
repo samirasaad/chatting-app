@@ -7,4 +7,22 @@
   .brand-name {
     color: $link;
   }
+  .mode-icon {
+    color: #c1c1c1;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .mode-icon-active {
+    color: #50d350;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .logout-icon {
+    color: #bebebe;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
