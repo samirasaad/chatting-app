@@ -4,17 +4,15 @@
   background-repeat: no-repeat;
   background-size: cover;
   .row {
-    min-height: 100vh;
+    min-height: 79.9vh;
   }
   .main-text {
     font-size: 3em;
     color: #2d5872;
   }
-  .lottie {
-    svg {
-      // width: 58% !important;
-      // height: 65% !important;
-    }
+  .start-chatting-link {
+    font-size: 2em;
+    color: $link;
   }
 }
 @media screen and (max-width: 300px) {

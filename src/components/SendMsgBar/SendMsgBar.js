@@ -15,7 +15,7 @@ const SendMsgBar = ({
         onSubmit={handleSubmitMessage}
       >
         <input
-          className="send-msg w-100"
+          className="send-msg w-100 pl-3 pr-5 py-3"
           type="text"
           onChange={handleChange}
           value={message}

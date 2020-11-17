@@ -19,6 +19,10 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
     `${currentUserId}-${peerUserId}` || `${peerUserId}-${currentUserId}`;
 
   useEffect(() => {
+    console.log((new Date().getTime() / 1000).toString());
+    console.log(new Date().getTime() / 1000);
+    let d = (new Date().getTime() / 1000).toString()
+    console.log(moment(d*1000).format("DD/MM/YYYY , h:mm:ss A"))
     getChatMessages();
   }, [peerUserId]);
 
@@ -87,7 +91,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
       //   setNewMessagesCounter(newMessagesCounter + 1);
     }
 
-    const timestamp = moment().valueOf().toString();
+    const timestamp = (new Date().getTime() / 1000).toString();
 
     const itemMessage = {
       idFrom: currentUserId,
@@ -126,11 +130,18 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
       });
   };
 
-  const renderMessages = ({ idFrom, content }, index) => {
+  const renderMessages = ({ idFrom, content, timestamp }, index) => {
     if (idFrom === localStorage.getItem("userID")) {
       return (
         <div key={index} className="d-flex my-4 justify-content-end">
-          <p className="position-relative msg-bg-current-user mx-3 p-2">{content}</p>
+          <div className="flex">
+            <p className="position-relative msg-bg-current-user mx-3 p-2 mb-0">
+              {content}
+            </p>
+            <small className="mx-3 time">
+              {moment(timestamp*1000).format("DD/MM/YYYY , h:mm A")}
+            </small>
+          </div>
           <UserAvatar
             img={currentUserPic}
             size="small"
@@ -146,7 +157,14 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName } }) {
             size="small"
             statusClass="status-circle-small"
           />
-          <p className="position-relative msg-bg-peer-user mx-3 p-2">{content}</p>
+          <div className="flex">
+            <p className="position-relative msg-bg-peer-user mx-3 p-2 mb-0">
+              {content}
+            </p>
+            <small className="mx-3 time">
+              {moment(timestamp*1000).format("DD/MM/YYYY , h:mm A")}
+            </small>
+          </div>
         </div>
       );
     }

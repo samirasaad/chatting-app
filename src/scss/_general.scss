@@ -5,7 +5,24 @@
 .medium-font {
   font-family: LT-Azer-Medium;
 }
-
+//BUTTONS
+.primary-button,
+.secondary-button {
+  border-radius: 3em;
+}
+.primary-button {
+  background-color: $primaryColorLight;
+  border: 1px solid $primaryColorLight;
+  color: white;
+}
+.secondary-button {
+  background-color: transparent;
+  border: 1px solid $primaryColorLight;
+  color: $primaryColorLight;
+}
+button:focus {
+  outline: none;
+}
 //GENERAL STYLES
 a:hover {
   text-decoration: none;
