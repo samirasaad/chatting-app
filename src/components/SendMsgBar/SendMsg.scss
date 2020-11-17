@@ -2,19 +2,40 @@
 .send-msg-bar {
   bottom: 0;
   input.send-msg {
-    border-radius: 1.4em;
-    border: 1px solid #dbdbdb;
-    box-shadow: 0px 2px 6px -1px #cbcbcb;
+    color: white;
     &:focus {
       outline: none;
     }
   }
   .send-btn {
+    color: #999797;
     svg:hover {
       cursor: pointer;
     }
   }
   .disable-send-msg:hover {
     cursor: not-allowed !important;
+  }
+}
+
+.chat-wrapper.dark-mode {
+  input.send-msg {
+    border-radius: 1.4em;
+    background-color: #090909;
+    box-shadow: 0px 0px 8px -3px #494949;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.chat-wrapper.light-mode {
+  input.send-msg {
+    border-radius: 1.4em;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0px 2px 6px -1px #cbcbcb;
+    &:focus {
+      outline: none;
+    }
   }
 }
