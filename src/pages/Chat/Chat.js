@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import WelcomeBoard from "../WelcomeBoard/WelcomeBoard";
-import FilterBar from "../../components/FilterBar/FilterBar";
+import UsersList from "../../components/UsersList/UsersList";
 import ChatBoard from "../ChatBoard/ChatBoard";
-import SettingsBrightnessTwoToneIcon from "@material-ui/icons/SettingsBrightnessTwoTone";
 import { db } from "./../../firebase";
 import "./Chat.scss";
 function Chat(props) {
@@ -66,32 +64,19 @@ function Chat(props) {
     }
   };
 
-  const changeMode = () => {
-    document.querySelector(".chat-wrapper").classList.toggle("dark-mode");
-    document.querySelector(".chat-wrapper").classList.toggle("light-mode");
-    document.querySelector(".mode-icon").classList.toggle("mode-icon-active");
-  };
   return (
-    <section className="light-mode chat-wrapper container-fluid">
+    <section className="light-mode chat-wrapper my-1 container-fluid">
       <div className="row mx-0">
-        <div className="col-md-4 section-bg">
-          <FilterBar
-            handleFilter={handleFilter}
+        <div className="col-md-3 section-bg">
+          <UsersList
             handleChange={handleChange}
+            handleFilter={handleFilter}
             searchValue={searchValue}
+            filteredList={filteredList}
+            peerUserId={peerUserId}
           />
-          {filteredList &&
-            filteredList.length > 0 &&
-            filteredList.map((user) => (
-              <Link to={`/chat/${user.id}`} key={user.id}>
-                <p>
-                  {user.userName}
-                  {user.availibility}
-                </p>
-              </Link>
-            ))}
         </div>
-        <div className="col-md-8 section-bg messages-wrapper">
+        <div className="col-md-9 section-bg messages-wrapper">
           {peerUserInfo ? (
             <ChatBoard peerUserInfo={peerUserInfo} peerUserId={peerUserId} />
           ) : (

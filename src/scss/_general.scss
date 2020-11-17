@@ -27,6 +27,22 @@ button:focus {
 a:hover {
   text-decoration: none;
 }
+.status-circle-large {
+  bottom: 10px;
+  right: 25px;
+  height: 12px;
+  width: 14px;
+  background-color: #32d040;
+  border-radius: 10px;
+}
+.status-circle-small {
+  top: 1.5rem;
+  right: 1px;
+  height: 8px;
+  width: 8px;
+  background-color: #32d040;
+  border-radius: 10px;
+}
 //SCROLL
 /* scroll-width */
 ::-webkit-scrollbar {

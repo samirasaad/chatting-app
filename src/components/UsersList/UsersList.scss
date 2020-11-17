@@ -1,0 +1,35 @@
+@import "./../../scss/variables";
+.users-list-wrapper {
+  .selected-user {
+    border-radius: 1.4em;
+  }
+  a {
+    font-size: 1.1em;
+  }
+}
+.chat-wrapper.light-mode {
+  .section-bg {
+    .users-list-wrapper {
+      a {
+        color: $primaryColorLight;
+      }
+      .selected-user {
+        background-color: #f6f6f6;
+        box-shadow: 0px 2px 6px 1px #d9d9d9;
+      }
+    }
+  }
+}
+.chat-wrapper.dark-mode {
+  .section-bg {
+    .users-list-wrapper {
+      a {
+        color: $secondaryColorLight;
+      }
+      .selected-user {
+        background-color: #232323;
+        box-shadow: 0px 2px 6px 1px #565656;
+      }
+    }
+  }
+}

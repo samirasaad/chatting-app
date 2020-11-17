@@ -18,7 +18,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   //   let [newMessagesCounter, setNewMessagesCounter] = useState(0);
 
   useEffect(() => {
-    updateScroll();
     getChatMessages();
   }, [peerUserId]);
 
@@ -56,6 +55,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
           return doc.data();
         });
         setMessagesList(messages);
+        updateScroll();
       });
 
     //   await db
@@ -179,12 +179,12 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
                 peerUserAvailibility === "online" && "status-circle-large"
               } `}
             />
-            <p className="user-name d-flex flex-column align-items-center bold-font">
+            <p className="user-name mt-3 d-flex flex-column align-items-center bold-font">
               {peerUserName}
             </p>
             <span>
-              There is no chat between you and{" "}
-              <span className="medium-font">{peerUserName}</span>, Say hi
+              There is no chat between you and
+              <span className="medium-font mx-1 peer-user-name">{peerUserName}</span>, Say hi
             </span>
             <PanToolIcon className="say-hi-icon mt-4" />
           </div>

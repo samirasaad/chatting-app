@@ -8,7 +8,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import "./NavBar.scss";
 
 const NavBar = () => {
-  const userID = localStorage.getItem('userID')
+  const userID = localStorage.getItem('userID');
+
   const changeMode = () => {
     document.querySelector(".chat-wrapper").classList.toggle("dark-mode");
     document.querySelector(".chat-wrapper").classList.toggle("light-mode");
@@ -32,7 +33,7 @@ const NavBar = () => {
     <section className="navbar-wrapper py-2 px-5 medium-font d-flex justify-content-between align-items-center">
       <Link to="/">
         <img src={logo} alt="chatBoard-logo" className="logo" />
-        <h3 className="brand-name mx-3">ChatBoard</h3>
+        <h3 className="brand-name mx-3 mb-0">ChatBoard</h3>
       </Link>
       {localStorage.getItem("userID") && (
         <div className="d-flex">
