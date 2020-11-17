@@ -1,12 +1,6 @@
 @import "./../../scss/variables";
 .navbar-wrapper {
   background-color: #f3f6f8;
-  .logo {
-    height: 3em;
-  }
-  .brand-name {
-    color: $link;
-  }
   .mode-icon {
     color: #c1c1c1;
     &:hover {

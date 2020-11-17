@@ -24,6 +24,12 @@ button:focus {
   outline: none;
 }
 //GENERAL STYLES
+.logo {
+  height: 3em;
+}
+.brand-name {
+  color: $link;
+}
 a:hover {
   text-decoration: none;
 }
@@ -43,6 +49,10 @@ a:hover {
   background-color: #32d040;
   border-radius: 10px;
 }
+input:focus {
+  outline: none;
+}
+
 //SCROLL
 /* scroll-width */
 ::-webkit-scrollbar {
@@ -60,10 +70,6 @@ a:hover {
   border-radius: 3em;
   width: 6px;
   height: 10px;
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 .chat-wrapper.dark-mode {
   /* scroll-track */

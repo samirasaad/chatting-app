@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WelcomeBoard from "../WelcomeBoard/WelcomeBoard";
 import UsersList from "../../components/UsersList/UsersList";
 import ChatBoard from "../ChatBoard/ChatBoard";
+import NavBar from "./../../components/NavBar/NavBar";
 import { db } from "./../../firebase";
 import "./Chat.scss";
 function Chat(props) {
@@ -65,6 +66,8 @@ function Chat(props) {
   };
 
   return (
+    <>
+     <NavBar />
     <section className="light-mode chat-wrapper my-1 container-fluid">
       <div className="row mx-0">
         <div className="col-md-3 section-bg">
@@ -85,6 +88,7 @@ function Chat(props) {
         </div>
       </div>
     </section>
+    </>
   );
 }
 

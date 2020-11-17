@@ -39,7 +39,9 @@ const UsersList = ({
                   user.availibility === "online" && "status-circle-small"
                 } `}
               />
-              <p className="mx-3 bold-font user-name mb-0 mt-1">{user.userName}</p>
+              <p className="mx-3 bold-font user-name mb-0 mt-1">
+                {user.userName}
+              </p>
             </div>
           </Link>
         ))}

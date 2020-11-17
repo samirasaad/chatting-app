@@ -3,11 +3,9 @@
   background-image: url("../../assets/images/Skyline_.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  .row {
-    min-height: 79.9vh;
-  }
+  min-height: 94vh;
   .main-text {
-    font-size: 3em;
+    font-size: 4em;
     color: #2d5872;
   }
   .start-chatting-link {
@@ -17,6 +15,7 @@
 }
 @media screen and (max-width: 300px) {
   .splash-screen {
+    min-height: 92vh;
     .main-text {
       font-size: 2em;
     }

@@ -8,7 +8,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import "./NavBar.scss";
 
 const NavBar = () => {
-  const userID = localStorage.getItem('userID');
+  const userID = localStorage.getItem("userID");
 
   const changeMode = () => {
     document.querySelector(".chat-wrapper").classList.toggle("dark-mode");
@@ -17,24 +17,24 @@ const NavBar = () => {
   };
 
   const handleLogout = async () => {
-      await db
-        .collection("users")
-        .doc(userID)
-        .update({ availibility: "offline" })
-        .then(() => {
-          firebaseSignout();
-        })
-        .catch((err) => {
-          console.log(err);
-          // this.props.showToast(0, err.toString());
-        });
+    await db
+      .collection("users")
+      .doc(userID)
+      .update({ availibility: "offline" })
+      .then(() => {
+        firebaseSignout();
+      })
+      .catch((err) => {
+        console.log(err);
+        // this.props.showToast(0, err.toString());
+      });
   };
   return (
-    <section className="navbar-wrapper py-2 px-5 medium-font d-flex justify-content-between align-items-center">
-      <Link to="/">
+    <section className="navbar-wrapper  container-fluid medium-font d-flex justify-content-between align-items-center">
+      <p className="mb-0 py-2">
         <img src={logo} alt="chatBoard-logo" className="logo" />
-        <h3 className="brand-name mx-3 mb-0">ChatBoard</h3>
-      </Link>
+        <h3 className="brand-name mx-3 mb-0 medium-font">ChatBoard</h3>
+      </p>
       {localStorage.getItem("userID") && (
         <div className="d-flex">
           <div className="d-flex mx-3">
