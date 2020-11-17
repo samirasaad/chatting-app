@@ -27,3 +27,45 @@ button:focus {
 a:hover {
   text-decoration: none;
 }
+//SCROLL
+/* scroll-width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+/* scroll-track */
+::-webkit-scrollbar-track {
+  // background: #f0f0f0;
+  border-radius: 3em;
+  padding-left: 10px;
+}
+/* scroll-handle */
+::-webkit-scrollbar-thumb {
+  // background: $primaryColorLight;
+  border-radius: 3em;
+  width: 6px;
+  height: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.chat-wrapper.dark-mode {
+  /* scroll-track */
+  ::-webkit-scrollbar-track {
+    background: black;
+  }
+  /* scroll-handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: white;
+  }
+}
+.chat-wrapper.light-mode {
+  /* scroll-track */
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+  /* scroll-handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: $primaryColorLight;
+  }
+}
