@@ -18,10 +18,10 @@ const Home = () => {
   };
   return (
     <header className="splash-screen">
-      <p className="mb-0 py-2 container-fluid">
+      <div className="mb-0 py-2 container-fluid">
         <img src={logo} alt="chatBoard-logo" className="logo" />
         <h3 className="brand-name mx-3 mb-0">ChatBoard</h3>
-      </p>
+      </div>
       <div className="container">
         <div className="mx-0 row justify-content-center">
           <div className="col-md-6 mt-5 py-md-5 py-0">
@@ -29,7 +29,7 @@ const Home = () => {
               Make Your Life Easier, Use ChatBoard
             </h4>
             {!localStorage.getItem("userID") && (
-              <div className='d-flex flex-wrap  mt-md-5 mt-0'>
+              <div className="d-flex flex-wrap  mt-md-5 mt-0">
                 <Btn
                   text="Log In"
                   handleClick={() => {

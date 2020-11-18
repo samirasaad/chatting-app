@@ -12,6 +12,8 @@
     "bootstrap": "^4.5.3",
     "emoji-picker-react": "^3.2.4",
     "firebase": "^8.0.0",
+    "formik": "^2.2.5",
+    "formik-yup": "0.0.5",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
@@ -21,7 +23,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "tinymce-emoji": "^0.1.4",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",
