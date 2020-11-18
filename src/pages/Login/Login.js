@@ -13,21 +13,24 @@ import "./Login.scss";
 function Login() {
   const [formValues, setFormValues] = useState({});
 
-  const addUserInfoToStorage = () => {
-    localStorage.setItem("isAuthnticated", true);
-    localStorage.setItem("userID", auth().currentUser.uid);
-    // localStorage.setItem("userPic", auth().currentUser.photoURL);
-    // localStorage.setItem("userFullName", auth().currentUser.displayName);
-    // localStorage.setItem("userEmail", auth().currentUser.email);
+  const getCurrentUserInfo = async (id) => {
+    await db
+      .collection("users")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        localStorage.setItem("isAuthnticated", true);
+        localStorage.setItem("userID", doc.data().id);
+        localStorage.setItem("userPic", doc.data().photoUrl);
+        localStorage.setItem("userFullName", doc.data().userName);
+      })
+      .catch((err) => console.log(err));
   };
-
   const addUser = async () => {
     try {
       let usersList = [];
       auth().onAuthStateChanged(async function (user) {
         if (user) {
-          addUserInfoToStorage();
-          let user = auth().currentUser;
           await db
             .collection("users")
             .where("id", "==", user.uid)
@@ -39,21 +42,30 @@ function Login() {
             });
           if (usersList.length === 0) {
             //new user set it to users collection
-            db.collection("users").doc(user.uid).set({
-              id: user.uid,
-              userName: user.displayName,
-              photoUrl: user.photoURL,
-              userEmail: user.email,
-              availibility: "online",
-            });
+            db.collection("users")
+              .doc(user.uid)
+              .set({
+                id: user.uid,
+                userName: user.displayName,
+                photoUrl: user.photoURL,
+                userEmail: user.email,
+                availibility: "online",
+              })
+              .then((res) => {
+                getCurrentUserInfo(user.uid);
+                History.push("/Chat/index");
+              });
           } else {
-            //already existing user
-            addUserInfoToStorage();
-            db.collection("users").doc(user.uid).update({
-              availibility: "online",
-            });
+            db.collection("users")
+              .doc(user.uid)
+              .update({
+                availibility: "online",
+              })
+              .then((res) => {
+                getCurrentUserInfo(user.uid);
+                History.push("/Chat/index");
+              });
           }
-          History.push("/Chat/index");
         }
       });
     } catch (error) {
@@ -123,9 +135,9 @@ function Login() {
             altText="google-icon"
           ></Btn>
           <p className="mt-3">
-            Don't have an account ?{" "}
+            Don't have an account ?
             <Link to="/signUp" className="medium-font mx-1">
-              Sign up{" "}
+              Sign up
             </Link>
           </p>
         </form>

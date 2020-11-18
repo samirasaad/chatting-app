@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import WelcomeBoard from "../WelcomeBoard/WelcomeBoard";
 import UsersList from "../../components/UsersList/UsersList";
+import UserProfile from "../../components/UserProfile/UserProfile";
 import ChatBoard from "../ChatBoard/ChatBoard";
 import NavBar from "./../../components/NavBar/NavBar";
 import { db } from "./../../firebase";
 import "./Chat.scss";
+
 function Chat(props) {
   const [usersList, setUsersList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -16,7 +18,7 @@ function Chat(props) {
 
   useEffect(() => {
     setIsDark(JSON.parse(localStorage.getItem("isDark") || false));
-  }, []);
+  });
 
   useEffect(() => {
     getUsersList();
@@ -51,7 +53,8 @@ function Chat(props) {
         });
         setUsersList(usersList);
         setFilteredList(usersList);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleChange = (e) => {
@@ -72,29 +75,34 @@ function Chat(props) {
 
   return (
     <>
-     <NavBar />
-    <section className={`${isDark ? 'dark-mode' : 'light-mode'} chat-wrapper py-1 container-fluid`}>
-      <div className="row mx-0">
-        <div className="col-md-3 section-bg">
-          <UsersList
-            handleChange={handleChange}
-            handleFilter={handleFilter}
-            searchValue={searchValue}
-            filteredList={filteredList}
-            peerUserId={peerUserId}
-          />
-        </div>
-        <div className="col-md-9 section-bg messages-wrapper">
-          {/* <div className='position-relative'> */}
-          {peerUserInfo ? (
-            <ChatBoard peerUserInfo={peerUserInfo} peerUserId={peerUserId} />
+      <NavBar />
+      <section
+        className={`${
+          isDark ? "dark-mode" : "light-mode"
+        } chat-wrapper py-1 container-fluid`}
+      >
+        <div className="row mx-0">
+          <div className="col-md-2">
+            <UserProfile />
+          </div>
+          <div className="col-md-7 section-bg messages-wrapper">
+            {peerUserInfo ? (
+              <ChatBoard peerUserInfo={peerUserInfo} peerUserId={peerUserId} />
             ) : (
               <WelcomeBoard />
-              )}
-              </div>
-        {/* </div> */}
-      </div>
-    </section>
+            )}
+          </div>
+          <div className='col-md-3 section-bg px-0'>
+          <UsersList
+              handleChange={handleChange}
+              handleFilter={handleFilter}
+              searchValue={searchValue}
+              filteredList={filteredList}
+              peerUserId={peerUserId}
+            />
+          </div>
+        </div>
+      </section>
     </>
   );
 }

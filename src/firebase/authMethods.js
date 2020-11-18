@@ -1,7 +1,9 @@
 import { auth } from "./";
-import History from './../routes/History';
+import History from "./../routes/History";
+
 function signup(email, password) {
-  return auth().createUserWithEmailAndPassword(email, password);
+  return auth()
+    .createUserWithEmailAndPassword(email, password)
 }
 
 function signin(email, password) {
@@ -18,7 +20,7 @@ const firebaseSignout = () => {
     .signOut()
     .then((res) => {
       localStorage.clear();
-      History.push('/Login')
+      History.push("/Login");
     })
     .catch((err) => {
       console.error(err.message);

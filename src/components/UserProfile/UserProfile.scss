@@ -1,0 +1,10 @@
+@import "./../../scss/variables";
+.user-profile-wrapper {
+  .MuiAvatar-root {
+    box-shadow: 0px 1px 4px 4px #dfdfdf;
+  }
+  .user-name {
+    font-size: 1.5em;
+    color: $primaryColorLight;
+  }
+}

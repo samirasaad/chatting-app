@@ -1,10 +1,16 @@
 @import "./../../scss/variables";
 .users-list-wrapper {
+  max-height: 79vh;
+  overflow: auto;
+  min-height: 30vh;
   .selected-user {
     border-radius: 1.4em;
   }
   a {
     font-size: 1.1em;
+  }
+  .user-item {
+    word-break: break-word;
   }
 }
 .chat-wrapper.light-mode {
@@ -23,6 +29,7 @@
 .chat-wrapper.dark-mode {
   .section-bg {
     .users-list-wrapper {
+      color: white;
       a {
         color: $secondaryColorLight;
       }

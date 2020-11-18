@@ -15,13 +15,12 @@ const UsersList = ({
     document.querySelectorAll(`.selected-user`).forEach((item) => {
       item.classList.remove("selected-user");
     });
-
     peerUserId &&
-      document.getElementById(`#${peerUserId}`) &&
-      document.getElementById(`#${peerUserId}`).classList.add("selected-user");
-  });
+      document.getElementById(`${peerUserId}`) &&
+      document.getElementById(`${peerUserId}`).classList.add("selected-user");
+  },[peerUserId]);
   return (
-    <section className="users-list-wrapper pt-2">
+    <section className="users-list-wrapper pt-2 ">
       <FilterBar
         handleFilter={handleFilter}
         handleChange={handleChange}
@@ -31,7 +30,10 @@ const UsersList = ({
         filteredList.length > 0 &&
         filteredList.map((user) => (
           <Link to={`/chat/${user.id}`} key={user.id}>
-            <div className="d-flex p-2 mt-4 align-items-stretch" id={user.id}>
+            <div
+              className="d-flex p-2 mt-4 align-items-stretch user-item"
+              id={user.id}
+            >
               <UserAvatar
                 img={user.photoUrl && user.photoUrl}
                 size="small"

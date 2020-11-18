@@ -55,11 +55,11 @@ a:hover {
   border: none;
   border-radius: 0.7em;
   color: $primaryColorLight;
-  &:focus {
-    outline: none;
-  }
 }
 
+input:focus {
+  outline: none !important;
+}
 //SCROLL
 /* scroll-width */
 ::-webkit-scrollbar {
