@@ -53,7 +53,7 @@ const NavBar = () => {
       </div>
       {localStorage.getItem("userID") && (
         <div className="d-flex">
-          <div className="d-flex mx-3">
+          <div className="d-flex mx-md-3 mx-0">
             <span>Dark mode</span>
             <SettingsBrightnessTwoToneIcon
               className={` ${isDark ? "mode-icon-active" : "mode-icon"} mx-1`}

@@ -16,13 +16,13 @@ const UserProfile = () => {
         });
   });
   return (
-    <div className="user-profile-wrapper d-flex justify-content-center flex-column align-items-center pt-4">
+    <div className="mt-2 user-profile-wrapper d-flex justify-content-center flex-column align-items-center pt-4">
       <UserAvatar
         img={currentUserImg}
         size="large"
         statusClass="status-circle-large"
       />
-      <p className='user-name medium-font mt-2'>{localStorage.getItem('userFullName')}</p>
+      <h4 className='user-name medium-font mt-2'>{localStorage.getItem('userFullName')}</h4>
     </div>
   );
 };

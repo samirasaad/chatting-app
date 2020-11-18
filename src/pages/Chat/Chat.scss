@@ -29,6 +29,11 @@
 //DARK-MODE
 .chat-wrapper.dark-mode {
   background-color: black;
+  .user-profile-wrapper {
+    .user-name {
+      color: white;
+    }
+  }
   .send-msg-bar {
     background-color: $darkBg;
   }
