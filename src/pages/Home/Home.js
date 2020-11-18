@@ -24,28 +24,28 @@ const Home = () => {
         <h3 className="brand-name mx-3 mb-0">ChatBoard</h3>
       </p>
       <div className="container">
-        <div className="mx-0 row align-items-center justify-content-center">
-          <div className="col-md-6">
+        <div className="mx-0 row justify-content-center">
+          <div className="col-md-6 mt-5 py-md-5 py-0">
             <h4 className="main-text medium-font">
               Make Your Life Easier, Use ChatBoard
             </h4>
             {!localStorage.getItem("userID") && (
-              <>
+              <div className='d-flex flex-wrap'>
                 <Btn
                   text="Log In"
                   handleClick={() => {
                     History.push("/Login");
                   }}
-                  classes="primary-button px-5 py-2  bold-font"
+                  classes="primary-button px-md-5 px-4 py-2  bold-font"
                 />
                 <Btn
                   text="Sign Up"
                   handleClick={() => {
                     History.push("/Signup");
                   }}
-                  classes="secondary-button px-5 py-2  bold-font mx-3"
+                  classes="secondary-button px-md-5 px-4 py-2  bold-font mx-0 mx-md-3"
                 />
-              </>
+              </div>
             )}
           </div>
           <div className="lottie col-md-6 col-9">

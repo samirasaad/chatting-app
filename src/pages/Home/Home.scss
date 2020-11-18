@@ -3,7 +3,7 @@
   background-image: url("../../assets/images/Skyline_.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 94vh;
+  min-height: 95vh;
   .logo {
     height: 4em;
   }
@@ -11,12 +11,8 @@
     font-size: 4em;
     color: #2d5872;
   }
-  .start-chatting-link {
-    font-size: 2em;
-    color: $link;
-  }
 }
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 460px) {
   .splash-screen {
     min-height: 92vh;
     .main-text {
@@ -24,3 +20,16 @@
     }
   }
 }
+@media screen and (min-width: 1280px) {
+  .splash-screen {
+    min-height: 93vh;
+  }
+}
+
+// @media screen and (max-width: 460px) {
+//   .splash-screen {
+//     .main-text {
+//       font-size: 2em;
+//     }
+//   }
+// }

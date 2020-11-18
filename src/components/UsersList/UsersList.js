@@ -17,8 +17,8 @@ const UsersList = ({
     });
 
     peerUserId &&
-      document.querySelector(`#${peerUserId}`) &&
-      document.querySelector(`#${peerUserId}`).classList.add("selected-user");
+      document.getElementById(`#${peerUserId}`) &&
+      document.getElementById(`#${peerUserId}`).classList.add("selected-user");
   });
   return (
     <section className="users-list-wrapper pt-2">

@@ -17,6 +17,8 @@
   .section-bg {
     border-radius: 1.6em;
     min-height: 79.9vh;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
   .messages-wrapper {
     position: relative;

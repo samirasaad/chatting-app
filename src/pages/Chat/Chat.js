@@ -12,6 +12,11 @@ function Chat(props) {
   const currentUserId = localStorage.getItem("userID");
   const [peerUserId, setPeerUserId] = useState(props.match.params.id);
   const [searchValue, setSearchValue] = useState("");
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(JSON.parse(localStorage.getItem("isDark") || false));
+  }, []);
 
   useEffect(() => {
     getUsersList();
@@ -68,7 +73,7 @@ function Chat(props) {
   return (
     <>
      <NavBar />
-    <section className="light-mode chat-wrapper py-1 container-fluid">
+    <section className={`${isDark ? 'dark-mode' : 'light-mode'} chat-wrapper py-1 container-fluid`}>
       <div className="row mx-0">
         <div className="col-md-3 section-bg">
           <UsersList

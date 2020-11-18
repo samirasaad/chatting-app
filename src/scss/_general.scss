@@ -9,16 +9,17 @@
 .primary-button,
 .secondary-button {
   border-radius: 3em;
+  font-size: 1.2em;
 }
 .primary-button {
-  background-color: $primaryColorLight;
-  border: 1px solid $primaryColorLight;
+  background-color: $primaryBtn;
+  border: 1px solid $primaryBtn;
   color: white;
 }
 .secondary-button {
   background-color: transparent;
-  border: 1px solid $primaryColorLight;
-  color: $primaryColorLight;
+  border: 1px solid $primaryBtn;
+  color: $primaryBtn;
 }
 button:focus {
   outline: none;
@@ -56,7 +57,7 @@ input:focus {
 //SCROLL
 /* scroll-width */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 /* scroll-track */
 ::-webkit-scrollbar-track {

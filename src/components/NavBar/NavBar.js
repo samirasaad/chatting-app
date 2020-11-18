@@ -1,6 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { db, auth } from "./../../firebase";
+import React, { useEffect, useState } from "react";
+import { db } from "./../../firebase";
 import { firebaseSignout } from "./../../firebase/authMethods";
 import { logo } from "./../../utils/Images";
 import SettingsBrightnessTwoToneIcon from "@material-ui/icons/SettingsBrightnessTwoTone";
@@ -9,13 +8,18 @@ import "./NavBar.scss";
 
 const NavBar = () => {
   const userID = localStorage.getItem("userID");
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(JSON.parse(localStorage.getItem("isDark")) || false);
+  }, []);
 
   const changeMode = () => {
+    setIsDark(!isDark);
+    localStorage.setItem("isDark", !isDark);
     //chat-wrapper
     document.querySelector(".chat-wrapper").classList.toggle("dark-mode");
     document.querySelector(".chat-wrapper").classList.toggle("light-mode");
-    //mode icone
-    document.querySelector(".mode-icon").classList.toggle("mode-icon-active");
     //navbar
     document.querySelector(".navbar-wrapper").classList.toggle("dark-mode");
     document.querySelector(".navbar-wrapper").classList.toggle("light-mode");
@@ -38,7 +42,11 @@ const NavBar = () => {
       });
   };
   return (
-    <section className="navbar-wrapper light-mode container-fluid medium-font d-flex justify-content-between align-items-center">
+    <section
+      className={` ${
+        isDark ? "dark-mode" : "light-mode"
+      } navbar-wrapper container-fluid medium-font d-flex justify-content-between align-items-center`}
+    >
       <p className="mb-0 py-2">
         <img src={logo} alt="chatBoard-logo" className="logo" />
         <h3 className="brand-name mx-3 mb-0 medium-font">ChatBoard</h3>
@@ -48,7 +56,7 @@ const NavBar = () => {
           <div className="d-flex mx-3">
             <span>Dark mode</span>
             <SettingsBrightnessTwoToneIcon
-              className="mode-icon mx-1"
+              className={` ${isDark ? "mode-icon-active" : "mode-icon"} mx-1`}
               onClick={changeMode}
             />
           </div>
