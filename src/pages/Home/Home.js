@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Lottie from "react-lottie";
 import Btn from "../../components/Controls/Button/Button";
 import { logo } from "./../../utils/Images";
@@ -30,7 +29,7 @@ const Home = () => {
               Make Your Life Easier, Use ChatBoard
             </h4>
             {!localStorage.getItem("userID") && (
-              <div className='d-flex flex-wrap'>
+              <div className='d-flex flex-wrap  mt-md-5 mt-0'>
                 <Btn
                   text="Log In"
                   handleClick={() => {
@@ -43,7 +42,7 @@ const Home = () => {
                   handleClick={() => {
                     History.push("/Signup");
                   }}
-                  classes="secondary-button px-md-5 px-4 py-2  bold-font mx-0 mx-md-3"
+                  classes="secondary-button px-md-5 px-4 py-2  bold-font mx-1 mx-md-3"
                 />
               </div>
             )}
