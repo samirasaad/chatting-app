@@ -47,10 +47,10 @@ const NavBar = () => {
         isDark ? "dark-mode" : "light-mode"
       } navbar-wrapper container-fluid medium-font d-flex justify-content-between align-items-center`}
     >
-      <p className="mb-0 py-2">
+      <div className="mb-0 py-2">
         <img src={logo} alt="chatBoard-logo" className="logo" />
-        <h3 className="brand-name mx-3 mb-0 medium-font">ChatBoard</h3>
-      </p>
+        <h3 className="brand-name mx-3 mb-0 bold-font">ChatBoard</h3>
+      </div>
       {localStorage.getItem("userID") && (
         <div className="d-flex">
           <div className="d-flex mx-3">

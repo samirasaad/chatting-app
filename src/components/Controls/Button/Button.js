@@ -1,12 +1,13 @@
 import React from "react";
-const Btn = ({ disabled, text, handleClick, classes }) => {
+const Btn = ({ disabled, text, handleClick, classes, type, hasicon, icon, altText }) => {
   return (
     <button
-      type="button"
+      type={type}
       disabled={disabled}
       onClick={handleClick}
       className={`radius-ratio ${classes}`}
     >
+      {hasicon && <img src={icon} alt={altText} className="mx-1" />}
       {text}
     </button>
   );

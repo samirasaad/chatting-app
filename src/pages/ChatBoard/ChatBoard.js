@@ -5,6 +5,7 @@ import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import PanToolIcon from "@material-ui/icons/PanTool";
 import "./ChatBoard.scss";
+import { cleanup } from "@testing-library/react";
 
 function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const peerUserId = id;
@@ -19,7 +20,19 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   useEffect(() => {
     getChatMessages();
+    setMessage("");
   }, [peerUserId]);
+
+  useEffect(() => {
+    var chatContainer = document.querySelector(".messages-wrapper");
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+    if ((chatContainer.scrollHeight <= chatContainer.clientHeight)) {
+      document.querySelector(".send-msg-bar").style.top = "100%";
+    }else{
+      document.querySelector(".send-msg-bar").style.bottom = "0";
+      document.querySelector(".send-msg-bar").style.top = "0";
+    }
+  }, [peerUserId, messagesList]);
 
   useEffect(() => {
     // getNewMsgsCounter();
@@ -167,7 +180,11 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   return (
     <>
-      <section className={`${messagesList.length === 0 && 'chat-min-height'} chat-board`}>
+      <section
+        className={`${
+          messagesList.length === 0 && "chat-min-height"
+        } chat-board`}
+      >
         {messagesList && messagesList.length > 0 ? (
           messagesList.map((message, index) => renderMessages(message, index))
         ) : (

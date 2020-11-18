@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { db, auth } from "./../../firebase";
-import { signin, signInWithGoogle } from "./../../firebase/authMethods";
+import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { logo } from "./../../utils/Images";
+import { db, auth } from "./../../firebase";
+import { signin, signInWithGoogle } from "./../../firebase/authMethods";
+import Divider from "@material-ui/core/Divider";
+import Btn from "../../components/Controls/Button/Button";
+import Input from "./../../components/Controls/Input/Input";
+import { logo, googleIcon } from "./../../utils/Images";
 import History from "./../../routes/History";
 import "./Login.scss";
 function Login() {
@@ -73,26 +77,59 @@ function Login() {
     const { handleChange, handleSubmit, values, errors } = props;
     setFormValues(values);
     return (
-      <form onSubmit={(values) => handleSubmit(values)} noValidate>
-        <input
-          type="email"
-          name="email"
-          value={values.email}
-          onChange={handleChange}
-        />
-        {errors.email && <small className="text-danger">{errors.email}</small>}
-        <input
-          type="password"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
-        />
-        <button type="submit">login</button>
-        <span>or</span>
-        <button type="button" onClick={(e) => handleSubmitGoogle(values)}>
-          sign in with google
-        </button>
-      </form>
+      <div className="form-bg p-md-5 p-3  m-auto">
+        <form
+          onSubmit={(values) => handleSubmit(values)}
+          noValidate
+          className="d-flex flex-column"
+        >
+          <Input
+            type="email"
+            name="email"
+            value={values.email}
+            handleChange={handleChange}
+            className="p-3 input mb-3"
+            placeholder="Email"
+          />
+          {errors.email && (
+            <small className="mb-2 text-danger">{errors.email}</small>
+          )}
+          <Input
+            type="password"
+            name="password"
+            value={values.password}
+            handleChange={handleChange}
+            className="p-3 input mb-3"
+            placeholder="Password"
+          />
+          <Btn
+            type="submit"
+            classes="p-2 primary-button mt-2 bold-font"
+            text="Login"
+            handleClick={handleSubmit}
+          ></Btn>
+          <div className="d-flex align-items-center justify-content-between">
+            <Divider component="div" className="my-4 divider" />
+            <span className="text-muted">OR</span>
+            <Divider component="div" className="my-4 divider" />
+          </div>
+          <Btn
+            type="button"
+            classes="p-2 sign-in-goole bold-font"
+            text="Sign in with google"
+            handleClick={(e) => handleSubmitGoogle(values)}
+            hasicon={true}
+            icon={googleIcon}
+            altText="google-icon"
+          ></Btn>
+          <p className="mt-3">
+            Don't have an account ?{" "}
+            <Link to="/signUp" className="medium-font mx-1">
+              Sign up{" "}
+            </Link>
+          </p>
+        </form>
+      </div>
     );
   };
 
@@ -100,18 +137,21 @@ function Login() {
     <section className="login-wrapper">
       <div className="mb-0 py-2 container-fluid">
         <img src={logo} alt="chatBoard-logo" className="logo" />
-        <h3 className="brand-name mx-3 mb-0">ChatBoard</h3>
+        <h3 className="brand-name mx-3 mb-0 bold-font">ChatBoard</h3>
       </div>
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => handleSubmit(values)}
-        validateOnChange={false}
-        validationSchema={Yup.object().shape({
-          email: Yup.string().email(),
-        })}
-      >
-        {(props) => renderLoginForm(props)}
-      </Formik>
+      <div className="form-parent d-flex justify-content-center flex-column align-items-center">
+        <h3 className="section-title bold-font mt-5">Login</h3>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={(values) => handleSubmit(values)}
+          validateOnChange={false}
+          validationSchema={Yup.object().shape({
+            email: Yup.string().email(),
+          })}
+        >
+          {(props) => renderLoginForm(props)}
+        </Formik>
+      </div>
     </section>
   );
 }

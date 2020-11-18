@@ -20,7 +20,7 @@ const Home = () => {
     <header className="splash-screen">
       <div className="mb-0 py-2 container-fluid">
         <img src={logo} alt="chatBoard-logo" className="logo" />
-        <h3 className="brand-name mx-3 mb-0">ChatBoard</h3>
+        <h3 className="brand-name mx-3 mb-0 bold-font">ChatBoard</h3>
       </div>
       <div className="container">
         <div className="mx-0 row justify-content-center">

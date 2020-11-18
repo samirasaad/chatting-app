@@ -1,13 +1,14 @@
 import React from "react";
+import Input from "../Controls/Input/Input";
 import "./FilterBar.scss";
 
 const FilterBar = ({ handleFilter, handleChange, searchValue }) => {
   return (
     <form onSubmit={handleFilter} className="filter-bar my-2">
-      <input
+      <Input
         type="text"
         className="w-100 p-2"
-        onChange={handleChange}
+        handleChange={handleChange}
         value={searchValue}
         placeholder="Search for a friend"
       />

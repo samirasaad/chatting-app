@@ -50,8 +50,14 @@ a:hover {
   background-color: #32d040;
   border-radius: 10px;
 }
-input:focus {
-  outline: none;
+.input {
+  box-shadow: 1px 2px 4px 1px #e6e6e6;
+  border: none;
+  border-radius: 0.7em;
+  color: $primaryColorLight;
+  &:focus {
+    outline: none;
+  }
 }
 
 //SCROLL

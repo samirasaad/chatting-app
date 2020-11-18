@@ -1,6 +1,58 @@
+@import "./../../scss/variables";
 .login-wrapper {
   background-image: url("../../assets/images/Skyline_.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 93vh;
+  min-height: 94vh;
+  .form-parent {
+    .section-title {
+      color: $primaryColorLight;
+      font-size: 3em;
+    }
+    .form-bg {
+      width: 35%;
+      background-color: white;
+      box-shadow: 0px 6px 28px 9px #ddb0c5;
+      border-radius: 1em;
+      .google-icon {
+        height: 1.3em;
+      }
+      .divider {
+        height: 0.1em;
+        width: 40%;
+      }
+      .sign-in-goole {
+        border: none;
+        border-radius: 0.8em;
+        color: #868686;
+        img {
+          height: 2em;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 420px) {
+  .login-wrapper {
+    min-height: 90vh;
+    .form-parent {
+      height: 25em;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .login-wrapper {
+    .form-parent {
+      .form-bg {
+        width: 75%;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1440px) {
+  .login-wrapper {
+    .form-parent {
+      height: 30em;
+    }
+  }
 }

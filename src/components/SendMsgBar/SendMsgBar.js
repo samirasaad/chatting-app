@@ -1,5 +1,6 @@
 import React from "react";
 import Emojis from "../../components/Emojis/Emojis";
+import Input from "../Controls/Input/Input";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 import "./SendMsg.scss";
 const SendMsgBar = ({
@@ -14,10 +15,10 @@ const SendMsgBar = ({
         className="send-msg-bar d-flex align-items-baseline position-sticky pt-2"
         onSubmit={handleSubmitMessage}
       >
-        <input
+        <Input
           className="send-msg w-100 pl-3 pr-5 py-3"
           type="text"
-          onChange={handleChange}
+          handleChange={handleChange}
           value={message}
           placeholder="Enter your message"
         />
