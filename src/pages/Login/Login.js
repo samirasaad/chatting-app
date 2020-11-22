@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { db, auth } from "./../../firebase";
+import Logo from "../../components/Logo/Logo";
 import { signin, signInWithGoogle } from "./../../firebase/authMethods";
 import Divider from "@material-ui/core/Divider";
 import Btn from "../../components/Controls/Button/Button";
 import Input from "./../../components/Controls/Input/Input";
-import { logo, googleIcon } from "./../../utils/Images";
+import { googleIcon } from "./../../utils/Images";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { db, auth } from "./../../firebase";
 import History from "./../../routes/History";
 import "./Login.scss";
 
@@ -149,12 +150,9 @@ function Login() {
 
   return (
     <section className="login-wrapper">
-      <div className="mb-0 py-2 container-fluid">
-        <img src={logo} alt="chatBoard-logo" className="logo" />
-        <h3 className="brand-name mx-3 mb-0 bold-font">ChatBoard</h3>
-      </div>
-      <div className="form-parent d-flex justify-content-center flex-column align-items-center">
-        <h3 className="section-title bold-font mt-md-5 mt-2  mb-0">Login</h3>
+      <Logo />
+      <div className="form-parent d-flex justify-content-center flex-column align-items-center h-100">
+        <h3 className="section-title bold-font mt-md-5 mt-3 mb-0">Login</h3>
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => handleSubmit(values)}

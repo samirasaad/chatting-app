@@ -5,6 +5,7 @@ import { logo } from "./../../utils/Images";
 import SettingsBrightnessTwoToneIcon from "@material-ui/icons/SettingsBrightnessTwoTone";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import "./NavBar.scss";
+import Logo from "../Logo/Logo";
 
 const NavBar = () => {
   const userID = localStorage.getItem("userID");
@@ -47,13 +48,10 @@ const NavBar = () => {
         isDark ? "dark-mode" : "light-mode"
       } navbar-wrapper container-fluid medium-font d-flex justify-content-between align-items-center`}
     >
-      <div className="mb-0 py-2">
-        <img src={logo} alt="chatBoard-logo" className="logo" />
-        <h3 className="brand-name mx-3 mb-0 bold-font">ChatBoard</h3>
-      </div>
+      <Logo />
       {localStorage.getItem("userID") && (
-        <div className="d-flex">
-          <div className="d-flex mx-md-3 mx-0">
+        <div className="d-flex flex-wrap justify-content-end w-25 action-wrapper">
+          <div className="d-flex mx-lg-2 mx-0">
             <span>Dark mode</span>
             <SettingsBrightnessTwoToneIcon
               className={` ${isDark ? "mode-icon-active" : "mode-icon"} mx-1`}

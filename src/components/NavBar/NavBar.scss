@@ -1,21 +1,31 @@
 @import "./../../scss/variables";
 .navbar-wrapper {
-  .mode-icon {
-    color: #c1c1c1;
-    &:hover {
-      cursor: pointer;
+  .action-wrapper {
+    .mode-icon {
+      color: #c1c1c1;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .mode-icon-active {
+      color: #47ff45;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .logout-icon {
+      color: #bebebe;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
-  .mode-icon-active {
-    color: #47ff45;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  .logout-icon {
-    color: #bebebe;
-    &:hover {
-      cursor: pointer;
+}
+
+@media screen and (max-width: 420px) {
+  .navbar-wrapper {
+    .action-wrapper {
+      width: 50% !important;
     }
   }
 }

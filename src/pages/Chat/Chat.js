@@ -110,7 +110,7 @@ function Chat(props) {
               <WelcomeBoard />
             )}
           </div>
-          <div className="col-lg-3 col-md-4 section-bg px-0">
+          <div className="col-lg-3 col-md-4 section-bg px-0 mb-5">
             <UsersList
               handleChange={handleChange}
               handleFilter={handleFilter}

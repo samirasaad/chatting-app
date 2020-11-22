@@ -4,9 +4,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
-  .logo {
-    height: 4em;
-  }
   .main-text {
     font-size: 4em;
     color: $primaryColorLight;
@@ -14,14 +11,8 @@
 }
 @media screen and (max-width: 460px) {
   .splash-screen {
-    // min-height: 92vh;
     .main-text {
       font-size: 2em;
     }
-  }
-}
-@media screen and (min-width: 1280px) {
-  .splash-screen {
-    // min-height: 93vh;
   }
 }
