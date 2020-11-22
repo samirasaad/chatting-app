@@ -30,16 +30,18 @@ function Chat(props) {
   }, [props.match.params.id]);
 
   const getCurrentPeerUser = async (id) => {
-    await db
-      .collection("users")
-      .where("id", "==", id)
-      .get()
-      .then((querySnapshot) => {
-        let peerUser = querySnapshot.docs.map((doc) => {
-          return doc.data();
+    if (id) {
+      await db
+        .collection("users")
+        .where("id", "==", id)
+        .get()
+        .then((querySnapshot) => {
+          let peerUser = querySnapshot.docs.map((doc) => {
+            return doc.data();
+          });
+          setPeerUserInfo(peerUser[0]);
         });
-        setPeerUserInfo(peerUser[0]);
-      });
+    }
   };
 
   const getUsersList = async () => {
@@ -102,7 +104,7 @@ function Chat(props) {
                 </p>
               </div>
             )}
-            {(peerUserInfo && peerUserId ) ? (
+            {peerUserInfo && peerUserId ? (
               <ChatBoard peerUserInfo={peerUserInfo} />
             ) : (
               <WelcomeBoard />

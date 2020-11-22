@@ -1,7 +1,6 @@
 @import "./../../scss/variables";
 .send-msg-bar {
   bottom: 0;
-  // top: 100%;
   .send-btn {
     color: #999797;
     svg:hover {
@@ -10,23 +9,5 @@
   }
   .disable-send-msg:hover {
     cursor: not-allowed !important;
-  }
-}
-
-.chat-wrapper.dark-mode {
-  input.send-msg {
-    border-radius: 1.4em;
-    background-color: #090909;
-    box-shadow: 0px 0px 8px -3px #494949;
-    border: none;
-    color: white;
-  }
-}
-.chat-wrapper.light-mode {
-  input.send-msg {
-    border-radius: 1.4em;
-    border: 1px solid #dbdbdb;
-    box-shadow: 0px 2px 6px -1px #cbcbcb;
-    color: #494949;
   }
 }

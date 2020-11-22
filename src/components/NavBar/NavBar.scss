@@ -19,16 +19,3 @@
     }
   }
 }
-
-.navbar-wrapper.light-mode {
-  box-shadow: 1px 3px 14px -1px #e0e0e0;
-  background-color: #fdfdfd;
-}
-.navbar-wrapper.dark-mode {
-  // box-shadow: 1px 8px 17px -1px #c3c3c3;
-  background-color: $darkBg;
-  color: white;
-  .brand-name {
-    color: white;
-  }
-}

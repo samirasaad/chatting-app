@@ -6,16 +6,3 @@
   width: 100%;
   color: white;
 }
-.footer-wrapper.light-mode {
-  box-shadow: 4px 0px 13px 3px #dfdfdf;
-  background-color: white;
-  svg {
-    fill: $link;
-  }
-}
-.footer-wrapper.dark-mode {
-  background-color: $darkBg;
-  svg {
-    fill: $link;
-  }
-}

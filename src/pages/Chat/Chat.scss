@@ -1,9 +1,7 @@
 @import "./../../scss/variables";
-
 .chat-wrapper {
   min-height: 79vh;
   .section-bg {
-    // border-radius: 1.6em;
     min-height: 80.9vh;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -16,44 +14,6 @@
       top: 0;
       z-index: 11;
       border-bottom: 1px solid #e1e1e1;
-    }
-  }
-}
-//DARK-MODE
-.chat-wrapper.dark-mode {
-  background-color: black;
-  .user-profile-wrapper {
-    .user-name {
-      color: white;
-    }
-  }
-  .send-msg-bar {
-    background-color: $darkBg;
-  }
-  .section-bg {
-    border: 5px solid black;
-    background-color: $darkBg;
-    color: $secondaryColorDark;
-    .chat-heading {
-      background-color: $darkBg;
-      color: white;
-    }
-  }
-}
-//LIGHT-MODE
-.chat-wrapper.light-mode {
-  border: 5px solid white;
-  .send-msg-bar {
-    background-color: $secondaryColorLight;
-    color: $primaryColorDark;
-  }
-  .section-bg {
-    border: 5px solid white;
-    background-color: $secondaryColorLight;
-    color: $primaryColorLight;
-    .chat-heading {
-      background-color: $lightBg;
-      color: $primaryColorLight;
     }
   }
 }

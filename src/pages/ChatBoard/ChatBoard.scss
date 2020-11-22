@@ -43,35 +43,3 @@
     color: #999797;
   }
 }
-//LIGHT-MODE
-.chat-wrapper.light-mode {
-  .msg-bg-current-user {
-    background-color: $currentUserBg;
-    color: white;
-    &:before {
-      border-bottom: 8px solid $currentUserBg;
-    }
-  }
-
-  .msg-bg-peer-user {
-    background-color: white;
-    &:before {
-      border-bottom: 8px solid white;
-    }
-  }
-}
-//DARK-MODE
-.chat-wrapper.dark-mode {
-  .msg-bg-current-user {
-    background-color: $currentUserBg;
-    &:before {
-      border-bottom: 8px solid $currentUserBg;
-    }
-  }
-  .msg-bg-peer-user {
-    background-color: #424242;
-    &:before {
-      border-bottom: 8px solid #424242;
-    }
-  }
-}
