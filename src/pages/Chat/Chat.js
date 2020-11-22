@@ -11,10 +11,10 @@ function Chat(props) {
   const [usersList, setUsersList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [peerUserInfo, setPeerUserInfo] = useState({});
-  const currentUserId = localStorage.getItem("userID");
   const [peerUserId, setPeerUserId] = useState(props.match.params.id);
   const [searchValue, setSearchValue] = useState("");
   const [isDark, setIsDark] = useState(false);
+  const currentUserId = localStorage.getItem("userID");
 
   useEffect(() => {
     setIsDark(JSON.parse(localStorage.getItem("isDark") || false));
@@ -92,8 +92,8 @@ function Chat(props) {
               <WelcomeBoard />
             )}
           </div>
-          <div className='col-md-3 section-bg px-0'>
-          <UsersList
+          <div className="col-md-3 section-bg px-0">
+            <UsersList
               handleChange={handleChange}
               handleFilter={handleFilter}
               searchValue={searchValue}

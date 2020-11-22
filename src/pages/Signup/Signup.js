@@ -34,13 +34,13 @@ function Signup() {
             availibility: "online",
           })
           .then((res) => {
-            History.push("/Chat/index");
             localStorage.setItem("isAuthnticated", true);
             localStorage.setItem("userID", auth().currentUser.uid);
             localStorage.setItem(
               "userFullName",
               currentUser.displayName || userName
             );
+            History.push("/Chat/index");
           });
       } else {
         // //already existing user
@@ -51,6 +51,8 @@ function Signup() {
       }
     }
   }, [downloadedUrl]);
+
+
   const handleChange = (e) => {
     switch (e.target.name) {
       case "userName":
@@ -79,8 +81,8 @@ function Signup() {
       .child(user.uid)
       .getDownloadURL()
       .then((imgUrl) => {
-        setDownloadedUrl(imgUrl);
         localStorage.setItem("userPic", imgUrl);
+        setDownloadedUrl(imgUrl);
       });
   };
 

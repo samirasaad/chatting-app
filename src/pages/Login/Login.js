@@ -10,6 +10,7 @@ import Input from "./../../components/Controls/Input/Input";
 import { logo, googleIcon } from "./../../utils/Images";
 import History from "./../../routes/History";
 import "./Login.scss";
+
 function Login() {
   const [formValues, setFormValues] = useState({});
 
@@ -23,9 +24,11 @@ function Login() {
         localStorage.setItem("userID", doc.data().id);
         localStorage.setItem("userPic", doc.data().photoUrl);
         localStorage.setItem("userFullName", doc.data().userName);
+        History.push("/Chat/index");
       })
       .catch((err) => console.log(err));
   };
+
   const addUser = async () => {
     try {
       let usersList = [];
@@ -53,7 +56,7 @@ function Login() {
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
-                History.push("/Chat/index");
+                // History.push("/Chat/index");
               });
           } else {
             db.collection("users")
@@ -63,7 +66,7 @@ function Login() {
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
-                History.push("/Chat/index");
+                // History.push("/Chat/index");
               });
           }
         }
