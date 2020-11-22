@@ -95,8 +95,8 @@ function Login() {
       <div className="form-bg p-md-5 p-3  m-auto">
         <form
           onSubmit={(values) => handleSubmit(values)}
-          noValidate
           className="d-flex flex-column"
+          noValidate
         >
           <Input
             type="email"
@@ -149,10 +149,10 @@ function Login() {
   };
 
   return (
-    <section className="login-wrapper">
+    <section className="form-wrapper">
       <Logo />
       <div className="form-parent d-flex justify-content-center flex-column align-items-center h-100">
-        <h3 className="section-title bold-font mt-md-5 mt-3 mb-0">Login</h3>
+        <h3 className="section-title bold-font mt-md-4 mt-3 mb-0">Login</h3>
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => handleSubmit(values)}

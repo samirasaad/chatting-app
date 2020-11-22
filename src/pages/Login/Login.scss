@@ -1,5 +1,5 @@
 @import "./../../scss/variables";
-.login-wrapper {
+.form-wrapper {
   background-image: url("../../assets/images/background.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -33,15 +33,14 @@
   }
 }
 @media screen and (max-width: 420px) {
-  .login-wrapper {
-    // min-height: 90vh;
+  .form-wrapper {
     .form-parent {
       height: 25em;
     }
   }
 }
 @media screen and (max-width: 768px) {
-  .login-wrapper {
+  .form-wrapper {
     .form-parent {
       .form-bg {
         width: 75%;

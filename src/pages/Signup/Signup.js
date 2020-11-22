@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
+import Logo from "../../components/Logo/Logo";
 import UploadFile from "../../components/UploadFile/UploadFile";
+import Input from "../../components/Controls/Input/Input";
 import { db, auth, storage } from "./../../firebase";
 import { signup } from "./../../firebase/authMethods";
 import History from "./../../routes/History";
-function Signup() {
-  const [email, setEamil] = useState("");
-  const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
+import { Formik } from "formik";
+import * as Yup from "yup";
+import Btn from "../../components/Controls/Button/Button";
+import "./../Login/Login.scss";
+import { Link } from "react-router-dom";
+const Signup = () => {
+  // const [email, setEamil] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [userName, setUserName] = useState("");
+  const [formValues, setFormValues] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
   const [downloadedUrl, setDownloadedUrl] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
@@ -28,7 +36,7 @@ function Signup() {
           .doc(currentUser.uid)
           .set({
             id: currentUser.uid,
-            userName: currentUser.displayName || userName,
+            userName: currentUser.displayName || formValues.userName,
             photoUrl: currentUser.photoURL || downloadedUrl,
             userEmail: currentUser.email,
             availibility: "online",
@@ -38,42 +46,13 @@ function Signup() {
             localStorage.setItem("userID", auth().currentUser.uid);
             localStorage.setItem(
               "userFullName",
-              currentUser.displayName || userName
+              currentUser.displayName || formValues.userName
             );
             History.push("/Chat/index");
           });
-      } else {
-        // //already existing user
-        // addUserInfoToStorage();
-        // db.collection("users").doc(currentUser.uid).update({
-        //   availibility: "online",
-        // });
       }
     }
   }, [downloadedUrl]);
-
-
-  const handleChange = (e) => {
-    switch (e.target.name) {
-      case "userName":
-        setUserName(e.target.value);
-        break;
-      case "email":
-        setEamil(e.target.value);
-        break;
-      case "password":
-        setPassword(e.target.value);
-        break;
-      default:
-        setEamil("");
-        setPassword("");
-    }
-  };
-
-  // const addUserInfoToStorage = () => {
-  //   localStorage.setItem("isAuthnticated", true);
-  //   localStorage.setItem("userID", auth().currentUser.uid);
-  // };
 
   const getStoredUserImg = async (user) => {
     await storage
@@ -87,10 +66,8 @@ function Signup() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
-      await signup(email, password);
-      //we can check if there`s a currentuser rather than using onAuthStateChanged
+      await signup(formValues.email, formValues.password);
       auth().onAuthStateChanged(async function (user) {
         if (user) {
           storePhotoUrlInFirestoreStorage(user);
@@ -104,6 +81,7 @@ function Signup() {
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+    console.log(event.target.files[0].size / 1024 / 1024);
   };
 
   const storePhotoUrlInFirestoreStorage = async (user) => {
@@ -113,28 +91,111 @@ function Signup() {
       .then((res) => getStoredUserImg(user));
   };
 
+  const renderSignUpForm = (props) => {
+    const { handleChange, handleSubmit, values, errors } = props;
+    setFormValues(values);
+    console.log(props);
+    return (
+      <div className="form-bg p-md-5 p-3  m-auto">
+        <form
+          onSubmit={(values) => handleSubmit(values)}
+          className="d-flex flex-column"
+          noValidate
+        >
+          <Input
+            type="text"
+            name="userName"
+            value={values.userName}
+            handleChange={handleChange}
+            className="p-3 input mb-3"
+            placeholder="User Name"
+          />
+          {errors.userName && (
+            <small className="mb-2 text-danger">{errors.userName}</small>
+          )}
+          <Input
+            type="email"
+            name="email"
+            value={values.email}
+            handleChange={handleChange}
+            className="p-3 input mb-3"
+            placeholder="Email"
+          />
+          {errors.email && (
+            <small className="mb-2 text-danger">{errors.email}</small>
+          )}
+          <Input
+            type="password"
+            name="password"
+            value={values.password}
+            handleChange={handleChange}
+            className="p-3 input mb-3"
+            placeholder="Password"
+          />
+          {errors.password && (
+            <small className="mb-2 text-danger">{errors.password}</small>
+          )}
+          <UploadFile onFileChange={onFileChange} />
+          {errors.image && (
+            <small className="mb-2 text-danger">{errors.image}</small>
+          )}
+          <Btn
+            type="submit"
+            classes="p-2 primary-button mt-2 bold-font"
+            text="Signup"
+            handleClick={handleSubmit}
+          ></Btn>
+          <p className="mt-3">
+            Already have an account ?
+            <Link to="/Login" className="medium-font mx-1">
+              Login
+            </Link>
+          </p>
+        </form>
+      </div>
+    );
+  };
+
   return (
-    <>
-      <span>signup page</span>
-      <input
-        type="text"
-        name="userName"
-        value={userName}
-        onChange={handleChange}
-      />
-      <input type="email" name="email" value={email} onChange={handleChange} />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={handleChange}
-      />
-      <UploadFile onFileChange={onFileChange} />
-      <button type="submit" onClick={handleSubmit}>
-        signup
-      </button>
-    </>
+    <section className="form-wrapper">
+      <Logo />
+      <div className="form-parent d-flex justify-content-center flex-column align-items-center h-100">
+        <h3 className="section-title bold-font mt-md-4 mt-3 mb-0">Sign Up</h3>
+        <Formik
+          initialValues={{ userName: "", email: "", password: "", image: "" }}
+          onSubmit={(values) => handleSubmit(values)}
+          validateOnChange={false}
+          validationSchema={Yup.object().shape({
+            userName: Yup.string()
+              .required("Required")
+              .min(8, "user name should be at least 8 chracters"),
+            email: Yup.string().required("Required").email(),
+            password: Yup.string()
+              .required("Required")
+              .min(8, "password should be at least 8 chracters"),
+
+            // image: Yup.mixed()
+            //   // .test(
+            //   //   "fileSize",
+            //   //   "File is too large",
+            //   //   (value) => (value && value.size >= 2)
+            //   // )
+            //   .test(
+            //     "fileFormat",
+            //     "Unsupported Format",
+            //     (value) =>
+            //       !value ||
+            //       ((value) =>
+            //         value && ["jpg,JPG,JPEG,jpeg,svg,SVG"].includes(value.type))
+            //   ),
+
+          })}
+        >
+          {(props) => renderSignUpForm(props)}
+        </Formik>
+      </div>
+    </section>
   );
-}
+};
 
 export default Signup;
