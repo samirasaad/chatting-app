@@ -20,12 +20,12 @@ const Home = () => {
       <Logo />
       <div className="container">
         <div className="mx-0 row justify-content-center">
-          <div className="col-md-6 mt-5 py-md-5 py-0">
+          <div className="col-md-6 mt-lg-5 mt-0 py-md-5 py-0">
             <h4 className="main-text medium-font">
               Make Your Life Easier, Use ChatBoard
             </h4>
             {!localStorage.getItem("userID") && (
-              <div className="d-flex flex-wrap  mt-md-5 mt-0">
+              <div className="d-flex flex-wrap  mt-lg-5 mt-0">
                 <Btn
                   text="Log In"
                   handleClick={() => {
@@ -43,7 +43,7 @@ const Home = () => {
               </div>
             )}
           </div>
-          <div className="lottie col-md-6 col-9">
+          <div className="lottie col-lg-6 col-md-7 col-9 mt-md-0 mt-4">
             <Lottie options={defaultOptions} />
           </div>
         </div>
