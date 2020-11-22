@@ -12,7 +12,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const peerUserPicurl = photoUrl;
   const peerUserName = userName;
   const peerUserAvailibility = availibility;
-  const currentUserPic = auth().currentUser && auth().currentUser.photoURL;
+  const currentUserPic = localStorage.getItem('userPic')
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
   const currentUserId = localStorage.getItem("userID");
@@ -26,9 +26,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   useEffect(() => {
     var chatContainer = document.querySelector(".messages-wrapper");
     chatContainer.scrollTop = chatContainer.scrollHeight;
-    if ((chatContainer.scrollHeight <= chatContainer.clientHeight)) {
+    if (chatContainer.scrollHeight <= chatContainer.clientHeight) {
       document.querySelector(".send-msg-bar").style.top = "100%";
-    }else{
+    } else {
       document.querySelector(".send-msg-bar").style.bottom = "0";
       document.querySelector(".send-msg-bar").style.top = "0";
     }
@@ -158,7 +158,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
           <UserAvatar
             img={peerUserPicurl}
             size="small"
-            statusClass="status-circle-small"
+            statusClass={`${
+              peerUserAvailibility === "online" && "status-circle-small"
+            } `}
           />
           <div className="d-flex flex-column align-items-start">
             <p className="position-relative msg-bg-peer-user mx-3 p-2 mb-0">
@@ -180,6 +182,10 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   return (
     <>
+    {/* <div className=''>
+    <p className="peer-user-name">{peerUserName}</p>
+        <hr />
+    </div> */}
       <section
         className={`${
           messagesList.length === 0 && "chat-min-height"

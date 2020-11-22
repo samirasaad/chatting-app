@@ -42,7 +42,7 @@ const Home = () => {
                   handleClick={() => {
                     History.push("/Signup");
                   }}
-                  classes="secondary-button px-md-5 px-4 py-2  bold-font mx-1 mx-md-3"
+                  classes="secondary-button px-md-5 px-4 py-2  bold-font mx-1 mx-lg-3"
                 />
               </div>
             )}

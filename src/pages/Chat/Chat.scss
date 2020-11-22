@@ -1,29 +1,22 @@
 @import "./../../scss/variables";
-// @mixin mode($modeBg, $primaryText, $secondaryText) {
-//   background-color: $modeBg;
-//   color: $primaryText;
-// }
-
-// .dark-mode {
-//   @include mode($primaryColorDark, $secondaryColorDark, green);
-// }
-
-// .light-mode {
-//   @include mode($primaryColorLight, $secondaryColorLight, red);
-// }
 
 .chat-wrapper {
-  min-height: 70vh;
+  min-height: 79vh;
   .section-bg {
-    border-radius: 1.6em;
-    min-height: 79.9vh;
+    // border-radius: 1.6em;
+    min-height: 80.9vh;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
   .messages-wrapper {
-    position: relative;
-    max-height: 80vh;
+    max-height: 78vh;
     overflow-y: auto;
+    .chat-heading {
+      color: $primaryColorLight;
+      top: 0;
+      z-index: 11;
+      border-bottom: 1px solid #e1e1e1;
+    }
   }
 }
 //DARK-MODE
@@ -41,6 +34,10 @@
     border: 5px solid black;
     background-color: $darkBg;
     color: $secondaryColorDark;
+    .chat-heading {
+      background-color: $darkBg;
+      color: white;
+    }
   }
 }
 //LIGHT-MODE
@@ -54,5 +51,9 @@
     border: 5px solid white;
     background-color: $secondaryColorLight;
     color: $primaryColorLight;
+    .chat-heading {
+      background-color: $lightBg;
+      color: $primaryColorLight;
+    }
   }
 }

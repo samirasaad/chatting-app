@@ -12,13 +12,18 @@ const UsersList = ({
   peerUserId,
 }) => {
   useEffect(() => {
+    highLightSelectedUSer();
+  });
+
+  const highLightSelectedUSer = () => {
     document.querySelectorAll(`.selected-user`).forEach((item) => {
       item.classList.remove("selected-user");
     });
-    peerUserId &&
+    if (peerUserId) {
       document.getElementById(`${peerUserId}`) &&
-      document.getElementById(`${peerUserId}`).classList.add("selected-user");
-  },[peerUserId]);
+        document.getElementById(`${peerUserId}`).classList.add("selected-user");
+    }
+  };
   return (
     <section className="users-list-wrapper pt-2 ">
       <FilterBar
@@ -31,7 +36,7 @@ const UsersList = ({
         filteredList.map((user) => (
           <Link to={`/chat/${user.id}`} key={user.id}>
             <div
-              className="d-flex p-2 mt-4 align-items-stretch user-item"
+              className="d-flex p-2 mx-2 mt-4 align-items-stretch user-item"
               id={user.id}
             >
               <UserAvatar

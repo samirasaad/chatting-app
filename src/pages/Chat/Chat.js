@@ -82,17 +82,33 @@ function Chat(props) {
         } chat-wrapper py-1 container-fluid`}
       >
         <div className="row mx-0">
-          <div className="col-md-2">
+          <div className="col-lg-3 col-md-12">
             <UserProfile />
           </div>
-          <div className="col-md-7 section-bg messages-wrapper">
+          <div className="col-lg-6 col-md-8 section-bg messages-wrapper postion-relative">
+            {peerUserInfo && (
+              <div className="chat-heading position-sticky">
+                <p className="medium-font py-2 mb-0">
+                  {peerUserInfo.userName}
+                  <span
+                    className={` mx-1 ${
+                      peerUserInfo.availibility === "online"
+                        ? "text-success"
+                        : "text-muted"
+                    }`}
+                  >
+                    {peerUserInfo.availibility}
+                  </span>
+                </p>
+              </div>
+            )}
             {peerUserInfo ? (
-              <ChatBoard peerUserInfo={peerUserInfo} peerUserId={peerUserId} />
+              <ChatBoard peerUserInfo={peerUserInfo} />
             ) : (
               <WelcomeBoard />
             )}
           </div>
-          <div className="col-md-3 section-bg px-0">
+          <div className="col-lg-3 col-md-4 section-bg px-0">
             <UsersList
               handleChange={handleChange}
               handleFilter={handleFilter}
