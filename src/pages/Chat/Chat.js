@@ -86,7 +86,7 @@ function Chat(props) {
             <UserProfile />
           </div>
           <div className="col-lg-6 col-md-8 section-bg messages-wrapper postion-relative">
-            {peerUserInfo && (
+            {peerUserInfo && peerUserId && (
               <div className="chat-heading position-sticky">
                 <p className="medium-font py-2 mb-0">
                   {peerUserInfo.userName}
@@ -102,7 +102,7 @@ function Chat(props) {
                 </p>
               </div>
             )}
-            {peerUserInfo ? (
+            {(peerUserInfo && peerUserId ) ? (
               <ChatBoard peerUserInfo={peerUserInfo} />
             ) : (
               <WelcomeBoard />

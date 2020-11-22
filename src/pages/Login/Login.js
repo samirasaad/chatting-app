@@ -24,7 +24,7 @@ function Login() {
         localStorage.setItem("userID", doc.data().id);
         localStorage.setItem("userPic", doc.data().photoUrl);
         localStorage.setItem("userFullName", doc.data().userName);
-        History.push("/Chat/index");
+        History.push("/Chat");
       })
       .catch((err) => console.log(err));
   };

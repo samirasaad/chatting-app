@@ -1,0 +1,11 @@
+@import "./../../scss/variables";
+.welcome-board {
+  height: 100%;
+  svg {
+    font-size: 6em;
+  }
+  .welcome-heading {
+    color: $primaryColorLight;
+    font-size: 1.5em;
+  }
+}

@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import ChatIcon from "@material-ui/icons/Chat";
+import "./WelcomeBoard.scss";
 
 function WelcomeBoard() {
-    return (
-        <p>welcome page</p>
-    )
+  return (
+    <div className="d-flex justify-content-center align-items-center welcome-board flex-column text-center">
+      <ChatIcon className="" />
+      <p className="welcome-heading medium font mb-0 my-3">
+        Choose a friend to start chatting with
+      </p>
+    </div>
+  );
 }
 
-export default WelcomeBoard
+export default WelcomeBoard;
