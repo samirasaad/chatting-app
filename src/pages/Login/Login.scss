@@ -1,9 +1,9 @@
 @import "./../../scss/variables";
 .login-wrapper {
-  background-image: url("../../assets/images/Skyline_.jpeg");
+  background-image: url("../../assets/images/background.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 94vh;
+  min-height: 100vh;
   .form-parent {
     .section-title {
       color: $primaryColorLight;
@@ -34,7 +34,7 @@
 }
 @media screen and (max-width: 420px) {
   .login-wrapper {
-    min-height: 90vh;
+    // min-height: 90vh;
     .form-parent {
       height: 25em;
     }
@@ -52,7 +52,7 @@
 @media screen and (min-width: 1440px) {
   .login-wrapper {
     .form-parent {
-      height: 30em;
+      // height: 30em;
     }
   }
 }

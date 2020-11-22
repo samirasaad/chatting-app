@@ -154,7 +154,7 @@ function Login() {
         <h3 className="brand-name mx-3 mb-0 bold-font">ChatBoard</h3>
       </div>
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
-        <h3 className="section-title bold-font mt-5">Login</h3>
+        <h3 className="section-title bold-font mt-md-5 mt-2  mb-0">Login</h3>
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => handleSubmit(values)}
