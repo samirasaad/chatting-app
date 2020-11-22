@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { db, auth } from "./../../firebase";
+import { db } from "./../../firebase";
 import moment from "moment";
 import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import PanToolIcon from "@material-ui/icons/PanTool";
 import "./ChatBoard.scss";
-import { cleanup } from "@testing-library/react";
 
 function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const peerUserId = id;
   const peerUserPicurl = photoUrl;
   const peerUserName = userName;
   const peerUserAvailibility = availibility;
-  const currentUserPic = localStorage.getItem('userPic')
+  const currentUserPic = localStorage.getItem("userPic");
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
   const currentUserId = localStorage.getItem("userID");
@@ -182,7 +181,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   return (
     <>
-    {/* <div className=''>
+      {/* <div className=''>
     <p className="peer-user-name">{peerUserName}</p>
         <hr />
     </div> */}

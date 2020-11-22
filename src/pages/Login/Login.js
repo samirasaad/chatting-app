@@ -56,7 +56,6 @@ function Login() {
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
-                // History.push("/Chat/index");
               });
           } else {
             db.collection("users")

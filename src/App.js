@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Router } from "react-router-dom";
 import history from "./routes/History";
-// import { auth } from "./firebase";
 import Routes from "./routes/Routes";
 import Footer from "./components/Footer/Footer";
 import "./App.scss";
+
 const App = () => {
   return (
     <Router history={history}>
@@ -13,4 +13,5 @@ const App = () => {
     </Router>
   );
 };
+
 export default App;
