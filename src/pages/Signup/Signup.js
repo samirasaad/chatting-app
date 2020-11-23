@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 import UploadFile from "../../components/UploadFile/UploadFile";
+import Btn from "../../components/Controls/Button/Button";
 import Input from "../../components/Controls/Input/Input";
 import { db, auth, storage } from "./../../firebase";
 import { signup } from "./../../firebase/authMethods";
 import History from "./../../routes/History";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Btn from "../../components/Controls/Button/Button";
 import "./../Login/Login.scss";
-import { Link } from "react-router-dom";
+
 const Signup = () => {
-  // const [email, setEamil] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [userName, setUserName] = useState("");
   const [formValues, setFormValues] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
   const [downloadedUrl, setDownloadedUrl] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
+  const supportedFormats = [
+    "image/jpeg",
+    "image/JPEG",
+    "image/JPG",
+    "image/jpg",
+    "image/svg",
+    "image/SVG",
+  ];
+  const fileSize = 1;
 
   useEffect(() => {
     if (downloadedUrl) {
@@ -81,7 +88,9 @@ const Signup = () => {
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+    // setSelectedFileType(event.target.files[0].size / 1024 / 1024);
     console.log(event.target.files[0].size / 1024 / 1024);
+    console.log(event.target.files[0].type);
   };
 
   const storePhotoUrlInFirestoreStorage = async (user) => {
@@ -135,6 +144,12 @@ const Signup = () => {
           {errors.password && (
             <small className="mb-2 text-danger">{errors.password}</small>
           )}
+          {/* <Input
+            type="file"
+            name="image"
+            value={values.image}
+            handleChange={handleChange}
+          /> */}
           <UploadFile onFileChange={onFileChange} />
           {errors.image && (
             <small className="mb-2 text-danger">{errors.image}</small>
@@ -173,22 +188,6 @@ const Signup = () => {
             password: Yup.string()
               .required("Required")
               .min(8, "password should be at least 8 chracters"),
-
-            // image: Yup.mixed()
-            //   // .test(
-            //   //   "fileSize",
-            //   //   "File is too large",
-            //   //   (value) => (value && value.size >= 2)
-            //   // )
-            //   .test(
-            //     "fileFormat",
-            //     "Unsupported Format",
-            //     (value) =>
-            //       !value ||
-            //       ((value) =>
-            //         value && ["jpg,JPG,JPEG,jpeg,svg,SVG"].includes(value.type))
-            //   ),
-
           })}
         >
           {(props) => renderSignUpForm(props)}
