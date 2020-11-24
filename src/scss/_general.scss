@@ -56,9 +56,14 @@ a:hover {
   border-radius: 0.7em;
   color: $primaryColorLight;
 }
-
-input:focus {
-  outline: none !important;
+input,
+button {
+  &:focus {
+    outline: none !important;
+  }
+}
+::placeholder {
+  color: #818181;
 }
 //SCROLL
 /* scroll-width */

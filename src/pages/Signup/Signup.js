@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
-import UploadFile from "../../components/UploadFile/UploadFile";
 import Btn from "../../components/Controls/Button/Button";
 import Input from "../../components/Controls/Input/Input";
-import BackupIcon from '@material-ui/icons/Backup';
+import BackupIcon from "@material-ui/icons/Backup";
 import { db, auth, storage } from "./../../firebase";
 import { signup } from "./../../firebase/authMethods";
 import History from "./../../routes/History";
@@ -146,19 +145,18 @@ const Signup = () => {
           {errors.password && (
             <small className="mb-2 text-danger">{errors.password}</small>
           )}
-           <label className="upload-btn position-relative">
-          <Input
-            type="file"
-            name="image"
-            value={values.image}
-            handleChange={onFileChange}
-          />
-          <div className='label-content h-100 w-100 d-flex '>
-          <span className="position-absolute medium-font ml-5">Upload image</span>
-          <BackupIcon className='ml-3'/>
-          </div>
+          <label className="upload-btn position-relative">
+            <Input
+              type="file"
+              name="image"
+              value={values.image}
+              handleChange={onFileChange}
+            />
+            <div className="label-content h-100 w-100 d-flex ">
+              <span className="position-absolute ml-5">Upload image</span>
+              <BackupIcon className="ml-3" />
+            </div>
           </label>
-          {/* <UploadFile onFileChange={onFileChange} /> */}
           {errors.image && (
             <small className="mb-2 text-danger">{errors.image}</small>
           )}

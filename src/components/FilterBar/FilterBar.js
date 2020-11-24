@@ -1,6 +1,5 @@
 import React from "react";
 import Input from "../Controls/Input/Input";
-import "./FilterBar.scss";
 
 const FilterBar = ({ handleFilter, handleChange, searchValue }) => {
   return (
