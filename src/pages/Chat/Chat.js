@@ -84,7 +84,7 @@ function Chat(props) {
         } chat-wrapper py-1 container-fluid`}
       >
         <div className="row mx-0">
-          <div className="col-lg-3 col-md-12">
+          <div className="col-lg-3 col-md-12 px-2">
             <UserProfile />
           </div>
           <div className="col-lg-6 col-md-8 section-bg messages-wrapper postion-relative">

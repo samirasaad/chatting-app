@@ -181,10 +181,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   return (
     <>
-      {/* <div className=''>
-    <p className="peer-user-name">{peerUserName}</p>
-        <hr />
-    </div> */}
       <section
         className={`${
           messagesList.length === 0 && "chat-min-height"
@@ -204,7 +200,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
             <p className="user-name mt-3 d-flex flex-column align-items-center bold-font">
               {peerUserName}
             </p>
-            <span>
+            <span className='text-center'>
               There is no chat between you and
               <span className="medium-font mx-1 peer-user-name">
                 {peerUserName}

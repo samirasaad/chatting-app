@@ -23,12 +23,12 @@ const SendMsgBar = ({
           placeholder="Enter your message"
         />
         <Emojis handleEmojiClick={handleChooseEmoji} />
-        <p className="send-btn mx-3 py-2">
+        <div className="send-btn">
           <SendOutlinedIcon
             onClick={handleSubmitMessage}
             className={`${!message && "disable-send-msg"}`}
           />
-        </p>
+        </div>
       </form>
     </>
   );
