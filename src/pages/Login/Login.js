@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 import { signin, signInWithGoogle } from "./../../firebase/authMethods";
 import Divider from "@material-ui/core/Divider";
+import Loader from "../../components/Loader/Loader";
 import Btn from "../../components/Controls/Button/Button";
 import Input from "./../../components/Controls/Input/Input";
 import { googleIcon } from "./../../utils/Images";
@@ -14,9 +15,11 @@ import { USERS, ONLINE } from "./../../utils/constants";
 import "./Login.scss";
 
 function Login() {
+  const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({});
 
   const getCurrentUserInfo = async (id) => {
+    setLoading(true);
     await db
       .collection(USERS)
       .doc(id)
@@ -27,11 +30,13 @@ function Login() {
         localStorage.setItem("userPic", doc.data().photoUrl);
         localStorage.setItem("userFullName", doc.data().userName);
         History.push("/Chat");
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
 
   const addUser = async () => {
+    // setLoading(true);
     try {
       let usersList = [];
       auth().onAuthStateChanged(async function (user) {
@@ -58,6 +63,7 @@ function Login() {
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
+                setLoading(false)
               });
           } else {
             db.collection(USERS)
@@ -67,6 +73,7 @@ function Login() {
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
+                setLoading(false)
               });
           }
         }
@@ -82,6 +89,7 @@ function Login() {
   };
 
   const handleSubmit = async (values) => {
+    setLoading(true)
     values.email &&
       values.password &&
       (await signin(values.email, values.password));
@@ -150,9 +158,10 @@ function Login() {
 
   return (
     <section className="form-wrapper">
-      <div className='mx-4'>
-      <Logo />
+      <div className="mx-4">
+        <Logo />
       </div>
+      <Loader loading={loading} />
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Login</h3>
         <Formik

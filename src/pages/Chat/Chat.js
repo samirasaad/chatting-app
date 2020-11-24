@@ -4,11 +4,13 @@ import UsersList from "../../components/UsersList/UsersList";
 import UserProfile from "../../components/UserProfile/UserProfile";
 import ChatBoard from "../ChatBoard/ChatBoard";
 import NavBar from "./../../components/NavBar/NavBar";
+import Loader from "../../components/Loader/Loader";
 import { db } from "./../../firebase";
 import { USERS, ONLINE } from "./../../utils/constants";
 import "./Chat.scss";
 
 function Chat(props) {
+  const [loading, setLoading] = useState(false);
   const [usersList, setUsersList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [peerUserInfo, setPeerUserInfo] = useState({});
@@ -32,6 +34,7 @@ function Chat(props) {
 
   const getCurrentPeerUser = async (id) => {
     if (id) {
+      setLoading(true);
       await db
         .collection(USERS)
         .where("id", "==", id)
@@ -41,11 +44,13 @@ function Chat(props) {
             return doc.data();
           });
           setPeerUserInfo(peerUser[0]);
+          setLoading(false);
         });
     }
   };
 
   const getUsersList = async () => {
+    setLoading(true);
     await db
       .collection(USERS)
       .where("id", "!=", currentUserId)
@@ -56,6 +61,7 @@ function Chat(props) {
         });
         setUsersList(usersList);
         setFilteredList(usersList);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -79,6 +85,7 @@ function Chat(props) {
   return (
     <>
       <NavBar />
+      <Loader loading={loading} />
       <section
         className={`${
           isDark ? "dark-mode" : "light-mode"

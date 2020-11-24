@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FilterBar from "../FilterBar/FilterBar";
 import UserAvatar from "../UserAvatar/UserAvatar";
+// import Loader from "./../Loader/Loader";
 import "./UsersList.scss";
 
 const UsersList = ({
@@ -24,6 +25,7 @@ const UsersList = ({
         document.getElementById(`${peerUserId}`).classList.add("selected-user");
     }
   };
+
   return (
     <section className="users-list-wrapper py-2">
       <FilterBar
@@ -31,8 +33,7 @@ const UsersList = ({
         handleChange={handleChange}
         searchValue={searchValue}
       />
-      {filteredList &&
-        filteredList.length > 0 &&
+      {filteredList && filteredList.length > 0 && (
         filteredList.map((user) => (
           <Link to={`/chat/${user.id}`} key={user.id}>
             <div
@@ -51,7 +52,12 @@ const UsersList = ({
               </p>
             </div>
           </Link>
-        ))}
+        ))
+      ) 
+      // : (
+      //   <Loader />
+      // )
+      }
     </section>
   );
 };

@@ -10,7 +10,7 @@ function PublicRoute({ component: Component, ...rest }) {
         !isAuthnticated ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/chat/index" />
+          <Redirect to="/chat" />
         )
       }
     />

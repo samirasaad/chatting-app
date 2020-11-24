@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
+import Loader from "../../components/Loader/Loader";
 import Btn from "../../components/Controls/Button/Button";
 import Input from "../../components/Controls/Input/Input";
 import BackupIcon from "@material-ui/icons/Backup";
@@ -14,6 +15,7 @@ import "./Signup.scss";
 import "./../Login/Login.scss";
 
 const Signup = () => {
+  const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({});
   const [selectedFile, setSelectedFile] = useState({
     file: null,
@@ -49,7 +51,8 @@ const Signup = () => {
           usersList = querySnapshot.docs.map((doc) => {
             return doc.data();
           });
-        });
+        })
+        .catch((err) => console.log(err));
       if (usersList.length === 0) {
         //if new user, store it intto users collection
         db.collection(USERS)
@@ -75,6 +78,7 @@ const Signup = () => {
   }, [downloadedUrl]);
 
   const getStoredUserImg = async (user) => {
+    setLoading(true);
     await storage
       .ref(IMAGES)
       .child(user.uid)
@@ -82,10 +86,12 @@ const Signup = () => {
       .then((imgUrl) => {
         localStorage.setItem("userPic", imgUrl);
         setDownloadedUrl(imgUrl);
+        setLoading(false);
       });
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     checkSelectedFileValidation();
     if (!fileErr.sizeErr && !fileErr.typeErr) {
       try {
@@ -96,7 +102,9 @@ const Signup = () => {
             setCurrentUser(user);
           }
         });
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error.message);
       }
     }
@@ -126,6 +134,7 @@ const Signup = () => {
   };
 
   const storePhotoUrlInFirestoreStorage = async (user) => {
+    setLoading(true);
     await storage
       .ref(`/${IMAGES}/${user.uid}`)
       .put(selectedFile.file)
@@ -215,6 +224,7 @@ const Signup = () => {
       <div className="mx-4">
         <Logo />
       </div>
+      <Loader loading={loading} />
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Sign Up</h3>
         <Formik

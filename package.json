@@ -22,6 +22,7 @@
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-spinners": "^0.9.0",
     "tinymce-emoji": "^0.1.4",
     "web-vitals": "^0.2.4",
     "yup": "^0.29.3"
