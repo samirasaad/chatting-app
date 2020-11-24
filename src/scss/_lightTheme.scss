@@ -2,6 +2,10 @@
 .navbar-wrapper.light-mode {
   box-shadow: 1px 3px 14px -1px #e0e0e0;
   background-color: #fdfdfd;
+  .logo,
+  .action-wrapper {
+    color: $primaryColorLight;
+  }
 }
 .chat-wrapper.light-mode {
   border: 5px solid white;

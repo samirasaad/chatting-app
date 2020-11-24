@@ -4,6 +4,10 @@
   .brand-name {
     color: white;
   }
+  .logo,
+  .action-wrapper {
+    color: white;
+  }
 }
 .chat-wrapper.dark-mode {
   background-color: black;
@@ -90,6 +94,6 @@
 .footer-wrapper.dark-mode {
   background-color: $darkBg;
   svg {
-    fill: $link;
+    fill: white;
   }
 }

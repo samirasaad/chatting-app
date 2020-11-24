@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { db } from "./../../firebase";
-import { firebaseSignout } from "./../../firebase/authMethods";
-import { logo } from "./../../utils/Images";
 import SettingsBrightnessTwoToneIcon from "@material-ui/icons/SettingsBrightnessTwoTone";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import "./NavBar.scss";
 import Logo from "../Logo/Logo";
+import { firebaseSignout } from "./../../firebase/authMethods";
+import { db } from "./../../firebase";
+import "./NavBar.scss";
 
 const NavBar = () => {
   const userID = localStorage.getItem("userID");
