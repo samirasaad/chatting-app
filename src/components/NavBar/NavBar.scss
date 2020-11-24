@@ -1,6 +1,11 @@
 @import "./../../scss/variables";
 .navbar-wrapper {
   .action-wrapper {
+    .mode-icon,
+    .logout-icon,
+    .mode-icon-active {
+      font-size: 1.8em;
+    }
     .mode-icon {
       color: #c1c1c1;
       &:hover {

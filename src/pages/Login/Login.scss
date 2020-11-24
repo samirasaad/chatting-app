@@ -5,7 +5,7 @@
   background-size: cover;
   min-height: 100vh;
   .form-parent {
-    .section-title {
+    .form-title {
       color: $primaryColorLight;
       font-size: 3em;
     }
@@ -36,6 +36,9 @@
   .form-wrapper {
     .form-parent {
       height: 25em;
+      .form-title {
+        font-size: 2em;
+      }
     }
   }
 }

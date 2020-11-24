@@ -51,15 +51,15 @@ const NavBar = () => {
       <Logo />
       {localStorage.getItem("userID") && (
         <div className="d-flex flex-wrap justify-content-end w-25 action-wrapper">
-          <div className="d-flex mx-lg-2 mx-0">
-            <span className='d-md-block d-none'>Dark mode</span>
+          <div className="d-flex mx-lg-2 mx-0 align-items-center">
+            <span className="d-md-block d-none">Dark mode</span>
             <SettingsBrightnessTwoToneIcon
               className={` ${isDark ? "mode-icon-active" : "mode-icon"} mx-1`}
               onClick={changeMode}
             />
           </div>
-          <div className="d-flex ">
-            <span className='d-md-block d-none'>Logout</span>
+          <div className="d-flex align-items-center">
+            <span className="d-md-block d-none">Logout</span>
             <ExitToAppIcon
               className="logout-icon mx-1"
               onClick={handleLogout}

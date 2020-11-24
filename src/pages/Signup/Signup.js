@@ -213,7 +213,7 @@ const Signup = () => {
   return (
     <section className="form-wrapper">
       <Logo />
-      <div className="form-parent d-flex justify-content-center flex-column align-items-center h-100">
+      <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="section-title bold-font mt-md-4 mt-3 mb-0">Sign Up</h3>
         <Formik
           initialValues={{ userName: "", email: "", password: "", image: "" }}

@@ -200,7 +200,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
             <p className="user-name mt-3 d-flex flex-column align-items-center bold-font">
               {peerUserName}
             </p>
-            <span className='text-center'>
+            <span className="text-center">
               There is no chat between you and
               <span className="medium-font mx-1 peer-user-name">
                 {peerUserName}

@@ -92,7 +92,7 @@ function Login() {
     const { handleChange, handleSubmit, values, errors } = props;
     setFormValues(values);
     return (
-      <div className="form-bg p-md-5 p-3  m-auto">
+      <div className="form-bg p-md-5 p-3 m-auto">
         <form
           onSubmit={(values) => handleSubmit(values)}
           className="d-flex flex-column"
@@ -151,8 +151,8 @@ function Login() {
   return (
     <section className="form-wrapper">
       <Logo />
-      <div className="form-parent d-flex justify-content-center flex-column align-items-center h-100">
-        <h3 className="section-title bold-font mt-md-4 mt-3 mb-0">Login</h3>
+      <div className="form-parent d-flex justify-content-center flex-column align-items-center">
+        <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Login</h3>
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => handleSubmit(values)}
