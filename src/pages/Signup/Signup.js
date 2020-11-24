@@ -119,6 +119,7 @@ const Signup = () => {
             handleChange={handleChange}
             className="p-3 input mb-3"
             placeholder="User Name"
+            isRequired={true}
           />
           {errors.userName && (
             <small className="mb-2 text-danger">{errors.userName}</small>
@@ -130,6 +131,7 @@ const Signup = () => {
             handleChange={handleChange}
             className="p-3 input mb-3"
             placeholder="Email"
+            isRequired={true}
           />
           {errors.email && (
             <small className="mb-2 text-danger">{errors.email}</small>
@@ -141,6 +143,7 @@ const Signup = () => {
             handleChange={handleChange}
             className="p-3 input mb-3"
             placeholder="Password"
+            isRequired={true}
           />
           {errors.password && (
             <small className="mb-2 text-danger">{errors.password}</small>
