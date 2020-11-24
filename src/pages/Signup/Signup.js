@@ -17,6 +17,7 @@ const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [downloadedUrl, setDownloadedUrl] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
+  const [selectedFileName, setSelectedFileName] = useState("");
   const supportedFormats = [
     "image/jpeg",
     "image/JPEG",
@@ -89,6 +90,7 @@ const Signup = () => {
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+    setSelectedFileName(event.target.files[0].name);
     // setSelectedFileType(event.target.files[0].size / 1024 / 1024);
     console.log(event.target.files[0].size / 1024 / 1024);
     console.log(event.target.files[0].type);
@@ -154,6 +156,7 @@ const Signup = () => {
               <BackupIcon className="ml-3" />
             </div>
           </label>
+          {selectedFileName && <span className='mx-2 medium-font seleceted-img-name'>{selectedFileName}</span>}
           {errors.image && (
             <small className="mb-2 text-danger">{errors.image}</small>
           )}
