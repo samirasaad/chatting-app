@@ -119,7 +119,7 @@ function Login() {
           />
           <Btn
             type="submit"
-            classes="p-2 primary-button mt-2 bold-font"
+            classes="p-2 primary-button bold-font"
             text="Login"
             handleClick={handleSubmit}
           ></Btn>

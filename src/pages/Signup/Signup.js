@@ -120,10 +120,8 @@ const Signup = () => {
             className="p-3 input mb-3"
             placeholder="User Name"
             isRequired={true}
+            errors={errors}
           />
-          {errors.userName && (
-            <small className="mb-2 text-danger">{errors.userName}</small>
-          )}
           <Input
             type="email"
             name="email"
@@ -132,10 +130,8 @@ const Signup = () => {
             className="p-3 input mb-3"
             placeholder="Email"
             isRequired={true}
+            errors={errors}
           />
-          {errors.email && (
-            <small className="mb-2 text-danger">{errors.email}</small>
-          )}
           <Input
             type="password"
             name="password"
@@ -144,10 +140,8 @@ const Signup = () => {
             className="p-3 input mb-3"
             placeholder="Password"
             isRequired={true}
+            errors={errors}
           />
-          {errors.password && (
-            <small className="mb-2 text-danger">{errors.password}</small>
-          )}
           <label className="upload-btn position-relative">
             <Input
               type="file"
@@ -165,7 +159,7 @@ const Signup = () => {
           )}
           <Btn
             type="submit"
-            classes="p-2 primary-button mt-2 bold-font"
+            classes="p-2 primary-button mt-1 bold-font"
             text="Signup"
             handleClick={handleSubmit}
           ></Btn>
