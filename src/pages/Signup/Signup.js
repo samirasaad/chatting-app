@@ -67,7 +67,7 @@ const Signup = () => {
               "userFullName",
               currentUser.displayName || formValues.userName
             );
-            History.push("/Chat/index");
+            History.push("/Chat");
           });
       }
     }
@@ -214,7 +214,7 @@ const Signup = () => {
     <section className="form-wrapper">
       <Logo />
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
-        <h3 className="section-title bold-font mt-md-4 mt-3 mb-0">Sign Up</h3>
+        <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Sign Up</h3>
         <Formik
           initialValues={{ userName: "", email: "", password: "", image: "" }}
           onSubmit={(values) => handleSubmit(values)}
@@ -222,8 +222,12 @@ const Signup = () => {
           validationSchema={Yup.object().shape({
             userName: Yup.string()
               .required("Required")
-              .min(8, "user name should be at least 8 chracters"),
-            email: Yup.string().required("Required").email(),
+              .min(8, "Username should be at least 8 chracters")
+              .max(25, "Username is too large, Maximum 25 character"),
+            email: Yup.string()
+              .required("Required")
+              .email("Email must be a valid email")
+              .max(320, "Email must be a valid email"),
             password: Yup.string()
               .required("Required")
               .min(8, "password should be at least 8 chracters"),

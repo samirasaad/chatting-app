@@ -83,7 +83,7 @@ function Chat(props) {
           isDark ? "dark-mode" : "light-mode"
         } chat-wrapper py-1 container-fluid`}
       >
-        <div className="row mx-0">
+        <div className="row mx-0 mt-2">
           <div className="col-lg-3 col-md-12 px-2">
             <UserProfile />
           </div>

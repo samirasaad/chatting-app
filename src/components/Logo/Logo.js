@@ -6,10 +6,12 @@ import "./Logo.scss";
 
 const Logo = () => {
   return (
-    <Link to="/" className="mb-0 mt-2 container-fluid logo-wrapper">
-      {/* <img src={logo} alt="chatBoard-logo" className="logo mt-3" /> */}
-      <ChatIcon className="logo" />
-      <h3 className="brand-name mx-1 mb-0 bold-font">ChatBoard</h3>
+    <Link to="/" className="mb-0 mt-2 container-fluid logo-wrapper ">
+      <div className="d-flex flex-column mx-4">
+        {/* <img src={logo} alt="chatBoard-logo" className="logo mt-3" /> */}
+        <ChatIcon className="logo" />
+        <h3 className="brand-name mx-1 mb-0 bold-font">ChatBoard</h3>
+      </div>
     </Link>
   );
 };
