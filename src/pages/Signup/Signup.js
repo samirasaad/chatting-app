@@ -14,17 +14,27 @@ import "./../Login/Login.scss";
 
 const Signup = () => {
   const [formValues, setFormValues] = useState({});
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState({
+    file: null,
+    fileName: "",
+    fileSize: 0,
+    fileType: "",
+  });
+  const [fileErr, setFileErr] = useState({
+    sizeErr: false,
+    typeErr: false,
+    msg: "",
+  });
   const [downloadedUrl, setDownloadedUrl] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  const [selectedFileName, setSelectedFileName] = useState("");
-  const supportedFormats = [
-    "image/jpeg",
+  const fileSupportedFormats = [
     "image/JPEG",
     "image/JPG",
     "image/jpg",
-    "image/svg",
-    "image/SVG",
+    "image/png",
+    "image/PNG",
+    "image/JPEG",
+    "image/jpeg",
   ];
   const fileSize = 1;
 
@@ -69,44 +79,62 @@ const Signup = () => {
       .child(user.uid)
       .getDownloadURL()
       .then((imgUrl) => {
+        console.log(imgUrl);
         localStorage.setItem("userPic", imgUrl);
         setDownloadedUrl(imgUrl);
       });
   };
 
   const handleSubmit = async (e) => {
-    try {
-      await signup(formValues.email, formValues.password);
-      auth().onAuthStateChanged(async function (user) {
-        if (user) {
-          storePhotoUrlInFirestoreStorage(user);
-          setCurrentUser(user);
-        }
-      });
-    } catch (error) {
-      console.log(error.message);
+    checkSelectedFileValidation();
+    if (!fileErr.sizeErr && !fileErr.typeErr) {
+      try {
+        await signup(formValues.email, formValues.password);
+        auth().onAuthStateChanged(async function (user) {
+          if (user) {
+            storePhotoUrlInFirestoreStorage(user);
+            setCurrentUser(user);
+          }
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
 
   const onFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setSelectedFileName(event.target.files[0].name);
-    // setSelectedFileType(event.target.files[0].size / 1024 / 1024);
-    console.log(event.target.files[0].size / 1024 / 1024);
-    console.log(event.target.files[0].type);
+    setSelectedFile({
+      file: event.target.files[0],
+      fileName: event.target.files[0].name,
+      fileSize: event.target.files[0].size, //size in bytes
+      fileType: event.target.files[0].type,
+    });
+  };
+
+  const checkSelectedFileValidation = () => {
+    if (selectedFile.fileSize && selectedFile.fileType) {
+      setFileErr({
+        typeErr: !fileSupportedFormats.includes(selectedFile.fileType),
+        sizeErr: selectedFile.fileSize / 1024 / 1024 > fileSize,
+        msg: !fileSupportedFormats.includes(selectedFile.fileType)
+          ? "Image type is not supported jpg, jpeg and png only"
+          : selectedFile.fileSize / 1024 / 1024 > fileSize
+          ? "Image size is too large, maximum 2 Mb"
+          : "",
+      });
+    }
   };
 
   const storePhotoUrlInFirestoreStorage = async (user) => {
     await storage
       .ref(`/images/${user.uid}`)
-      .put(selectedFile)
+      .put(selectedFile.file)
       .then((res) => getStoredUserImg(user));
   };
 
   const renderSignUpForm = (props) => {
     const { handleChange, handleSubmit, values, errors } = props;
     setFormValues(values);
-    console.log(props);
     return (
       <div className="form-bg p-md-5 p-3  m-auto">
         <form
@@ -144,7 +172,7 @@ const Signup = () => {
             isRequired={true}
             errors={errors}
           />
-          <label className="upload-btn position-relative">
+          <label className="upload-btn position-relative d-flex  justify-content-center">
             <Input
               type="file"
               name="image"
@@ -156,15 +184,20 @@ const Signup = () => {
               <BackupIcon className="ml-3" />
             </div>
           </label>
-          {selectedFileName && <span className='mx-2 medium-font seleceted-img-name'>{selectedFileName}</span>}
-          {errors.image && (
-            <small className="mb-2 text-danger">{errors.image}</small>
+          {selectedFile && (
+            <span className="mx-2 medium-font seleceted-img-name">
+              {selectedFile.fileName}
+            </span>
+          )}
+
+          {fileErr.msg && (
+            <p className="mb-2 mx-2 text-danger">{fileErr.msg}</p>
           )}
           <Btn
             type="submit"
             classes="p-2 primary-button mt-1 bold-font"
             text="Signup"
-            handleClick={handleSubmit}
+            handleClick={checkSelectedFileValidation}
           ></Btn>
           <p className="mt-3">
             Already have an account ?
