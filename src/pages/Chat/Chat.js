@@ -96,24 +96,24 @@ function Chat(props) {
             <UserProfile />
           </div>
           <div className="col-lg-6 col-md-8 section-bg messages-wrapper postion-relative">
-            {peerUserInfo && peerUserId && (
-              <div className="chat-heading position-sticky">
-                <p className="medium-font py-2 mb-0">
-                  {peerUserInfo.userName}
-                  <span
-                    className={` mx-1 ${
-                      peerUserInfo.availibility === ONLINE
-                        ? "text-success"
-                        : "text-muted"
-                    }`}
-                  >
-                    {peerUserInfo.availibility}
-                  </span>
-                </p>
-              </div>
-            )}
             {peerUserInfo && peerUserId ? (
-              <ChatBoard peerUserInfo={peerUserInfo} />
+              <>
+                <div className="chat-heading position-sticky">
+                  <p className="medium-font py-2 mb-0">
+                    {peerUserInfo.userName}
+                    <span
+                      className={` mx-1 ${
+                        peerUserInfo.availibility === ONLINE
+                          ? "text-success"
+                          : "text-muted"
+                      }`}
+                    >
+                      {peerUserInfo.availibility}
+                    </span>
+                  </p>
+                </div>
+                <ChatBoard peerUserInfo={peerUserInfo} />
+              </>
             ) : (
               <WelcomeBoard />
             )}

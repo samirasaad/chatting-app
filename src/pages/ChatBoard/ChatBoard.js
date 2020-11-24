@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
+import Loader from "../../components/Loader/Loader";
+import NoChat from "../../components/NoChat/NoChat";
 import PanToolIcon from "@material-ui/icons/PanTool";
 import { db } from "./../../firebase";
 import moment from "moment";
@@ -8,6 +10,7 @@ import { MESSAGES, CHAT, ONLINE } from "./../../utils/constants";
 import "./ChatBoard.scss";
 
 function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
+  const [loading, setLoading] = useState(false);
   const peerUserId = id;
   const peerUserPicurl = photoUrl;
   const peerUserName = userName;
@@ -58,7 +61,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   //         );
   //       });
   //   };
+
   const getChatMessages = async () => {
+    setLoading(true);
     await db
       .collection(MESSAGES)
       .doc(`${currentUserId}-${peerUserId}`)
@@ -69,6 +74,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
         });
         setMessagesList(messages);
         updateScroll();
+        setLoading(false);
       });
 
     //   await db
@@ -179,29 +185,15 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
           messagesList.length === 0 && "chat-min-height"
         } chat-board`}
       >
-        {messagesList && messagesList.length > 0 ? (
+        <Loader loading={loading} />
+        {(messagesList && messagesList.length > 0) ? (
           messagesList.map((message, index) => renderMessages(message, index))
         ) : (
-          <div className="d-flex flex-column align-items-center mt-5">
-            <UserAvatar
-              img={peerUserPicurl}
-              size="large"
-              statusClass={`${
-                peerUserAvailibility === "online" && "status-circle-large"
-              } `}
-            />
-            <p className="user-name mt-3 d-flex flex-column align-items-center bold-font">
-              {peerUserName}
-            </p>
-            <span className="text-center">
-              There is no chat between you and
-              <span className="medium-font mx-1 peer-user-name">
-                {peerUserName}
-              </span>
-              , Say hi
-            </span>
-            <PanToolIcon className="say-hi-icon mt-4" />
-          </div>
+          <NoChat
+            peerUserPicurl={peerUserPicurl}
+            peerUserAvailibility={peerUserAvailibility}
+            peerUserName={peerUserName}
+          />
         )}
       </section>
       <SendMsgBar
