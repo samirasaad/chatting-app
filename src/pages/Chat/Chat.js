@@ -5,6 +5,7 @@ import UserProfile from "../../components/UserProfile/UserProfile";
 import ChatBoard from "../ChatBoard/ChatBoard";
 import NavBar from "./../../components/NavBar/NavBar";
 import { db } from "./../../firebase";
+import { USERS, ONLINE } from "./../../utils/constants";
 import "./Chat.scss";
 
 function Chat(props) {
@@ -27,12 +28,12 @@ function Chat(props) {
   useEffect(() => {
     setPeerUserId(props.match.params.id);
     peerUserId && getCurrentPeerUser(props.match.params.id);
-  }, [props.match.params.id]);
+  }, [props.match.params.id, peerUserId]);
 
   const getCurrentPeerUser = async (id) => {
     if (id) {
       await db
-        .collection("users")
+        .collection(USERS)
         .where("id", "==", id)
         .get()
         .then((querySnapshot) => {
@@ -46,7 +47,7 @@ function Chat(props) {
 
   const getUsersList = async () => {
     await db
-      .collection("users")
+      .collection(USERS)
       .where("id", "!=", currentUserId)
       .get()
       .then((querySnapshot) => {
@@ -94,7 +95,7 @@ function Chat(props) {
                   {peerUserInfo.userName}
                   <span
                     className={` mx-1 ${
-                      peerUserInfo.availibility === "online"
+                      peerUserInfo.availibility === ONLINE
                         ? "text-success"
                         : "text-muted"
                     }`}

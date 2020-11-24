@@ -9,6 +9,7 @@ import { signup } from "./../../firebase/authMethods";
 import History from "./../../routes/History";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { USERS, ONLINE, IMAGES } from "./../../utils/constants";
 import "./Signup.scss";
 import "./../Login/Login.scss";
 
@@ -41,7 +42,7 @@ const Signup = () => {
   useEffect(() => {
     if (downloadedUrl) {
       let usersList = [];
-      db.collection("users")
+      db.collection(USERS)
         .where("id", "==", currentUser.uid)
         .get()
         .then((querySnapshot) => {
@@ -50,15 +51,15 @@ const Signup = () => {
           });
         });
       if (usersList.length === 0) {
-        //if new user set it to users collection
-        db.collection("users")
+        //if new user, store it intto users collection
+        db.collection(USERS)
           .doc(currentUser.uid)
           .set({
             id: currentUser.uid,
             userName: currentUser.displayName || formValues.userName,
             photoUrl: currentUser.photoURL || downloadedUrl,
             userEmail: currentUser.email,
-            availibility: "online",
+            availibility: ONLINE,
           })
           .then((res) => {
             localStorage.setItem("isAuthnticated", true);
@@ -75,11 +76,10 @@ const Signup = () => {
 
   const getStoredUserImg = async (user) => {
     await storage
-      .ref("images")
+      .ref(IMAGES)
       .child(user.uid)
       .getDownloadURL()
       .then((imgUrl) => {
-        console.log(imgUrl);
         localStorage.setItem("userPic", imgUrl);
         setDownloadedUrl(imgUrl);
       });
@@ -127,7 +127,7 @@ const Signup = () => {
 
   const storePhotoUrlInFirestoreStorage = async (user) => {
     await storage
-      .ref(`/images/${user.uid}`)
+      .ref(`/${IMAGES}/${user.uid}`)
       .put(selectedFile.file)
       .then((res) => getStoredUserImg(user));
   };
@@ -212,7 +212,9 @@ const Signup = () => {
 
   return (
     <section className="form-wrapper">
-      <Logo />
+      <div className="mx-4">
+        <Logo />
+      </div>
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Sign Up</h3>
         <Formik

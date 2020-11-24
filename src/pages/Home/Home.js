@@ -7,7 +7,7 @@ import splashScreenLottie2 from "./../../assets/lotties/splash-screen-2.json";
 import History from "./../../routes/History";
 import "./Home.scss";
 const Home = () => {
-  const defaultOptions = {
+  const defaultLottieOptions = {
     loop: true,
     autoplay: true,
     animationData: splashScreenLottie,
@@ -17,7 +17,9 @@ const Home = () => {
   };
   return (
     <header className="splash-screen">
+      <div className='mx-4'>
       <Logo />
+      </div>
       <div className="container">
         <div className="mx-0 row justify-content-center">
           <div className="col-md-6 mt-lg-5 mt-0 py-md-5 py-0">
@@ -44,7 +46,7 @@ const Home = () => {
             )}
           </div>
           <div className="lottie col-lg-6 col-md-7 col-9 mt-md-0 mt-4">
-            <Lottie options={defaultOptions} />
+            <Lottie options={defaultLottieOptions} />
           </div>
         </div>
       </div>

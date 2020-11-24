@@ -10,6 +10,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { db, auth } from "./../../firebase";
 import History from "./../../routes/History";
+import { USERS, ONLINE } from "./../../utils/constants";
 import "./Login.scss";
 
 function Login() {
@@ -17,7 +18,7 @@ function Login() {
 
   const getCurrentUserInfo = async (id) => {
     await db
-      .collection("users")
+      .collection(USERS)
       .doc(id)
       .get()
       .then((doc) => {
@@ -36,7 +37,7 @@ function Login() {
       auth().onAuthStateChanged(async function (user) {
         if (user) {
           await db
-            .collection("users")
+            .collection(USERS)
             .where("id", "==", user.uid)
             .get()
             .then((querySnapshot) => {
@@ -45,28 +46,27 @@ function Login() {
               });
             });
           if (usersList.length === 0) {
-            //new user set it to users collection
-            db.collection("users")
+            //if new user, set it to users collection
+            db.collection(USERS)
               .doc(user.uid)
               .set({
                 id: user.uid,
                 userName: user.displayName,
                 photoUrl: user.photoURL,
                 userEmail: user.email,
-                availibility: "online",
+                availibility: ONLINE,
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
               });
           } else {
-            db.collection("users")
+            db.collection(USERS)
               .doc(user.uid)
               .update({
-                availibility: "online",
+                availibility: ONLINE,
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
-                // History.push("/Chat/index");
               });
           }
         }
@@ -150,7 +150,9 @@ function Login() {
 
   return (
     <section className="form-wrapper">
+      <div className='mx-4'>
       <Logo />
+      </div>
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Login</h3>
         <Formik

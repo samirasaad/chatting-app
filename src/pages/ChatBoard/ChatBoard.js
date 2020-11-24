@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { db } from "./../../firebase";
-import moment from "moment";
 import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import PanToolIcon from "@material-ui/icons/PanTool";
+import { db } from "./../../firebase";
+import moment from "moment";
+import { MESSAGES, CHAT, ONLINE } from "./../../utils/constants";
 import "./ChatBoard.scss";
 
 function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
@@ -11,9 +12,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const peerUserPicurl = photoUrl;
   const peerUserName = userName;
   const peerUserAvailibility = availibility;
-  const currentUserPic = localStorage.getItem("userPic");
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
+  const currentUserPic = localStorage.getItem("userPic");
   const currentUserId = localStorage.getItem("userID");
   //   let [newMessagesCounter, setNewMessagesCounter] = useState(0);
 
@@ -59,9 +60,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   //   };
   const getChatMessages = async () => {
     await db
-      .collection("messages")
+      .collection(MESSAGES)
       .doc(`${currentUserId}-${peerUserId}`)
-      .collection("chat")
+      .collection(CHAT)
       .onSnapshot((querySnapshot) => {
         let messages = querySnapshot.docs.map((doc) => {
           return doc.data();
@@ -71,7 +72,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       });
 
     //   await db
-    //   .collection("messages")
+    //   .collection(MESSAGES)
     //   .doc(`${peerUserId}-${currentUserId}`)
     //   .collection('chat')
     //   .onSnapshot((querySnapshot) => {
@@ -84,15 +85,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   const handleSubmitMessage = async (e) => {
     e.preventDefault();
-    //for img
-    // if (this.state.isShowSticker && type === 2) {
-    //     this.setState({isShowSticker: false})
-    // }
     if (message.trim() === "") {
-      //empty message dont send
+      //empty message ? dont send
       return;
-    } else {
-      //   setNewMessagesCounter(newMessagesCounter + 1);
     }
     const timestamp = (new Date().getTime() / 1000).toString();
     const itemMessage = {
@@ -103,9 +98,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       //   newMessagesCounter,
     };
     await db
-      .collection("messages")
+      .collection(MESSAGES)
       .doc(`${currentUserId}-${peerUserId}`)
-      .collection("chat")
+      .collection(CHAT)
       .doc(timestamp)
       .set(itemMessage)
       .then(() => {
@@ -114,13 +109,12 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       })
       .catch((err) => {
         console.log(err);
-        // this.props.showToast(0, err.toString());
       });
 
     await db
-      .collection("messages")
+      .collection(MESSAGES)
       .doc(`${peerUserId}-${currentUserId}`)
-      .collection("chat")
+      .collection(CHAT)
       .doc(timestamp)
       .set(itemMessage)
       .then(() => {
@@ -128,7 +122,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       })
       .catch((err) => {
         console.log(err);
-        // this.props.showToast(0, err.toString());
       });
   };
 
@@ -158,7 +151,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
             img={peerUserPicurl}
             size="small"
             statusClass={`${
-              peerUserAvailibility === "online" && "status-circle-small"
+              peerUserAvailibility === ONLINE && "status-circle-small"
             } `}
           />
           <div className="d-flex flex-column align-items-start">
