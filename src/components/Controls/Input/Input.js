@@ -13,7 +13,7 @@ const Input = ({
 }) => {
   return (
     <>
-      <div className="position-relative d-flex">
+      <div className="position-relative d-flex w-100">
         <input
           name={name}
           id={id}
@@ -30,7 +30,7 @@ const Input = ({
         )}
       </div>
       {errors && errors[`${name}`] && (
-        <small className="mb-2 text-danger mx-3">{errors[`${name}`]}</small>
+        <p className="mb-2 text-danger mx-3">{errors[`${name}`]}</p>
       )}
     </>
   );

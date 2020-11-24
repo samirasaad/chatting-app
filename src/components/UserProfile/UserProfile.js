@@ -5,16 +5,16 @@ import "./UserProfile.scss";
 const UserProfile = () => {
   const [currentUserImg, setCurrentUserImg] = useState(null);
 
-  // useEffect(() => {
-  //   localStorage.getItem("userID") &&
-  //     storage
-  //       .ref("images")
-  //       .child(localStorage.getItem("userID"))
-  //       .getDownloadURL()
-  //       .then((imgUrl) => {
-  //         setCurrentUserImg(imgUrl);
-  //       });
-  // });
+  useEffect(() => {
+    localStorage.getItem("userID") &&
+      storage
+        .ref("images")
+        .child(localStorage.getItem("userID"))
+        .getDownloadURL()
+        .then((imgUrl) => {
+          setCurrentUserImg(imgUrl);
+        });
+  });
 
   return (
     <div className="mt-2 user-profile-wrapper d-flex justify-content-center flex-column align-items-center pt-4">
