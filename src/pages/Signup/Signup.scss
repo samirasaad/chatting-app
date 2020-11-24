@@ -1,0 +1,25 @@
+@import "./../../scss/variables";
+.form-wrapper {
+  input[type="file"] {
+    color: transparent;
+    visibility: hidden;
+  }
+  .upload-btn {
+    color: $primaryColorDark;
+    border: 1px dashed #cacaca;
+    width: 9em;
+    height: 3em;
+    border-radius: 10px;
+    cursor: pointer;
+    .label-content {
+      position: absolute !important;
+      top: 22%;
+      right: 0.6rem;
+      font-size: 1.1em;
+      color: #818181;
+    }
+    svg {
+      color: #818181;
+    }
+  }
+}
