@@ -257,7 +257,7 @@ const Signup = () => {
       <div className="mx-4">
         <Logo />
       </div>
-      <Loader loading={loading} />
+      {loading && <Loader loading={loading} />}
       {isOpen && (
         <Snackbar
           isOpen={isOpen}

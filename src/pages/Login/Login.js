@@ -200,7 +200,7 @@ function Login() {
       <div className="mx-4">
         <Logo />
       </div>
-      <Loader loading={true} />
+      {loading && <Loader loading={loading} />}
       {isOpen && (
         <SnackBar
           isOpen={isOpen}

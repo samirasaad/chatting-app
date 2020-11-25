@@ -62,7 +62,7 @@ const NavBar = () => {
       } navbar-wrapper container-fluid medium-font d-flex justify-content-between align-items-center`}
     >
       <Logo />
-      <Loader loading={loading} />
+      {loading && <Loader loading={loading} />}
       {isOpen && (
         <SnackBar
           isOpen={isOpen}

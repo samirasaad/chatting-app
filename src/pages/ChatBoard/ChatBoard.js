@@ -166,7 +166,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
           messagesList.length === 0 && "chat-min-height"
         } `}
       >
-        <Loader loading={loading} />
+        {loading && <Loader loading={loading} />}
         {messagesList && messagesList.length > 0 ? (
           messagesList.map((message, index) => renderMessages(message, index))
         ) : (
