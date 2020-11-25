@@ -191,14 +191,23 @@ function Login() {
       </div>
     );
   };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <section className="form-wrapper">
       <div className="mx-4">
         <Logo />
       </div>
-      <Loader loading={loading} />
-      <SnackBar isOpen={isOpen} text={firebaseErrMsg} />
+      <Loader loading={true} />
+      {isOpen && (
+        <SnackBar
+          isOpen={isOpen}
+          text={firebaseErrMsg}
+          handleClose={handleClose}
+        />
+      )}
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Login</h3>
         <Formik

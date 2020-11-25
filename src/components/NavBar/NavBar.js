@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import SettingsBrightnessTwoToneIcon from "@material-ui/icons/SettingsBrightnessTwoTone";
 import Loader from "../Loader/Loader";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import SnackBar from "../Snackbar/Snackbar";
 import Logo from "../Logo/Logo";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { firebaseSignout } from "./../../firebase/authMethods";
+import { moon, sun } from "./../../utils/Images";
 import { db } from "./../../firebase";
 import "./NavBar.scss";
 
 const NavBar = () => {
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [firebaseErrMsg, setFirebaseErrMsg] = useState("");
   const userID = localStorage.getItem("userID");
   const [isDark, setIsDark] = useState(false);
 
@@ -42,8 +45,16 @@ const NavBar = () => {
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
+        setIsOpen(true);
+        setFirebaseErrMsg(err.message);
       });
   };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <section
       className={` ${
@@ -52,12 +63,21 @@ const NavBar = () => {
     >
       <Logo />
       <Loader loading={loading} />
+      {isOpen && (
+        <SnackBar
+          isOpen={isOpen}
+          text={firebaseErrMsg}
+          handleClose={handleClose}
+        />
+      )}
       {localStorage.getItem("userID") && (
         <div className="d-flex flex-wrap justify-content-end w-25 action-wrapper">
           <div className="d-flex mx-lg-2 mx-0 align-items-center">
-            <span className="d-md-block d-none">Dark mode</span>
-            <SettingsBrightnessTwoToneIcon
-              className={` ${isDark ? "mode-icon-active" : "mode-icon"} mx-1`}
+            <span className="d-md-block d-none">Mode</span>
+            <img
+              className="mode-icon"
+              src={isDark ? moon : sun}
+              alt="mode-icon"
               onClick={changeMode}
             />
           </div>

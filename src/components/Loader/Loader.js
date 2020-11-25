@@ -1,23 +1,28 @@
 import React from "react";
 import { css } from "@emotion/core";
-import PulseLoader from "react-spinners/PulseLoader";
+import BarLoader from "react-spinners/BarLoader";
 
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const styles = css`
   position: fixed;
   z-index: 1000;
-  bottom: 40%;
-  right: 50%;
+  width: 100%;
+  height: 0.5em;
+  overflow: hidden;
+  background-color: rgba(252, 203, 255, 0.2);
+  top: 0.2rem;
+  left: 0;
 `;
 
 const Loader = ({ loading }) => {
   return (
     <div className="loader-icon">
-      <PulseLoader
+      <BarLoader
         className="test"
         css={styles}
         size={30}
-        color={"#fccbff"}
+        height={20}
+        color={"#01daff47"}
         loading={loading}
       />
     </div>

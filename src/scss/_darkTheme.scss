@@ -39,6 +39,7 @@
 
   //USER-PROFILE
   .user-profile-wrapper {
+    box-shadow: 0px 0 10px -4px #cccccc;
     .user-name {
       color: white;
     }
@@ -48,14 +49,14 @@
   .send-msg-bar {
     background-color: $darkBg;
     input.send-msg {
-      border-radius: 1.4em;
       background-color: #090909;
-      box-shadow: 0px 0px 8px -3px #494949;
+      box-shadow: 0px 0 9px -6px #676767;
       border: none;
       color: white;
     }
     .send-btn {
       background-color: #090909;
+      box-shadow: 0px 2px 11px -4px #676767;
     }
   }
 

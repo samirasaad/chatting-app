@@ -7,13 +7,7 @@
       font-size: 1.8em;
     }
     .mode-icon {
-      color: #c1c1c1;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .mode-icon-active {
-      color: #47ff45;
+      height: 2.7rem;
       &:hover {
         cursor: pointer;
       }
@@ -26,7 +20,6 @@
     }
   }
 }
-
 @media screen and (max-width: 420px) {
   .navbar-wrapper {
     .action-wrapper {

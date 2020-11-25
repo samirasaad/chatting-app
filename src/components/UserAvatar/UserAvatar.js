@@ -13,8 +13,8 @@ const UserAvatar = ({ img, size, variant, className, statusClass }) => {
       height: theme.spacing(11),
     },
     large: {
-      width: theme.spacing(21),
-      height: theme.spacing(21),
+      width: theme.spacing(18),
+      height: theme.spacing(18),
     },
   }));
   const classes = useStyles();

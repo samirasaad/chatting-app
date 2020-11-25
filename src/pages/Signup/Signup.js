@@ -86,6 +86,8 @@ const Signup = () => {
             setFirebaseErrMsg(err.message);
           });
       }
+    } else {
+      setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [downloadedUrl]);
@@ -130,8 +132,6 @@ const Signup = () => {
         setIsOpen(true);
         setFirebaseErrMsg(err.message);
       }
-    }else{
-      setLoading(false)
     }
   };
 
@@ -174,18 +174,39 @@ const Signup = () => {
     const { handleChange, handleSubmit, values, errors } = props;
     setFormValues(values);
     return (
-      <div className="form-bg p-md-5 p-3  m-auto">
+      <div className="form-bg px-md-5 px-3 pb-3 m-auto">
         <form
           onSubmit={(values) => handleSubmit(values)}
-          className="d-flex flex-column"
+          className="d-flex flex-column mt-3"
           noValidate
         >
+          <label className="upload-btn m-auto flex-column d-flex  mt-3 justify-content-center">
+            <Input
+              type="file"
+              name="image"
+              value={values.image}
+              handleChange={onFileChange}
+            />
+            <div className="label-content mb-4 d-flex justify-content-center align-items-center flex-column">
+              <BackupIcon className="" />
+              <span className="">Upload image</span>
+            </div>
+          </label>
+          {selectedFile && (
+            <span className="mx-2 medium-font seleceted-img-name">
+              {selectedFile.fileName}
+            </span>
+          )}
+
+          {fileErr.msg && (
+            <p className="mb-2 mx-2 text-danger">{fileErr.msg}</p>
+          )}
           <Input
             type="text"
             name="userName"
             value={values.userName}
             handleChange={handleChange}
-            className="p-3 input mb-3"
+            className="p-3 input mb-3 mt-2"
             placeholder="User Name"
             isRequired={true}
             errors={errors}
@@ -210,30 +231,9 @@ const Signup = () => {
             isRequired={true}
             errors={errors}
           />
-          <label className="upload-btn position-relative d-flex  justify-content-center">
-            <Input
-              type="file"
-              name="image"
-              value={values.image}
-              handleChange={onFileChange}
-            />
-            <div className="label-content h-100 w-100 d-flex ">
-              <span className="position-absolute ml-5">Upload image</span>
-              <BackupIcon className="ml-3" />
-            </div>
-          </label>
-          {selectedFile && (
-            <span className="mx-2 medium-font seleceted-img-name">
-              {selectedFile.fileName}
-            </span>
-          )}
-
-          {fileErr.msg && (
-            <p className="mb-2 mx-2 text-danger">{fileErr.msg}</p>
-          )}
           <Btn
             type="submit"
-            classes="p-2 primary-button mt-1 bold-font"
+            classes="p-2 primary-button  bold-font"
             text="Signup"
             handleClick={checkSelectedFileValidation}
           ></Btn>
@@ -248,13 +248,23 @@ const Signup = () => {
     );
   };
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <section className="form-wrapper">
       <div className="mx-4">
         <Logo />
       </div>
       <Loader loading={loading} />
-      <Snackbar isOpen={isOpen} text={firebaseErrMsg} />
+      {isOpen && (
+        <Snackbar
+          isOpen={isOpen}
+          text={firebaseErrMsg}
+          handleClose={handleClose}
+        />
+      )}
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Sign Up</h3>
         <Formik

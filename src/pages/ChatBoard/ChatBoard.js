@@ -22,7 +22,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   useEffect(() => {
     getChatMessages();
     setMessage("");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [peerUserId]);
 
   useEffect(() => {
@@ -115,7 +115,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const renderMessages = ({ idFrom, content, timestamp }, index) => {
     if (idFrom === localStorage.getItem("userID")) {
       return (
-        <div key={index} className="d-flex my-4 justify-content-end">
+        <div key={index} className="d-flex px-3 my-4 justify-content-end">
           <div className="d-flex flex-column align-items-end">
             <p className="position-relative msg-bg-current-user mx-3 p-2 mb-0">
               {content}
@@ -133,7 +133,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       );
     } else {
       return (
-        <div key={index} className="d-flex my-4 justify-content-start">
+        <div key={index} className="d-flex px-3 my-4 justify-content-start">
           <UserAvatar
             img={peerUserPicurl}
             size="small"
@@ -162,9 +162,9 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   return (
     <>
       <section
-        className={`${
+        className={`chat-board px-3${
           messagesList.length === 0 && "chat-min-height"
-        } chat-board`}
+        } `}
       >
         <Loader loading={loading} />
         {messagesList && messagesList.length > 0 ? (

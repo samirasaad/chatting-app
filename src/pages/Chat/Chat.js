@@ -69,6 +69,9 @@ function Chat(props) {
 
   const handleChange = (e) => {
     setSearchValue(e.target.value.toLowerCase());
+    if (e.target.value === "") {
+      getUsersList();
+    }
   };
 
   const handleFilter = (e) => {
@@ -93,13 +96,13 @@ function Chat(props) {
         } chat-wrapper py-1 container-fluid`}
       >
         <div className="row mx-0 mt-2">
-          <div className="col-lg-3 col-md-12 px-2">
+          <div className="col-lg-2 col-md-12 px-2">
             <UserProfile />
           </div>
-          <div className="col-lg-6 col-md-8 section-bg messages-wrapper postion-relative">
+          <div className="col-lg-7 px-0 col-md-8 section-bg messages-wrapper postion-relative">
             {peerUserInfo && peerUserId ? (
               <>
-                <div className="chat-heading position-sticky">
+                <div className="chat-heading px-3 position-sticky">
                   <p className="medium-font py-2 mb-0">
                     {peerUserInfo.userName}
                     <span
