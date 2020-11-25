@@ -30,8 +30,8 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "start": "env-cmd -f env.firebasse react-scripts start",
-    "build": "env-cmd -f env.firebasse react-scripts build",
+    "start": "env-cmd -f env_firebasse react-scripts start",
+    "build": "env-cmd -f env_firebasse react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
