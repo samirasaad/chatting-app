@@ -112,19 +112,26 @@ const Signup = () => {
     checkSelectedFileValidation();
     if (!fileErr.sizeErr && !fileErr.typeErr) {
       try {
-        await signup(formValues.email, formValues.password);
+        await signup(formValues.email, formValues.password)
+          .then()
+          .catch((err) => {
+            setLoading(false);
+            setIsOpen(true);
+            setFirebaseErrMsg(err.message);
+          });
         auth().onAuthStateChanged(async function (user) {
           if (user) {
             storePhotoUrlInFirestoreStorage(user);
             setCurrentUser(user);
           }
         });
-        setLoading(false);
       } catch (err) {
         setLoading(false);
         setIsOpen(true);
         setFirebaseErrMsg(err.message);
       }
+    }else{
+      setLoading(false)
     }
   };
 
