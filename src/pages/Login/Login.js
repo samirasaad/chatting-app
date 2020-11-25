@@ -119,8 +119,8 @@ function Login() {
   };
 
   const handleSubmit = async (values) => {
-    setLoading(true);
     if (values.email && values.password) {
+      setLoading(true);
       await signin(values.email, values.password)
         .then()
         .catch((err) => {
