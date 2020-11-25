@@ -108,7 +108,13 @@ function Login() {
   };
 
   const handleSubmitGoogle = async () => {
-    await signInWithGoogle(formValues.email, formValues.password);
+    await signInWithGoogle(formValues.email, formValues.password)
+      .then()
+      .catch((err) => {
+        setLoading(false);
+        setIsOpen(true);
+        setFirebaseErrMsg(err.message);
+      });
     addUser();
   };
 

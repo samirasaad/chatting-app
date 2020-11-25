@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import Footer from "./../components/Footer/Footer";
 
-const PrivateRoute =({ component: Component, ...rest })=> {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   const isAuthnticated =
     localStorage.getItem("isAuthnticated") && localStorage.getItem("userID");
   return (
@@ -22,5 +22,5 @@ const PrivateRoute =({ component: Component, ...rest })=> {
       }
     />
   );
-}
+};
 export default PrivateRoute;
