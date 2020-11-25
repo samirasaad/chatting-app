@@ -12,6 +12,7 @@
     "@tinymce/tinymce-react": "^3.8.1",
     "bootstrap": "^4.5.3",
     "emoji-picker-react": "^3.2.4",
+    "env-cmd": "^10.1.0",
     "firebase": "^8.0.0",
     "formik": "^2.2.5",
     "formik-yup": "0.0.5",
@@ -29,8 +30,8 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.firebasse react-scripts start",
+    "build": "env-cmd -f .env.firebasse react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
