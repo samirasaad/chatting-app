@@ -4,6 +4,7 @@ import Logo from "../../components/Logo/Logo";
 import Loader from "../../components/Loader/Loader";
 import Btn from "../../components/Controls/Button/Button";
 import Input from "../../components/Controls/Input/Input";
+import Snackbar from "../../components/Snackbar/Snackbar";
 import BackupIcon from "@material-ui/icons/Backup";
 import { db, auth, storage } from "./../../firebase";
 import { signup } from "./../../firebase/authMethods";
@@ -16,6 +17,8 @@ import "./../Login/Login.scss";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [firebaseErrMsg, setFirebaseErrMsg] = useState('');
   const [formValues, setFormValues] = useState({});
   const [selectedFile, setSelectedFile] = useState({
     file: null,
@@ -43,6 +46,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (downloadedUrl) {
+      setLoading(true);
       let usersList = [];
       db.collection(USERS)
         .where("id", "==", currentUser.uid)
@@ -51,8 +55,12 @@ const Signup = () => {
           usersList = querySnapshot.docs.map((doc) => {
             return doc.data();
           });
+          setLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setIsOpen(true);
+          setFirebaseErrMsg(err.message);
+        });
       if (usersList.length === 0) {
         //if new user, store it intto users collection
         db.collection(USERS)
@@ -72,6 +80,10 @@ const Signup = () => {
               currentUser.displayName || formValues.userName
             );
             History.push("/Chat");
+          })
+          .catch((err) => {
+            setIsOpen(true);
+            setFirebaseErrMsg(err.message);
           });
       }
     }
@@ -87,6 +99,10 @@ const Signup = () => {
         localStorage.setItem("userPic", imgUrl);
         setDownloadedUrl(imgUrl);
         setLoading(false);
+      })
+      .catch((err) => {
+        setIsOpen(true);
+        setFirebaseErrMsg(err.message);
       });
   };
 
@@ -103,9 +119,10 @@ const Signup = () => {
           }
         });
         setLoading(false);
-      } catch (error) {
+      } catch (err) {
         setLoading(false);
-        console.log(error.message);
+        setIsOpen(true);
+        setFirebaseErrMsg(err.message);
       }
     }
   };
@@ -138,7 +155,11 @@ const Signup = () => {
     await storage
       .ref(`/${IMAGES}/${user.uid}`)
       .put(selectedFile.file)
-      .then((res) => getStoredUserImg(user));
+      .then((res) => getStoredUserImg(user))
+      .catch((err) => {
+        setIsOpen(true);
+        setFirebaseErrMsg(err.message);
+      });
   };
 
   const renderSignUpForm = (props) => {
@@ -225,6 +246,7 @@ const Signup = () => {
         <Logo />
       </div>
       <Loader loading={loading} />
+      <Snackbar isOpen={isOpen} text={firebaseErrMsg} />
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Sign Up</h3>
         <Formik

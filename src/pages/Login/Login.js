@@ -4,6 +4,7 @@ import Logo from "../../components/Logo/Logo";
 import { signin, signInWithGoogle } from "./../../firebase/authMethods";
 import Divider from "@material-ui/core/Divider";
 import Loader from "../../components/Loader/Loader";
+import SnackBar from "../../components/Snackbar/Snackbar";
 import Btn from "../../components/Controls/Button/Button";
 import Input from "./../../components/Controls/Input/Input";
 import { googleIcon } from "./../../utils/Images";
@@ -16,6 +17,8 @@ import "./Login.scss";
 
 function Login() {
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [firebaseErrMsg, setFirebaseErrMsg] = useState("");
   const [formValues, setFormValues] = useState({});
 
   const getCurrentUserInfo = async (id) => {
@@ -32,11 +35,14 @@ function Login() {
         History.push("/Chat");
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsOpen(true);
+        setFirebaseErrMsg(err.message);
+      });
   };
 
   const addUser = async () => {
-    // setLoading(true);
+    setLoading(true);
     try {
       let usersList = [];
       auth().onAuthStateChanged(async function (user) {
@@ -49,8 +55,14 @@ function Login() {
               usersList = querySnapshot.docs.map((doc) => {
                 return doc.data();
               });
+              setLoading(false);
+            })
+            .catch((err) => {
+              setIsOpen(true);
+              setFirebaseErrMsg(err.message);
             });
           if (usersList.length === 0) {
+            setLoading(true);
             //if new user, set it to users collection
             db.collection(USERS)
               .doc(user.uid)
@@ -63,7 +75,11 @@ function Login() {
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
-                setLoading(false)
+                setLoading(false);
+              })
+              .catch((err) => {
+                setIsOpen(true);
+                setFirebaseErrMsg(err.message);
               });
           } else {
             db.collection(USERS)
@@ -73,13 +89,21 @@ function Login() {
               })
               .then((res) => {
                 getCurrentUserInfo(user.uid);
-                setLoading(false)
+                setLoading(false);
+              })
+              .catch((err) => {
+                setIsOpen(true);
+                setFirebaseErrMsg(err.message);
               });
           }
+        } else {
+          setLoading(false);
         }
       });
-    } catch (error) {
-      console.log(error.message);
+    } catch (err) {
+      setLoading(false);
+      setIsOpen(true);
+      setFirebaseErrMsg(err.message);
     }
   };
 
@@ -89,11 +113,17 @@ function Login() {
   };
 
   const handleSubmit = async (values) => {
-    setLoading(true)
-    values.email &&
-      values.password &&
-      (await signin(values.email, values.password));
-    addUser();
+    setLoading(true);
+    if (values.email && values.password) {
+      await signin(values.email, values.password)
+        .then()
+        .catch((err) => {
+          setLoading(false);
+          setIsOpen(true);
+          setFirebaseErrMsg(err.message);
+        });
+      addUser();
+    }
   };
 
   const renderLoginForm = (props) => {
@@ -162,6 +192,7 @@ function Login() {
         <Logo />
       </div>
       <Loader loading={loading} />
+      <SnackBar isOpen={isOpen} text={firebaseErrMsg} />
       <div className="form-parent d-flex justify-content-center flex-column align-items-center">
         <h3 className="form-title bold-font mt-md-4 mt-3 mb-0">Login</h3>
         <Formik
