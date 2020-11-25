@@ -18,7 +18,7 @@ import "./../Login/Login.scss";
 const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [firebaseErrMsg, setFirebaseErrMsg] = useState('');
+  const [firebaseErrMsg, setFirebaseErrMsg] = useState("");
   const [formValues, setFormValues] = useState({});
   const [selectedFile, setSelectedFile] = useState({
     file: null,

@@ -19,7 +19,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const [messagesList, setMessagesList] = useState([]);
   const currentUserPic = localStorage.getItem("userPic");
   const currentUserId = localStorage.getItem("userID");
-  //   let [newMessagesCounter, setNewMessagesCounter] = useState(0);
 
   useEffect(() => {
     getChatMessages();
@@ -37,10 +36,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
     }
   }, [peerUserId, messagesList]);
 
-  useEffect(() => {
-    // getNewMsgsCounter();
-  }, []);
-
   const handleChange = (event, emojiObject) => {
     setMessage(event.target.value);
   };
@@ -48,19 +43,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   const handleChooseEmoji = (event, emojiObject) => {
     setMessage(message + emojiObject.emoji);
   };
-
-  //   const getNewMsgsCounter = async () => {
-  //     await db
-  //       .collection("messages")
-  //       .doc(`${currentUserId}-${peerUserId}`)
-  //       .collection("chat")
-  //       .onSnapshot((querySnapshot) => {
-  //         setNewMessagesCounter(
-  //           querySnapshot.docs[querySnapshot.docs.length - 1].data()
-  //             .newMessagesCounter
-  //         );
-  //       });
-  //   };
 
   const getChatMessages = async () => {
     setLoading(true);
@@ -101,7 +83,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       idTo: peerUserId,
       timestamp,
       content: message.trim(),
-      //   newMessagesCounter,
     };
     await db
       .collection(MESSAGES)
@@ -186,7 +167,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
         } chat-board`}
       >
         <Loader loading={loading} />
-        {(messagesList && messagesList.length > 0) ? (
+        {messagesList && messagesList.length > 0 ? (
           messagesList.map((message, index) => renderMessages(message, index))
         ) : (
           <NoChat
