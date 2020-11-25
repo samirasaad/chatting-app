@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-function PublicRoute({ component: Component, ...rest }) {
+const PublicRoute = ({ component: Component, ...rest }) =>{
   const isAuthnticated =
     localStorage.getItem("isAuthnticated") && localStorage.getItem("userID");
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { logo } from "./../../utils/Images";
+// import { logo } from "./../../utils/Images";
 import ChatIcon from "@material-ui/icons/Chat";
 import "./Logo.scss";
 

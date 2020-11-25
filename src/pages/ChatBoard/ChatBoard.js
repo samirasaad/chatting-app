@@ -3,7 +3,6 @@ import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import Loader from "../../components/Loader/Loader";
 import NoChat from "../../components/NoChat/NoChat";
-import PanToolIcon from "@material-ui/icons/PanTool";
 import { db } from "./../../firebase";
 import moment from "moment";
 import { MESSAGES, CHAT, ONLINE } from "./../../utils/constants";
@@ -23,6 +22,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   useEffect(() => {
     getChatMessages();
     setMessage("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [peerUserId]);
 
   useEffect(() => {

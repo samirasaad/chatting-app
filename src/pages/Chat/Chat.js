@@ -21,10 +21,11 @@ function Chat(props) {
 
   useEffect(() => {
     setIsDark(JSON.parse(localStorage.getItem("isDark") || false));
-  });
+  }, []);
 
   useEffect(() => {
     getUsersList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

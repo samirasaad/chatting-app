@@ -87,6 +87,7 @@ const Signup = () => {
           });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [downloadedUrl]);
 
   const getStoredUserImg = async (user) => {
