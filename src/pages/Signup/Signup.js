@@ -121,7 +121,7 @@ const Signup = () => {
     checkSelectedFileValidation();
     if (!fileErr.sizeErr && !fileErr.typeErr) {
       try {
-        setLoading(true)
+        setLoading(true);
         await signup(formValues.email, formValues.password)
           .then((res) => {
             console.log("signed up thers is a user");

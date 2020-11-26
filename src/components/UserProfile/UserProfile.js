@@ -1,8 +1,8 @@
 import React from "react";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import "./UserProfile.scss";
+
 const UserProfile = () => {
-  console.log(localStorage.getItem("userPic"));
   return (
     <div className="mt-2 mb-3 user-profile-wrapper d-flex justify-content-center flex-column align-items-center pt-2">
       <UserAvatar
