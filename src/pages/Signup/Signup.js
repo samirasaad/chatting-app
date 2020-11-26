@@ -32,7 +32,7 @@ const Signup = () => {
     msg: "",
   });
   const [downloadedUrl, setDownloadedUrl] = useState(null);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState();
   const fileSupportedFormats = [
     "image/JPEG",
     "image/JPG",
@@ -42,10 +42,11 @@ const Signup = () => {
     "image/JPEG",
     "image/jpeg",
   ];
-  const fileSize = 1;
+  const fileSize = 1; //1MB
 
   useEffect(() => {
     if (downloadedUrl) {
+      console.log("thersi is downloaderd url ");
       setLoading(true);
       let usersList = [];
       db.collection(USERS)
@@ -67,19 +68,26 @@ const Signup = () => {
           .doc(currentUser.uid)
           .set({
             id: currentUser.uid,
-            userName: currentUser.displayName || formValues.userName,
-            photoUrl: currentUser.photoURL || downloadedUrl,
+            userName: formValues.userName
+              ? formValues.userName
+              : currentUser.displayName,
+            photoUrl: downloadedUrl ? downloadedUrl : currentUser.photoURL,
             userEmail: currentUser.email,
             availibility: ONLINE,
           })
           .then((res) => {
+            console.log(formValues);
+            console.log(currentUser);
+            console.log("setting user info into firebase and local storage");
             localStorage.setItem("isAuthnticated", true);
             localStorage.setItem("userID", auth().currentUser.uid);
             localStorage.setItem(
               "userFullName",
-              currentUser.displayName || formValues.userName
+              currentUser.displayName
+                ? currentUser.displayName
+                : formValues.userName
             );
-            History.push("/Chat");
+            History.push("/chat");
           })
           .catch((err) => {
             setIsOpen(true);
@@ -92,11 +100,11 @@ const Signup = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [downloadedUrl]);
 
-  const getStoredUserImg = async (user) => {
+  const getStoredUserImg = async () => {
     setLoading(true);
     await storage
       .ref(IMAGES)
-      .child(user.uid)
+      .child(currentUser.uid)
       .getDownloadURL()
       .then((imgUrl) => {
         localStorage.setItem("userPic", imgUrl);
@@ -110,30 +118,52 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     checkSelectedFileValidation();
     if (!fileErr.sizeErr && !fileErr.typeErr) {
       try {
+        setLoading(true)
         await signup(formValues.email, formValues.password)
-          .then()
+          .then((res) => {
+            console.log("signed up thers is a user");
+            auth().onAuthStateChanged(async function (user) {
+              if (user) {
+                console.log(user);
+                setCurrentUser(user);
+                //  await storePhotoUrlInFirestoreStorage(user);
+              }
+            });
+          })
           .catch((err) => {
             setLoading(false);
             setIsOpen(true);
             setFirebaseErrMsg(err.message);
           });
-        auth().onAuthStateChanged(async function (user) {
-          if (user) {
-            storePhotoUrlInFirestoreStorage(user);
-            setCurrentUser(user);
-          }
-        });
+        // auth().onAuthStateChanged(async function (user) {
+        //   if (user) {
+        //     // storePhotoUrlInFirestoreStorage(user);
+        //     // setCurrentUser(user);
+        //   }
+        // });
       } catch (err) {
         setLoading(false);
         setIsOpen(true);
         setFirebaseErrMsg(err.message);
       }
+    } else {
+      setLoading(false);
     }
   };
+
+  useEffect(
+    () => {
+      if (currentUser) {
+        console.log("current user here");
+        storePhotoUrlInFirestoreStorage();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [currentUser]
+  );
 
   const onFileChange = (event) => {
     setSelectedFile({
@@ -146,6 +176,7 @@ const Signup = () => {
 
   const checkSelectedFileValidation = () => {
     if (selectedFile.fileSize && selectedFile.fileType) {
+      // setLoading(true);
       setFileErr({
         typeErr: !fileSupportedFormats.includes(selectedFile.fileType),
         sizeErr: selectedFile.fileSize / 1024 / 1024 > fileSize,
@@ -156,14 +187,17 @@ const Signup = () => {
           : "",
       });
     }
+    // else{
+    //   setLoading(false)
+    // }
   };
 
-  const storePhotoUrlInFirestoreStorage = async (user) => {
+  const storePhotoUrlInFirestoreStorage = async () => {
     setLoading(true);
     await storage
-      .ref(`/${IMAGES}/${user.uid}`)
+      .ref(`/${IMAGES}/${currentUser.uid}`)
       .put(selectedFile.file)
-      .then((res) => getStoredUserImg(user))
+      .then((res) => getStoredUserImg())
       .catch((err) => {
         setIsOpen(true);
         setFirebaseErrMsg(err.message);
