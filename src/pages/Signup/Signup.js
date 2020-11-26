@@ -32,7 +32,12 @@ const Signup = () => {
     msg: "",
   });
   const [downloadedUrl, setDownloadedUrl] = useState(null);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({
+    id: null,
+    userName: null,
+    photoUrl: null,
+    userEmail: null,
+  });
   const fileSupportedFormats = [
     "image/JPEG",
     "image/JPG",
@@ -45,12 +50,14 @@ const Signup = () => {
   const fileSize = 1; //1MB
 
   useEffect(() => {
+    console.log(downloadedUrl);
     if (downloadedUrl) {
+      console.log(downloadedUrl);
       console.log("thersi is downloaderd url ");
       setLoading(true);
       let usersList = [];
       db.collection(USERS)
-        .where("id", "==", currentUser.uid)
+        .where("id", "==", currentUser.id)
         .get()
         .then((querySnapshot) => {
           usersList = querySnapshot.docs.map((doc) => {
@@ -65,28 +72,21 @@ const Signup = () => {
       if (usersList.length === 0) {
         //if new user, store it intto users collection
         db.collection(USERS)
-          .doc(currentUser.uid)
+          .doc(currentUser.id)
           .set({
-            id: currentUser.uid,
+            id: currentUser.id,
             userName: formValues.userName
               ? formValues.userName
               : currentUser.displayName,
             photoUrl: downloadedUrl ? downloadedUrl : currentUser.photoURL,
-            userEmail: currentUser.email,
+            userEmail: currentUser.userEmail,
             availibility: ONLINE,
           })
           .then((res) => {
             console.log(formValues);
             console.log(currentUser);
             console.log("setting user info into firebase and local storage");
-            localStorage.setItem("isAuthnticated", true);
-            localStorage.setItem("userID", auth().currentUser.uid);
-            localStorage.setItem(
-              "userFullName",
-              currentUser.displayName
-                ? currentUser.displayName
-                : formValues.userName
-            );
+
             History.push("/chat");
           })
           .catch((err) => {
@@ -98,16 +98,24 @@ const Signup = () => {
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [downloadedUrl]);
+  }, [downloadedUrl, currentUser]);
 
   const getStoredUserImg = async () => {
     setLoading(true);
     await storage
       .ref(IMAGES)
-      .child(currentUser.uid)
+      .child(currentUser.id)
       .getDownloadURL()
       .then((imgUrl) => {
         localStorage.setItem("userPic", imgUrl);
+        localStorage.setItem("isAuthnticated", true);
+        localStorage.setItem("userID", currentUser.id);
+        localStorage.setItem(
+          "userFullName",
+          currentUser.displayName
+            ? currentUser.displayName
+            : formValues.userName
+        );
         setDownloadedUrl(imgUrl);
         setLoading(false);
       })
@@ -128,7 +136,14 @@ const Signup = () => {
             auth().onAuthStateChanged(async function (user) {
               if (user) {
                 console.log(user);
-                setCurrentUser(user);
+                console.log(downloadedUrl);
+                console.log(user.photoURL);
+                setCurrentUser({
+                  id: user.uid,
+                  photoUrl: user.photoURL || downloadedUrl,
+                  userName: user.displayName || formValues.userName,
+                  userEmail: user.email || formValues.email,
+                });
                 //  await storePhotoUrlInFirestoreStorage(user);
               }
             });
@@ -156,8 +171,10 @@ const Signup = () => {
 
   useEffect(
     () => {
-      if (currentUser) {
+      if (currentUser.id) {
         console.log("current user here");
+        console.log(currentUser);
+        console.log(formValues);
         storePhotoUrlInFirestoreStorage();
       }
     },
@@ -195,7 +212,7 @@ const Signup = () => {
   const storePhotoUrlInFirestoreStorage = async () => {
     setLoading(true);
     await storage
-      .ref(`/${IMAGES}/${currentUser.uid}`)
+      .ref(`/${IMAGES}/${currentUser.id}`)
       .put(selectedFile.file)
       .then((res) => getStoredUserImg())
       .catch((err) => {
