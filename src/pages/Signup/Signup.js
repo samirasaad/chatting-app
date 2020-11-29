@@ -50,10 +50,7 @@ const Signup = () => {
   const fileSize = 1; //1MB
 
   useEffect(() => {
-    console.log(downloadedUrl);
     if (downloadedUrl) {
-      console.log(downloadedUrl);
-      console.log("thersi is downloaderd url ");
       setLoading(true);
       let usersList = [];
       db.collection(USERS)
@@ -83,10 +80,6 @@ const Signup = () => {
             availibility: ONLINE,
           })
           .then((res) => {
-            console.log(formValues);
-            console.log(currentUser);
-            console.log("setting user info into firebase and local storage");
-
             History.push("/chat");
           })
           .catch((err) => {
@@ -133,19 +126,14 @@ const Signup = () => {
         setLoading(true);
         await signup(formValues.email, formValues.password)
           .then((res) => {
-            console.log("signed up thers is a user");
             auth().onAuthStateChanged(async function (user) {
               if (user) {
-                console.log(user);
-                console.log(downloadedUrl);
-                console.log(user.photoURL);
                 setCurrentUser({
                   id: user.uid,
                   photoUrl: user.photoURL || downloadedUrl,
                   userName: user.displayName || formValues.userName,
                   userEmail: user.email || formValues.email,
                 });
-                //  await storePhotoUrlInFirestoreStorage(user);
               }
             });
           })
@@ -167,9 +155,6 @@ const Signup = () => {
   useEffect(
     () => {
       if (currentUser.id) {
-        console.log("current user here");
-        console.log(currentUser);
-        console.log(formValues);
         storePhotoUrlInFirestoreStorage();
       }
     },
