@@ -278,7 +278,11 @@ const Signup = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
+const x =({name,age}, param2) =>{
+  console.log(name,age,param2)
+}
 
+x({name:'samira',age:'25'})
   return (
     <section className="form-wrapper">
       <div className="mx-4">
