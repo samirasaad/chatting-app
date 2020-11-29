@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SendMsgBar from "../../components/SendMsgBar/SendMsgBar";
-import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import Loader from "../../components/Loader/Loader";
 import NoChat from "../../components/NoChat/NoChat";
+import Message from "./../../components/Message/Message";
 import { db } from "./../../firebase";
-import moment from "moment";
-import { MESSAGES, CHAT, ONLINE } from "./../../utils/constants";
+import { MESSAGES, CHAT } from "./../../utils/constants";
 import "./ChatBoard.scss";
 
 function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
@@ -112,48 +111,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       });
   };
 
-  const renderMessages = ({ idFrom, content, timestamp }, index) => {
-    if (idFrom === localStorage.getItem("userID")) {
-      return (
-        <div key={index} className="d-flex px-3 my-4 justify-content-end">
-          <div className="d-flex flex-column align-items-end">
-            <p className="position-relative msg-bg-current-user mx-3 p-2 mb-0">
-              {content}
-            </p>
-            <small className="mx-3 time">
-              {moment(timestamp * 1000).format("DD/MM/YYYY , h:mm A")}
-            </small>
-          </div>
-          <UserAvatar
-            img={currentUserPic}
-            size="small"
-            statusClass="status-circle-small"
-          />
-        </div>
-      );
-    } else {
-      return (
-        <div key={index} className="d-flex px-3 my-4 justify-content-start">
-          <UserAvatar
-            img={peerUserPicurl}
-            size="small"
-            statusClass={`${
-              peerUserAvailibility === ONLINE && "status-circle-small"
-            } `}
-          />
-          <div className="d-flex flex-column align-items-start">
-            <p className="position-relative msg-bg-peer-user mx-3 p-2 mb-0">
-              {content}
-            </p>
-            <small className="mx-3 time">
-              {moment(timestamp * 1000).format("DD/MM/YYYY , h:mm A")}
-            </small>
-          </div>
-        </div>
-      );
-    }
-  };
-
   const updateScroll = () => {
     var chatContainer = document.querySelector(".messages-wrapper");
     chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -168,7 +125,17 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       >
         {loading && <Loader loading={loading} />}
         {messagesList && messagesList.length > 0 ? (
-          messagesList.map((message, index) => renderMessages(message, index))
+          messagesList.map((message, index) => (
+            <Message
+              message={message}
+              index={index}
+              peerUserInfo={{
+                peerUserPicurl: { peerUserPicurl },
+                peerUserAvailibility: { peerUserAvailibility },
+              }}
+              currentUserPic={currentUserPic}
+            />
+          ))
         ) : (
           <NoChat
             peerUserPicurl={peerUserPicurl}
