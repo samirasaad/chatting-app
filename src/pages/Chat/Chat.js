@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { debounce } from "lodash";
 import WelcomeBoard from "../WelcomeBoard/WelcomeBoard";
 import UsersList from "../../components/UsersList/UsersList";
 import UserProfile from "../../components/UserProfile/UserProfile";
@@ -18,10 +19,15 @@ function Chat(props) {
   const [searchValue, setSearchValue] = useState("");
   const [isDark, setIsDark] = useState(false);
   const currentUserId = localStorage.getItem("userID");
-
+  const delayedHandleChange = debounce(
+    (searchValue) => handleFilter(searchValue),
+    700
+  );
+  
   useEffect(() => {
     setIsDark(JSON.parse(localStorage.getItem("isDark") || false));
   }, []);
+
 
   useEffect(() => {
     getUsersList();
@@ -69,6 +75,7 @@ function Chat(props) {
 
   const handleChange = (e) => {
     setSearchValue(e.target.value.toLowerCase());
+    delayedHandleChange(e);
     if (e.target.value === "") {
       getUsersList();
     }
