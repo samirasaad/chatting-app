@@ -1,6 +1,6 @@
 # ChatBoard App
 
-[Live Demo](https://chat-board.vercel.app/)	
+[Live Demo](https://chatting-app-gamma.vercel.app/)	
 
 # Installation
 1. git clone https://github.com/samirasaad/chatting-app.git
