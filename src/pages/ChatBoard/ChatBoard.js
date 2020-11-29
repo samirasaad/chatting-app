@@ -57,17 +57,6 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
         updateScroll();
         setLoading(false);
       });
-
-    //   await db
-    //   .collection(MESSAGES)
-    //   .doc(`${peerUserId}-${currentUserId}`)
-    //   .collection('chat')
-    //   .onSnapshot((querySnapshot) => {
-    //     let messages = querySnapshot.docs.map((doc) => {
-    //       return doc.data();
-    //     });
-    //     setMessagesList(messages);
-    //   });
   };
 
   const handleSubmitMessage = async (e) => {
@@ -119,7 +108,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
   return (
     <>
       <section
-        className={`chat-board px-3${
+        className={`chat-board px-3 ${
           messagesList.length === 0 && "chat-min-height"
         } `}
       >

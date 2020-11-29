@@ -3,7 +3,6 @@ import Lottie from "react-lottie";
 import Btn from "../../components/Controls/Button/Button";
 import Logo from "../../components/Logo/Logo";
 import splashScreenLottie from "./../../assets/lotties/splash-screen.json";
-// import splashScreenLottie2 from "./../../assets/lotties/splash-screen-2.json";
 import History from "./../../routes/History";
 import "./Home.scss";
 const Home = () => {

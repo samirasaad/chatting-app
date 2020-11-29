@@ -126,6 +126,7 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
+    setIsOpen(false);
     checkSelectedFileValidation();
     if (!fileErr.sizeErr && !fileErr.typeErr) {
       try {
@@ -153,12 +154,6 @@ const Signup = () => {
             setIsOpen(true);
             setFirebaseErrMsg(err.message);
           });
-        // auth().onAuthStateChanged(async function (user) {
-        //   if (user) {
-        //     // storePhotoUrlInFirestoreStorage(user);
-        //     // setCurrentUser(user);
-        //   }
-        // });
       } catch (err) {
         setLoading(false);
         setIsOpen(true);
@@ -193,7 +188,6 @@ const Signup = () => {
 
   const checkSelectedFileValidation = () => {
     if (selectedFile.fileSize && selectedFile.fileType) {
-      // setLoading(true);
       setFileErr({
         typeErr: !fileSupportedFormats.includes(selectedFile.fileType),
         sizeErr: selectedFile.fileSize / 1024 / 1024 > fileSize,
@@ -204,9 +198,6 @@ const Signup = () => {
           : "",
       });
     }
-    // else{
-    //   setLoading(false)
-    // }
   };
 
   const storePhotoUrlInFirestoreStorage = async () => {
