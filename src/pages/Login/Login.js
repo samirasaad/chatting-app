@@ -32,7 +32,11 @@ function Login() {
         localStorage.setItem("isAuthnticated", true);
         localStorage.setItem("userID", doc.data().id);
         localStorage.setItem("userPic", doc.data().photoUrl);
-        localStorage.setItem("userFullName", doc.data().userName);
+        localStorage.setItem(
+          "userFullName",
+          doc.data().userName.trim().charAt(0).toUpperCase() +
+            doc.data().userName.slice(1)
+        );
         History.push("/Chat");
         setLoading(false);
       })

@@ -112,6 +112,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
         {messagesList && messagesList.length > 0 ? (
           messagesList.map((message, index) => (
             <Message
+              key={index}
               message={message}
               index={index}
               peerUserInfo={{
