@@ -38,6 +38,7 @@ const Signup = () => {
     photoUrl: null,
     userEmail: null,
   });
+
   const fileSupportedFormats = [
     "image/JPEG",
     "image/JPG",
@@ -47,6 +48,7 @@ const Signup = () => {
     "image/JPEG",
     "image/jpeg",
   ];
+
   const fileSize = 1; //1MB
 
   useEffect(() => {
@@ -73,7 +75,8 @@ const Signup = () => {
           .set({
             id: currentUser.id,
             userName: formValues.userName
-              ? formValues.userName
+              ? formValues.userName.trim().charAt(0).toUpperCase() +
+                formValues.userName.slice(1)
               : currentUser.displayName,
             photoUrl: downloadedUrl ? downloadedUrl : currentUser.photoURL,
             userEmail: currentUser.userEmail,
@@ -86,9 +89,9 @@ const Signup = () => {
             setIsOpen(true);
             setFirebaseErrMsg(err.message);
           });
+      } else {
+        setLoading(false);
       }
-    } else {
-      setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [downloadedUrl, currentUser]);
@@ -108,7 +111,8 @@ const Signup = () => {
           "userFullName",
           currentUser.displayName
             ? currentUser.displayName
-            : formValues.userName
+            : formValues.userName.trim().charAt(0).toUpperCase() +
+                formValues.userName.slice(1)
         );
         setDownloadedUrl(imgUrl);
         setLoading(false);
@@ -129,6 +133,8 @@ const Signup = () => {
           .then((res) => {
             auth().onAuthStateChanged(async function (user) {
               if (user) {
+                console.log(user.displayName);
+                console.log(formValues.userName);
                 setCurrentUser({
                   id: user.uid,
                   photoUrl: user.photoURL || downloadedUrl,

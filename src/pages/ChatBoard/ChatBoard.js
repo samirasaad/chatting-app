@@ -70,7 +70,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
       idFrom: currentUserId,
       idTo: peerUserId,
       timestamp,
-      content: message.trim(),
+      content: message.trim().charAt(0).toUpperCase() + message.slice(1),
     };
     await db
       .collection(MESSAGES)
@@ -116,7 +116,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
               index={index}
               peerUserInfo={{
                 peerUserPicurl,
-                peerUserAvailibility
+                peerUserAvailibility,
               }}
               currentUserPic={currentUserPic}
             />

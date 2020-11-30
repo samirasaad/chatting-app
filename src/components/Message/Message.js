@@ -4,10 +4,7 @@ import moment from "moment";
 import { ONLINE } from "./../../utils/constants";
 
 const Message = ({
-  peerUserInfo: {
-    peerUserPicurl,
-    peerUserAvailibility,
-  },
+  peerUserInfo: { peerUserPicurl, peerUserAvailibility },
   currentUserPic,
   message: { idFrom, content, timestamp },
   index,
