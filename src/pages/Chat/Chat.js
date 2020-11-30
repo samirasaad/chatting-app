@@ -64,16 +64,14 @@ function Chat(props) {
     await db
       .collection(USERS)
       .where("id", "!=", currentUserId)
-      .get()
-      .then((querySnapshot) => {
+      .onSnapshot((querySnapshot) => {
         let usersList = querySnapshot.docs.map((doc) => {
           return doc.data();
         });
         setUsersList(usersList);
         setFilteredList(usersList);
         setLoading(false);
-      })
-      .catch((err) => console.log(err));
+      });
   };
 
   const handleChange = (e) => {
