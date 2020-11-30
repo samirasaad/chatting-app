@@ -6,7 +6,7 @@ import { ONLINE } from "./../../utils/constants";
 const Message = ({
   peerUserInfo: {
     peerUserPicurl,
-    peerUserAvailibility: { peerUserAvailibility },
+    peerUserAvailibility,
   },
   currentUserPic,
   message: { idFrom, content, timestamp },

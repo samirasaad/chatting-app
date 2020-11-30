@@ -115,8 +115,8 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
               message={message}
               index={index}
               peerUserInfo={{
-                peerUserPicurl: { peerUserPicurl },
-                peerUserAvailibility: { peerUserAvailibility },
+                peerUserPicurl,
+                peerUserAvailibility
               }}
               currentUserPic={currentUserPic}
             />
