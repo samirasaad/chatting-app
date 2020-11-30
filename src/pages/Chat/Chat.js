@@ -20,8 +20,8 @@ function Chat(props) {
   const [isDark, setIsDark] = useState(false);
   const currentUserId = localStorage.getItem("userID");
   const delayedHandleChange = debounce(
-    (searchValue) => handleFilter(searchValue),
-    700
+    (e,searchValue) => handleFilter(e,searchValue),
+    500
   );
 
   useEffect(() => {
@@ -75,21 +75,20 @@ function Chat(props) {
   const handleChange = (e) => {
     setSearchValue(e.target.value.toLowerCase());
     delayedHandleChange(e);
-    if (e.target.value === "") {
-      getUsersList();
-    }
   };
 
   const handleFilter = (e) => {
+    console.log("filter");
     e.preventDefault();
     if (searchValue) {
       let filteredUsers = usersList.filter((user) => {
         return user.userName.toLowerCase().indexOf(searchValue) >= 0;
       });
       setFilteredList(filteredUsers);
-    } else {
-      setFilteredList(usersList);
     }
+    // } else {
+    //   setFilteredList(usersList);
+    // }
   };
 
   return (
