@@ -28,11 +28,12 @@ button:focus {
 .logo {
   height: 3em;
 }
-.brand-name {
-  color: $link;
-}
-a:hover {
-  text-decoration: none;
+a {
+  color: $primaryColorLight;
+  &:hover {
+    color: $primaryColorLight;
+    text-decoration: none;
+  }
 }
 .status-circle-large {
   bottom: 10px;
@@ -62,6 +63,9 @@ button {
     outline: none !important;
   }
 }
+input {
+  border: none;
+}
 ::placeholder {
   color: #818181;
 }
@@ -72,8 +76,13 @@ button {
 }
 /* scroll-handle */
 ::-webkit-scrollbar-thumb {
-  // background: $primaryColorLight;
   border-radius: 3em;
   width: 6px;
   height: 10px;
+}
+// DARK MODE
+.dark-mode {
+  .chat-wrapper {
+    background-color: black;
+  }
 }

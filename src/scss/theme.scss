@@ -1,0 +1,63 @@
+@mixin theme() {
+  @each $theme, $map in $themes {
+    $theme-map: $map !global;
+    .#{$theme} & {
+      @content;
+    }
+  }
+  $theme-map: null !global;
+}
+
+@function theme-get($key) {
+  @return map-get($theme-map, $key);
+}
+
+.content {
+  transition: 500ms;
+  @include theme() {
+    background-color: theme-get("bg-color");
+    color: theme-get("text-color");
+    a {
+      color: theme-get("text-color");
+    }
+    .send-msg {
+      background-color: theme-get("bg-color");
+      box-shadow: 0px 0px 11px -2px theme-get("input-shadow");
+      background-color: theme-get("bg-color");
+    }
+    input {
+      color: theme-get("text-color");
+      background-color: theme-get("bg-color");
+      box-shadow: 0px 0px 11px -2px theme-get("input-shadow");
+    }
+    .send-btn {
+      box-shadow: 0px 0px 11px -2px theme-get("input-shadow");
+    }
+    .selected-user {
+      background-color: theme-get("selected-user-bg");
+      box-shadow: 0px 4px 2px 0px theme-get("selected-user-shadow");
+    }
+    .msg-bg-peer-user {
+      background-color: theme-get("peer-user-msg-bg");
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        left: 98%;
+        border-left: 0 solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid theme-get("peer-user-msg-bg");
+      }
+    }
+    /* scroll-track */
+    ::-webkit-scrollbar-track {
+      background-color: theme-get("scroll-track-bg");
+    }
+    /* scroll-handle */
+    ::-webkit-scrollbar-thumb {
+      background-color: theme-get("scroll-handler-bg");
+    }
+  }
+}

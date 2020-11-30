@@ -1,6 +1,7 @@
 @import "./../../scss/variables";
 .users-list-wrapper {
   max-height: 76vh;
+  min-height: 78vh;
   overflow: auto;
   .selected-user {
     border-radius: 1.4em;
@@ -10,5 +11,12 @@
   }
   .user-item {
     word-break: break-word;
+  }
+  .filter-bar {
+    input {
+      border-radius: 1.4em;
+      border: none;
+      padding: 12px;
+    }
   }
 }

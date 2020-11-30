@@ -28,6 +28,7 @@ function Login() {
       .doc(id)
       .get()
       .then((doc) => {
+        localStorage.setItem("isDark", false);
         localStorage.setItem("isAuthnticated", true);
         localStorage.setItem("userID", doc.data().id);
         localStorage.setItem("userPic", doc.data().photoUrl);

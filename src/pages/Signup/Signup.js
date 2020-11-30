@@ -100,8 +100,9 @@ const Signup = () => {
       .child(currentUser.id)
       .getDownloadURL()
       .then((imgUrl) => {
-        localStorage.setItem("userPic", imgUrl);
+        localStorage.setItem("isDark", false);
         localStorage.setItem("isAuthnticated", true);
+        localStorage.setItem("userPic", imgUrl);
         localStorage.setItem("userID", currentUser.id);
         localStorage.setItem(
           "userFullName",
@@ -179,7 +180,7 @@ const Signup = () => {
         msg: !fileSupportedFormats.includes(selectedFile.fileType)
           ? "Image type is not supported jpg, jpeg and png only"
           : selectedFile.fileSize / 1024 / 1024 > fileSize
-          ? "Image size is too large, maximum 2 Mb"
+          ? "Image size is too large, maximum 1 Mb"
           : "",
       });
     }

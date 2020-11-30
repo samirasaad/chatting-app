@@ -11,7 +11,7 @@ const Footer = () => {
   
   return (
     <footer
-      className={`${
+      className={` content ${
         isDark ? "dark-mode" : "light-mode"
       } d-flex justify-content-center footer-wrapper align-items-center`}
     >

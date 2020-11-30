@@ -12,7 +12,7 @@ const SendMsgBar = ({
   return (
     <>
       <form
-        className="send-msg-bar d-flex align-items-baseline position-sticky pt-2"
+        className="content send-msg-bar d-flex align-items-baseline position-sticky p-2"
         onSubmit={handleSubmitMessage}
       >
         <Input

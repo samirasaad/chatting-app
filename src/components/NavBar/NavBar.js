@@ -22,15 +22,10 @@ const NavBar = () => {
   const changeMode = () => {
     setIsDark(!isDark);
     localStorage.setItem("isDark", !isDark);
-    //chat-wrapper
-    document.querySelector(".chat-wrapper").classList.toggle("dark-mode");
     document.querySelector(".chat-wrapper").classList.toggle("light-mode");
-    //navbar
-    document.querySelector(".navbar-wrapper").classList.toggle("dark-mode");
-    document.querySelector(".navbar-wrapper").classList.toggle("light-mode");
-    //footer
-    document.querySelector(".footer-wrapper").classList.toggle("dark-mode");
-    document.querySelector(".footer-wrapper").classList.toggle("light-mode");
+    document.querySelector(".chat-wrapper").classList.toggle("dark-mode");
+    document.querySelector("#root").classList.toggle("light-mode");
+    document.querySelector("#root").classList.toggle("dark-mode");
   };
 
   const handleLogout = async () => {
@@ -42,6 +37,8 @@ const NavBar = () => {
       .then(() => {
         firebaseSignout();
         setLoading(false);
+        document.querySelector('#root').classList.add('light-mode')
+        document.querySelector('#root').classList.remove('dark-mode')
       })
       .catch((err) => {
         console.log(err);
@@ -59,7 +56,7 @@ const NavBar = () => {
     <section
       className={` ${
         isDark ? "dark-mode" : "light-mode"
-      } navbar-wrapper container-fluid medium-font d-flex justify-content-between align-items-center`}
+      } content navbar-wrapper container-fluid medium-font d-flex justify-content-between align-items-center`}
     >
       <Logo />
       {loading && <Loader loading={loading} />}
@@ -80,6 +77,7 @@ const NavBar = () => {
               alt="mode-icon"
               onClick={changeMode}
             />
+            
           </div>
           <div className="d-flex align-items-center">
             <span className="d-md-block d-none">Logout</span>

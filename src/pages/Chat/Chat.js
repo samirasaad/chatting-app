@@ -23,11 +23,10 @@ function Chat(props) {
     (searchValue) => handleFilter(searchValue),
     700
   );
-  
+
   useEffect(() => {
     setIsDark(JSON.parse(localStorage.getItem("isDark") || false));
   }, []);
-
 
   useEffect(() => {
     getUsersList();
@@ -106,10 +105,10 @@ function Chat(props) {
           <div className="col-lg-2 col-md-12 px-2">
             <UserProfile />
           </div>
-          <div className="col-lg-7 px-0 col-md-8 section-bg messages-wrapper postion-relative">
+          <div className="content col-lg-7 px-0 col-md-8 messages-wrapper postion-relative">
             {peerUserInfo && peerUserId ? (
-              <>
-                <div className="chat-heading px-3 position-sticky">
+              <div className="content chat-min-height">
+                <div className="chat-heading px-3 position-sticky content">
                   <p className="medium-font py-2 mb-0">
                     {peerUserInfo.userName}
                     <span
@@ -124,7 +123,7 @@ function Chat(props) {
                   </p>
                 </div>
                 <ChatBoard peerUserInfo={peerUserInfo} />
-              </>
+              </div>
             ) : (
               <WelcomeBoard />
             )}

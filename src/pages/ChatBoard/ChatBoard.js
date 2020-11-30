@@ -107,11 +107,7 @@ function ChatBoard({ peerUserInfo: { id, photoUrl, userName, availibility } }) {
 
   return (
     <>
-      <section
-        className={`chat-board px-3 ${
-          messagesList.length === 0 && "chat-min-height"
-        } `}
-      >
+      <section className={`chat-board chat-min-height `}>
         {loading && <Loader loading={loading} />}
         {messagesList && messagesList.length > 0 ? (
           messagesList.map((message, index) => (

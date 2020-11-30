@@ -1,9 +1,44 @@
 $primaryColorDark: #000000;
-$primaryColorLight: #273659; //#432759; //#2d5872;
+$primaryColorLight: #273659;
 $secondaryColorDark: #ffffff;
 $secondaryColorLight: #f5f7f8;
-$link: #273659; // #432759 //#6da9cc;
+$link: #273659;
 $darkBg: #1a1a1a;
 $lightBg: #f5f7f8;
-$currentUserBg: #273659; // #432759; //#91cee1;
-$primaryBtn: #273659; //#432759// #91cee1;
+$currentUserMsgBg: #273659;
+$peerUserMsgBgDark: #424242;
+$peerUserMsgBgLight: #ffffff;
+$primaryBtn: #273659;
+$inputShadowDark: #5d5d5d;
+$inputShadowLight: #cacaca;
+$scrollHandlerLight: #273659;
+$scrollHandlerDark: #273659;
+$scrollTrackLight: #f5f7f8;
+$scrollTrackDark: #6d4646;
+$selectedUserBgDark: #191919;
+$selectedUserBgLight: #f6f6f6;
+$selectedUserShadowDark: #313131;
+$selectedUserShadowLight: #d9d9d9;
+// ================================== THEMES ====================================== //
+$themes: (
+  dark-mode: (
+    "text-color": $secondaryColorDark,
+    "bg-color": $darkBg,
+    "input-shadow": $inputShadowDark,
+    "peer-user-msg-bg": $peerUserMsgBgDark,
+    "scroll-handler-bg": $scrollHandlerDark,
+    "scroll-track-bg": $scrollTrackDark,
+    "selected-user-shadow": $selectedUserShadowDark,
+    "selected-user-bg": $selectedUserBgDark,
+  ),
+  light-mode: (
+    "text-color": $primaryColorLight,
+    "bg-color": $lightBg,
+    "input-shadow": $inputShadowLight,
+    "peer-user-msg-bg": $peerUserMsgBgLight,
+    "scroll-handler-bg": $scrollHandlerLight,
+    "scroll-track-bg": $scrollTrackLight,
+    "selected-user-bg": $selectedUserBgLight,
+    "selected-user-shadow": $selectedUserShadowLight,
+  ),
+);

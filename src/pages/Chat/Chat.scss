@@ -1,16 +1,10 @@
 @import "./../../scss/variables";
 .chat-wrapper {
-  min-height: 87vh;
-  .section-bg {
-    min-height: 79.9vh;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
+  min-height: 80vh;
   .messages-wrapper {
     max-height: 78vh;
     overflow-y: auto;
     .chat-heading {
-      color: $primaryColorLight;
       top: 0;
       z-index: 11;
       border-bottom: 1px solid #e1e1e1;

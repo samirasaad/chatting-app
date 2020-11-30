@@ -4,7 +4,7 @@ import "./UserProfile.scss";
 
 const UserProfile = () => {
   return (
-    <div className="mt-2 mb-3 user-profile-wrapper d-flex justify-content-center flex-column align-items-center pt-2">
+    <div className="content mb-3 user-profile-wrapper d-flex justify-content-center flex-column align-items-center pt-2">
       <UserAvatar
         img={localStorage.getItem("userPic")}
         size="large"

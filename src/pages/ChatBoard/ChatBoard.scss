@@ -1,6 +1,6 @@
 @import "./../../scss/variables";
 .chat-min-height {
-  min-height: 55vh;
+  min-height: 59vh;
 }
 .chat-board {
   margin-bottom: 2em;
@@ -15,6 +15,10 @@
     fill: #ffd000;
     font-size: 2.5em;
   }
+  .msg-bg-current-user {
+    background-color: $currentUserMsgBg;
+    color: $secondaryColorDark;
+  }
   .msg-bg-current-user:before {
     content: "";
     position: absolute;
@@ -24,6 +28,7 @@
     left: 98%;
     border-left: 0 solid transparent;
     border-right: 8px solid transparent;
+    border-bottom: 8px solid $currentUserMsgBg;
   }
   .msg-bg-peer-user:before {
     content: "";

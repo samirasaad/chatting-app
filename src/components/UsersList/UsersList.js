@@ -26,7 +26,7 @@ const UsersList = ({
   };
 
   return (
-    <section className="users-list-wrapper py-2">
+    <section className="users-list-wrapper py-2 mx-2 content">
       <FilterBar
         handleFilter={handleFilter}
         handleChange={handleChange}

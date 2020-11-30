@@ -1,92 +1,92 @@
-// NAVBAR
-.navbar-wrapper.light-mode {
-  box-shadow: 1px 3px 14px -1px #e0e0e0;
-  background-color: #fdfdfd;
-  .logo,
-  .action-wrapper {
-    color: $primaryColorLight;
-  }
-}
-.chat-wrapper.light-mode {
-  border: 5px solid white;
+// // NAVBAR
+// .navbar-wrapper.light-mode {
+//   box-shadow: 1px 3px 14px -1px #e0e0e0;
+//   background-color: #fdfdfd;
+//   .logo,
+//   .action-wrapper {
+//     color: $primaryColorLight;
+//   }
+// }
+// .chat-wrapper.light-mode {
+//   border: 5px solid white;
 
-  //SCROLL
-  /* scroll-track */
-  ::-webkit-scrollbar-track {
-    background: #f0f0f0;
-  }
-  /* scroll-handle */
-  ::-webkit-scrollbar-thumb {
-    background-color: $primaryColorLight;
-  }
+//   //SCROLL
+//   /* scroll-track */
+//   ::-webkit-scrollbar-track {
+//     background: #f0f0f0;
+//   }
+//   /* scroll-handle */
+//   ::-webkit-scrollbar-thumb {
+//     background-color: $primaryColorLight;
+//   }
 
-  //MESSAGES-BG
-  .msg-bg-current-user {
-    background-color: $currentUserBg;
-    color: white;
-    &:before {
-      border-bottom: 8px solid $currentUserBg;
-    }
-  }
-  .msg-bg-peer-user {
-    background-color: white;
-    &:before {
-      border-bottom: 8px solid white;
-    }
-  }
+//   //MESSAGES-BG
+//   .msg-bg-current-user {
+//     background-color: $currentUserMsgBgDark;
+//     color: white;
+//     &:before {
+//       border-bottom: 8px solid $currentUserMsgBgDark;
+//     }
+//   }
+//   .msg-bg-peer-user {
+//     background-color: white;
+//     &:before {
+//       border-bottom: 8px solid white;
+//     }
+//   }
 
-  //SEND MSG BAR
-  .send-msg-bar {
-    background-color: $secondaryColorLight;
-    color: $primaryColorDark;
-    input.send-msg {
-      border: 1px solid #dbdbdb;
-      box-shadow: 0px 2px 6px -1px #cbcbcb;
-      color: #494949;
-    }
-    .send-btn {
-      background-color: white;
-      border: 1px solid #dbdbdb;
-      box-shadow: 0px 2px 6px -1px #cbcbcb;
-    }
-  }
+//   //SEND MSG BAR
+//   .send-msg-bar {
+//     background-color: $secondaryColorLight;
+//     color: $primaryColorDark;
+//     input.send-msg {
+//       border: 1px solid #dbdbdb;
+//       box-shadow: 0px 2px 6px -1px #cbcbcb;
+//       color: #494949;
+//     }
+//     .send-btn {
+//       background-color: white;
+//       border: 1px solid #dbdbdb;
+//       box-shadow: 0px 2px 6px -1px #cbcbcb;
+//     }
+//   }
 
-  //SECTION-BG [USERS LIST, MESSAGES, USER PROFILE]
-  .section-bg {
-    border: 5px solid white;
-    background-color: $secondaryColorLight;
-    color: $primaryColorLight;
-    .chat-heading {
-      background-color: $lightBg;
-      color: $primaryColorLight;
-    }
-    .welcome-heading {
-      color: $primaryColorLight;
-    }
-  }
-  .users-list-wrapper {
-    .filter-bar {
-      input {
-        padding: 12px;
-        border: 1px solid #dbdbdb;
-        box-shadow: 0px 2px 6px -1px #cbcbcb;
-        border-radius: 1.4em;
-        color: #494949;
-      }
-    }
-    a {
-      color: $primaryColorLight;
-    }
-    .selected-user {
-      background-color: #f6f6f6;
-      box-shadow: 0px 2px 6px 1px #d9d9d9;
-    }
-  }
-}
-.footer-wrapper.light-mode {
-  box-shadow: 4px 0px 13px 3px #dfdfdf;
-  background-color: white;
-  svg {
-    fill: $link;
-  }
-}
+//   //SECTION-BG [USERS LIST, MESSAGES, USER PROFILE]
+//   .section-bg {
+//     border: 5px solid white;
+//     background-color: $secondaryColorLight;
+//     color: $primaryColorLight;
+//     .chat-heading {
+//       background-color: $lightBg;
+//       color: $primaryColorLight;
+//     }
+//     .welcome-heading {
+//       color: $primaryColorLight;
+//     }
+//   }
+//   .users-list-wrapper {
+//     .filter-bar {
+//       input {
+//         padding: 12px;
+//         border: 1px solid #dbdbdb;
+//         box-shadow: 0px 2px 6px -1px #cbcbcb;
+//         border-radius: 1.4em;
+//         color: #494949;
+//       }
+//     }
+//     a {
+//       color: $primaryColorLight;
+//     }
+//     .selected-user {
+//       background-color: #f6f6f6;
+//       box-shadow: 0px 2px 6px 1px #d9d9d9;
+//     }
+//   }
+// }
+// .footer-wrapper.light-mode {
+//   box-shadow: 4px 0px 13px 3px #dfdfdf;
+//   background-color: white;
+//   svg {
+//     fill: $link;
+//   }
+// }
