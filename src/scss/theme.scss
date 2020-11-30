@@ -44,10 +44,9 @@
         position: absolute;
         bottom: 0;
         width: 0;
-        height: 0;
-        left: 98%;
-        border-left: 0 solid transparent;
-        border-right: 8px solid transparent;
+        right: 98%;
+        border-right: 0 solid transparent;
+        border-left: 8px solid transparent;
         border-bottom: 8px solid theme-get("peer-user-msg-bg");
       }
     }
