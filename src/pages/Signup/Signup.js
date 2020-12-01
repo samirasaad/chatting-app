@@ -63,35 +63,35 @@ const Signup = () => {
             return doc.data();
           });
           setLoading(false);
+          if (usersList.length === 0) {
+            //if new user, store it intto users collection
+            db.collection(USERS)
+              .doc(currentUser.id)
+              .set({
+                id: currentUser.id,
+                userName: formValues.userName
+                  ? formValues.userName.trim().charAt(0).toUpperCase() +
+                    formValues.userName.slice(1)
+                  : currentUser.displayName,
+                photoUrl: downloadedUrl ? downloadedUrl : currentUser.photoURL,
+                userEmail: currentUser.userEmail,
+                availibility: ONLINE,
+              })
+              .then((res) => {
+                History.push("/chat");
+              })
+              .catch((err) => {
+                setIsOpen(true);
+                setFirebaseErrMsg(err.message);
+              });
+          } else {
+            setLoading(false);
+          }
         })
         .catch((err) => {
           setIsOpen(true);
           setFirebaseErrMsg(err.message);
         });
-      if (usersList.length === 0) {
-        //if new user, store it intto users collection
-        db.collection(USERS)
-          .doc(currentUser.id)
-          .set({
-            id: currentUser.id,
-            userName: formValues.userName
-              ? formValues.userName.trim().charAt(0).toUpperCase() +
-                formValues.userName.slice(1)
-              : currentUser.displayName,
-            photoUrl: downloadedUrl ? downloadedUrl : currentUser.photoURL,
-            userEmail: currentUser.userEmail,
-            availibility: ONLINE,
-          })
-          .then((res) => {
-            History.push("/chat");
-          })
-          .catch((err) => {
-            setIsOpen(true);
-            setFirebaseErrMsg(err.message);
-          });
-      } else {
-        setLoading(false);
-      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [downloadedUrl, currentUser]);
@@ -133,8 +133,6 @@ const Signup = () => {
           .then((res) => {
             auth().onAuthStateChanged(async function (user) {
               if (user) {
-                console.log(user.displayName);
-                console.log(formValues.userName);
                 setCurrentUser({
                   id: user.uid,
                   photoUrl: user.photoURL || downloadedUrl,
