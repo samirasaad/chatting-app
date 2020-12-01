@@ -19,6 +19,8 @@ $selectedUserBgDark: #191919;
 $selectedUserBgLight: #f6f6f6;
 $selectedUserShadowDark: #313131;
 $selectedUserShadowLight: #d9d9d9;
+$loaderColorLight: #273659;
+$loaderColorDark: #cbcbcb;
 // ================================== THEMES ====================================== //
 $themes: (
   dark-mode: (
@@ -30,6 +32,7 @@ $themes: (
     "scroll-track-bg": $scrollTrackDark,
     "selected-user-shadow": $selectedUserShadowDark,
     "selected-user-bg": $selectedUserBgDark,
+    "loader-color": $loaderColorDark,
   ),
   light-mode: (
     "text-color": $primaryColorLight,
@@ -40,5 +43,6 @@ $themes: (
     "scroll-track-bg": $scrollTrackLight,
     "selected-user-bg": $selectedUserBgLight,
     "selected-user-shadow": $selectedUserShadowLight,
+    "loader-color": $loaderColorLight,
   ),
 );

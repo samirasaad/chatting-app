@@ -97,7 +97,7 @@ function Chat(props) {
   return (
     <>
       <NavBar />
-      {loading && <Loader loading={loading} />}
+       <Loader loading={true} />
       <section
         className={`${
           isDark ? "dark-mode" : "light-mode"
@@ -107,7 +107,7 @@ function Chat(props) {
           <div className="col-lg-2 col-md-12 px-2">
             <UserProfile />
           </div>
-          <div className="content col-lg-7 px-0 col-md-8 messages-wrapper postion-relative">
+          <div className="content col-lg-7 px-0 col-md-8  mb-2 mx-2 mx-md-0 messages-wrapper postion-relative">
             {peerUserInfo && peerUserId ? (
               <div className="content chat-min-height">
                 <div className="chat-heading px-3 position-sticky content">

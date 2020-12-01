@@ -22,7 +22,7 @@ const Loader = ({ loading }) => {
         css={styles}
         size={30}
         height={20}
-        color={"#2be0ff"}
+        color={"#4cbff8"}
         loading={loading}
       />
     </div>
