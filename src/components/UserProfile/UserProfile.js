@@ -11,7 +11,9 @@ const UserProfile = () => {
         statusClass="status-circle-large"
       />
       <h4 className="user-name medium-font mt-2">
-        {localStorage.getItem("userFullName")}
+        {localStorage.getItem("userFullName") === "null"
+          ? ""
+          : localStorage.getItem("userFullName")}
       </h4>
     </div>
   );

@@ -80,9 +80,29 @@ input {
   width: 6px;
   height: 10px;
 }
+
 // DARK MODE
 .dark-mode {
   .chat-wrapper {
     background-color: black;
+  }
+  // TRACK
+  .content::-webkit-scrollbar-track {
+    background-color: $scrollTrackDark;
+  }
+  // HANDLER
+  .content::-webkit-scrollbar-thumb {
+    background-color: $scrollHandlerDark;
+  }
+}
+// LIGHT MODE
+.light-mode {
+  // TRACK
+  .content::-webkit-scrollbar-track {
+    background-color: $scrollTrackLight;
+  }
+  // HANDLER
+  .content::-webkit-scrollbar-thumb {
+    background-color: $scrollHandlerLight;
   }
 }

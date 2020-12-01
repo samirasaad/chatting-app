@@ -7,16 +7,15 @@
   }
   $theme-map: null !global;
 }
-
 @function theme-get($key) {
   @return map-get($theme-map, $key);
 }
-
 .content {
   transition: 500ms;
   @include theme() {
     background-color: theme-get("bg-color");
     color: theme-get("text-color");
+
     a {
       color: theme-get("text-color");
     }
@@ -49,14 +48,6 @@
         border-left: 8px solid transparent;
         border-bottom: 8px solid theme-get("peer-user-msg-bg");
       }
-    }
-    /* scroll-track */
-    ::-webkit-scrollbar-track {
-      background-color: theme-get("scroll-track-bg");
-    }
-    /* scroll-handle */
-    ::-webkit-scrollbar-thumb {
-      background-color: theme-get("scroll-handler-bg");
     }
   }
 }

@@ -34,8 +34,10 @@ function Login() {
         localStorage.setItem("userPic", doc.data().photoUrl);
         localStorage.setItem(
           "userFullName",
-          doc.data().userName.trim().charAt(0).toUpperCase() +
-            doc.data().userName.slice(1)
+          doc.data().userName
+            ? doc.data().userName.trim().charAt(0).toUpperCase() +
+                doc.data().userName.slice(1)
+            : ""
         );
         History.push("/Chat");
         setLoading(false);
