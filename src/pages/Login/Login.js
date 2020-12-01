@@ -53,6 +53,7 @@ function Login() {
     try {
       let usersList = [];
       auth().onAuthStateChanged(async function (user) {
+        console.log(user)
         if (user) {
           await db
             .collection(USERS)
@@ -116,27 +117,32 @@ function Login() {
 
   const handleSubmitGoogle = async () => {
     await signInWithGoogle(formValues.email, formValues.password)
-      .then()
+    .then(res=>{
+    addUser();
+
+    })
       .catch((err) => {
         setLoading(false);
         setIsOpen(true);
         setFirebaseErrMsg(err.message);
       });
-    addUser();
   };
 
   const handleSubmit = async (values) => {
-    if (values.email && values.password) {
+    // if (values.email && values.password) {
       setLoading(true);
       await signin(values.email, values.password)
-        .then()
+        .then(res=>{
+
+          addUser()
+        }
+        )
         .catch((err) => {
           setLoading(false);
           setIsOpen(true);
           setFirebaseErrMsg(err.message);
         });
-      addUser();
-    }
+    // }
   };
 
   const renderLoginForm = (props) => {
@@ -198,6 +204,7 @@ function Login() {
       </div>
     );
   };
+
   const handleClose = () => {
     setIsOpen(false);
   };

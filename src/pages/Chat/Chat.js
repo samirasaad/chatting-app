@@ -97,7 +97,7 @@ function Chat(props) {
   return (
     <>
       <NavBar />
-       <Loader loading={true} />
+      {loading && <Loader loading={loading} />}
       <section
         className={`${
           isDark ? "dark-mode" : "light-mode"
