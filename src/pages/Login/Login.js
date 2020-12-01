@@ -53,7 +53,6 @@ function Login() {
     try {
       let usersList = [];
       auth().onAuthStateChanged(async function (user) {
-        console.log(user)
         if (user) {
           await db
             .collection(USERS)
