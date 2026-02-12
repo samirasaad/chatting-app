@@ -4,11 +4,8 @@
 
 
 ## 📸 Screenshots
-file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-44.png
-file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-39.png
-file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-29.png
-file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-06.png
-file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-02.png
+<img width="1840" height="1076" alt="Screenshot from 2026-02-12 13-29-44" src="https://github.com/user-attachments/assets/6ddf3908-3d74-4a24-9acd-3be9b2156128" />
+
 
 
 # Real-Time Chat Application
