@@ -14,6 +14,7 @@
 
 <img width="1840" height="1076" alt="Screenshot from 2026-02-12 13-29-44" src="https://github.com/user-attachments/assets/0e288f3f-dd29-4ada-b0a4-fc10da554a9c" />
 
+<img width="1840" height="1076" alt="Screenshot from 2026-02-12 13-33-57" src="https://github.com/user-attachments/assets/d60b323c-4a7f-40cf-88ba-5ee45d9daa36" />
 
 
 # Real-Time Chat Application
@@ -62,6 +63,7 @@ This project demonstrates how to build a **production-style chat interface** usi
 ---
 
 ## 📂 Project Structure
+
 src/
 ├── components/ # Reusable UI components
 ├── pages/ # Page-level components
