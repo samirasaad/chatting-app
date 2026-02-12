@@ -74,7 +74,7 @@ src/
 ├── utils/        # Helper utilities
 └── assets/       # Static files
  
-
+---
 
  ## ⚙️ Installation & Setup
 
