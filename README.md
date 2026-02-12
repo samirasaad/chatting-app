@@ -63,7 +63,6 @@ This project demonstrates how to build a **production-style chat interface** usi
 ---
 
 ## 📂 Project Structure
-
 src/
 ├── components/ # Reusable UI components
 ├── pages/ # Page-level components
