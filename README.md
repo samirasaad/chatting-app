@@ -88,9 +88,9 @@ npm start
 2. cd project directory
 3. npm i
 4. npm start will launch to localhodt://3000
+```
 
-
-# Used Technology
+## Used Technology
 1. formik **^2.2.5**
 2. yup **^0.29.3**
 3. lodash **^4.17.20**
