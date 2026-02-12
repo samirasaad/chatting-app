@@ -3,6 +3,14 @@
 [Live Demo](https://chatting-app-gamma.vercel.app/)	
 
 
+## 📸 Screenshots
+file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-44.png
+file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-39.png
+file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-29.png
+file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-06.png
+file:///home/oem/Pictures/Screenshots/Screenshot%20from%202026-02-12%2013-29-02.png
+
+
 # Real-Time Chat Application
 
 A modern real-time chat application built using **React**, **JavaScript**, and **Firebase**, focusing on clean UI, real-time communication, and scalable frontend architecture.
