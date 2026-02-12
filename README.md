@@ -1,4 +1,4 @@
-# ChatBoard App
+## ChatBoard App
 
 [Live Demo](https://chatting-app-gamma.vercel.app/)	
 
@@ -62,19 +62,7 @@ This project demonstrates how to build a **production-style chat interface** usi
 
 ---
 
-## 📂 Project Structure
 
-```text
-src/
-├── components/   # Reusable UI components
-├── pages/        # Page-level components
-├── routes/       # Routes
-├── services/     # Firebase configuration & helpers
-├── hooks/        # Custom React hooks
-├── utils/        # Helper utilities
-└── assets/       # Static files
- 
----
 
  ## ⚙️ Installation & Setup
 
